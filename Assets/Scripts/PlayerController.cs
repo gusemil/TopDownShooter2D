@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MovingObject
 {
     private float moveSpeed = 5f;
     private float bulletForce = 20f;
@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
 
     Vector2 movement;
     Vector2 mousePos;
+
+    void Start()
+    {
+        Hp = 100;
+    }
 
     // Update is called once per frame
     void Update()

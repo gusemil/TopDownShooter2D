@@ -4,15 +4,48 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject hitEffect;
+
+    private float bulletLifeTime;
+    private bool isBulletLifeOver;
+    private int damage;
+
     void Start()
     {
-        
+        damage = 20;
+
+        bulletLifeTime = 2f;
+        isBulletLifeOver = true;
+
+        StartCoroutine(BulletGoing());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator BulletGoing()
     {
-        
+        while (isBulletLifeOver == true)
+        {
+            yield return new WaitForSeconds(bulletLifeTime);
+            isBulletLifeOver = false;
+        }
+
+        if (!isBulletLifeOver)
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        Destroy(effect, 0.1f); //hit effect tuhoutuu 0.1sek
+        Destroy(gameObject); //tuhotaan bullet collisionissa
+
+        if (collision.transform.GetComponent<Enemy>())
+        {
+            Enemy enemy = collision.transform.GetComponent<Enemy>();
+            Debug.Log("Enemy hit!");
+            enemy.TakeDamage(damage);
+        }
     }
 }
