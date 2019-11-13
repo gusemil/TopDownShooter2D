@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        PlayerStats stats = GameManager.status.PlayerStats;
         //Hp = 100;
-        Debug.Log(GameManager.status.PlayerStats.Hp);
-        Debug.Log(GameManager.status.PlayerStats.MaxHp);
+        Debug.Log(stats.Hp);
+        Debug.Log(stats.MaxHp);
     }
 
     // Update is called once per frame
