@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MovingObject
+public class PlayerController : MonoBehaviour
 {
     private float moveSpeed = 5f;
     private float bulletForce = 20f;
@@ -17,7 +17,9 @@ public class PlayerController : MovingObject
 
     void Start()
     {
-        Hp = 100;
+        //Hp = 100;
+        Debug.Log(GameManager.status.PlayerStats.Hp);
+        Debug.Log(GameManager.status.PlayerStats.MaxHp);
     }
 
     // Update is called once per frame
@@ -50,4 +52,5 @@ public class PlayerController : MovingObject
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
+
 }
