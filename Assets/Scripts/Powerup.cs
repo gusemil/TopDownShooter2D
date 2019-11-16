@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Powerup : Pickup
 {
-    private float PowerUpDuration = 5f;
-    private bool isPowerUpOn;
+    private float hexDamageDuration = 5f;
+    private bool isHexDamageOn;
     private int healAmount = 20;
 
-    public bool IsPowerUpOn
+    public bool IsHexDamageOn
     {
-        get { return isPowerUpOn; }
-        set { isPowerUpOn = value; }
+        get { return isHexDamageOn; }
+        set { isHexDamageOn = value; }
     }
 
     private void Awake()
     {
-        isPowerUpOn = false;
+        isHexDamageOn = false;
+    }
+
+    private void Update()
+    {
+        //Debug.Log(isHexDamageOn);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +35,7 @@ public class Powerup : Pickup
             {
                 HpPack(playerStats);
             }
-            else if (gameObject.tag == "HexDamage")
+            else if (gameObject.tag == "HexDamage" && !playerStats.IsPoweredUp)
             {
                 RemoveGraphicsAndCollider();
                 StartCoroutine(HexDamage(playerStats, other));
@@ -50,9 +55,9 @@ public class Powerup : Pickup
 
     private IEnumerator HexDamage(PlayerStats player, Collider2D playerCollider)
     {
-        isPowerUpOn = true;
-        Debug.Log("HexDamage");
-        while (isPowerUpOn)
+        isHexDamageOn = true;
+        player.IsPoweredUp = true;
+        while (isHexDamageOn)
         {
             PlayerController pc = playerCollider.GetComponent<PlayerController>();
             Color originalColor = pc.OriginalColor;
@@ -60,19 +65,21 @@ public class Powerup : Pickup
             pc.ChangePlayerColor(new Color(0, 1, 1, 1)); 
             int originalDamage = player.Damage;
             player.Damage *= 6;
-            Debug.Log("PowerUpIsOn = true");
-            yield return new WaitForSeconds(PowerUpDuration);
-            isPowerUpOn = false;
+            yield return new WaitForSeconds(hexDamageDuration);
+            
             player.Damage = originalDamage;
-
-            pc.ChangePlayerColor(originalColor); //return color to original
-
+            pc.ChangePlayerColor(originalColor);
+            isHexDamageOn = false;
+            player.IsPoweredUp = false;
+            Destroy(gameObject);
         }
 
-        if (!isPowerUpOn)
+        /*
+        if (!isHexDamageOn)
         {
             Destroy(gameObject);
         }
+        */
 
     }
 

@@ -9,19 +9,12 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     private GameObject player;
     private Vector2 direction;
-    private float timer = 0;
-    private float damageCoolDown = 0.5f;
+    private float enemyDamageTimer = 0;
+    private float enemyDamageCooldown = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.FindGameObjectWithTag("Player"))
-        {
-            Debug.Log("player found!");
-        } else
-        {
-            Debug.Log("player not found!");
-        }
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -36,24 +29,24 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
+        enemyDamageTimer += Time.deltaTime;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (timer >= damageCoolDown)
+        if (enemyDamageTimer >= enemyDamageCooldown)
         {
             DamagePlayerOnCollision(collision);
-            timer = 0;
+            enemyDamageTimer = 0;
         }
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (timer >= damageCoolDown)
+        if (enemyDamageTimer >= enemyDamageCooldown)
         {
             DamagePlayerOnCollision(collision);
-            timer = 0;
+            enemyDamageTimer = 0;
         }
     }
 
