@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public int hp;
     public int damage;
     public float moveSpeed;
-    public GameObject player;
+    private GameObject player;
     private Vector2 direction;
     private float timer = 0;
     private float damageCoolDown = 0.5f;
@@ -15,6 +15,14 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            Debug.Log("player found!");
+        } else
+        {
+            Debug.Log("player not found!");
+        }
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

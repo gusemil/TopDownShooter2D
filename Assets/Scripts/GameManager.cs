@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
 
     public static GameManager status; //miten tämä on singleton?
     public PlayerStats PlayerStats { get { return playerStats; } }
-    
-    //public float playerHealth;
-    //public float playerMaxHealth;
+
+    public GameObject enemy;
+
+    private float spawnTimer = 0;
+    private float enemySpawnRate = 5f;
 
     void Awake()
     {
@@ -42,16 +44,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        spawnTimer += Time.deltaTime;
+
+        if (spawnTimer >= enemySpawnRate)
+        {
+            SpawnEnemy();
+            spawnTimer = 0;
+        }
+
     }
 
-    /*
-    [Serializable]
-    class PlayerData
+    void SpawnEnemy()
     {
-        public float health;
-        public float maxHealth;
-        public string currentLevel;
+        //Lista vihollisista myöhemmin
+        Instantiate(enemy, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
     }
-    */
+    
 }

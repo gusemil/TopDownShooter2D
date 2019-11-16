@@ -55,4 +55,14 @@ public class PlayerStats
         hp -= dmg;
         Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
     }
+
+    /*
+    [Serializable]
+    class PlayerData
+    {
+        public float health;
+        public float maxHealth;
+        public string currentLevel;
+    }
+    */
 }

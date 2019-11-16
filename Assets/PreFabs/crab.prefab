@@ -143,3 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 200
+  damage: 10
+  moveSpeed: 1
+  player: {fileID: 0}

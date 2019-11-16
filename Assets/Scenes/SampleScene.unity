@@ -727,7 +727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757325135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0756638, y: -0.09865587, z: -0.050943784}
+  m_LocalPosition: {x: 1.0756638, y: 3.08, z: -0.050943784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -745,6 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b743a5e908d5c44199918da95dfd21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 6405449876051954736, guid: ee7ea598a4281bd4fa14d95dc03e9435, type: 3}
 --- !u!1 &1892891068
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,19 +845,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6779071223058372707, guid: ee7ea598a4281bd4fa14d95dc03e9435,
         type: 3}
-      propertyPath: moveSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6779071223058372707, guid: ee7ea598a4281bd4fa14d95dc03e9435,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 7944583421165293223}
-    - target: {fileID: 6779071223058372707, guid: ee7ea598a4281bd4fa14d95dc03e9435,
-        type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee7ea598a4281bd4fa14d95dc03e9435, type: 3}
 --- !u!1001 &7779347601738834285
