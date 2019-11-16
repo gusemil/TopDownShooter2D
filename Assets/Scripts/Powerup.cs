@@ -8,20 +8,9 @@ public class Powerup : Pickup
     private bool isHexDamageOn;
     private int healAmount = 20;
 
-    public bool IsHexDamageOn
-    {
-        get { return isHexDamageOn; }
-        set { isHexDamageOn = value; }
-    }
-
     private void Awake()
     {
         isHexDamageOn = false;
-    }
-
-    private void Update()
-    {
-        //Debug.Log(isHexDamageOn);
     }
 
     void OnTriggerEnter2D(Collider2D other)
