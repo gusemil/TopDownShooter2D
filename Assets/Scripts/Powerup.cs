@@ -6,6 +6,7 @@ public class Powerup : Pickup
 {
     private float PowerUpDuration = 5f;
     private bool isPowerUpOn;
+    private int healAmount = 20;
 
     public bool IsPowerUpOn
     {
@@ -28,35 +29,44 @@ public class Powerup : Pickup
             if (gameObject.tag == "HpPack")
             {
                 HpPack(playerStats);
-                Destroy(gameObject);
             }
             else if (gameObject.tag == "HexDamage")
             {
                 RemoveGraphicsAndCollider();
-                StartCoroutine(HexDamage(playerStats));
+                StartCoroutine(HexDamage(playerStats, other));
             }
         }
     }
 
-    private void HpPack(PlayerStats playerObject)
+    private void HpPack(PlayerStats player)
     {
-        //playerObject.TakeDamage(20);
-        playerObject.Hp -= 20;
-        Debug.Log(playerObject.Hp);
+        if(player.Hp < player.MaxHp) //don't pick up unless player is actually healed
+        {
+            player.HealPlayer(healAmount);
+            Destroy(gameObject);
+        }
+        Debug.Log(player.Hp);
     }
 
-    private IEnumerator HexDamage(PlayerStats playerObject)
+    private IEnumerator HexDamage(PlayerStats player, Collider2D playerCollider)
     {
         isPowerUpOn = true;
         Debug.Log("HexDamage");
         while (isPowerUpOn)
         {
-            int originalHp = playerObject.Hp;
-            playerObject.Hp = 200;
+            PlayerController pc = playerCollider.GetComponent<PlayerController>();
+            Color originalColor = pc.OriginalColor;
+
+            pc.ChangePlayerColor(new Color(0, 1, 1, 1)); 
+            int originalDamage = player.Damage;
+            player.Damage *= 6;
             Debug.Log("PowerUpIsOn = true");
             yield return new WaitForSeconds(PowerUpDuration);
             isPowerUpOn = false;
-            playerObject.Hp = originalHp;
+            player.Damage = originalDamage;
+
+            pc.ChangePlayerColor(originalColor); //return color to original
+
         }
 
         if (!isPowerUpOn)
@@ -65,4 +75,11 @@ public class Powerup : Pickup
         }
 
     }
+
+    /*
+    private void ChangePlayerColor(Color color, Collider2D playerCollider)
+    {
+        playerCollider.GetComponent<SpriteRenderer>().color = color;
+    }
+    */
 }

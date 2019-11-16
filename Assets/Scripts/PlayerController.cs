@@ -7,18 +7,24 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 5f;
     private float bulletForce = 20f;
 
+    private float timer = 0;
+    private float fireCoolDown = 0.1f;
+
     public Transform firePoint;
     public GameObject bulletPreFab;
-    public Rigidbody2D rb;
-    public Camera cam;
+    public Rigidbody2D rb2D;
+    public Camera _camera; //variable name 'camera' is not available
 
     Vector2 movement;
-    Vector2 mousePos;
+    Vector2 mousePosition;
+
+    private Color originalColor;
+    public Color OriginalColor { get { return originalColor; } }
 
     void Start()
     {
         PlayerStats stats = GameManager.status.PlayerStats;
-        //Hp = 100;
+        originalColor = GetComponent<SpriteRenderer>().color;
         Debug.Log(stats.Hp);
         Debug.Log(stats.MaxHp);
     }
@@ -29,29 +35,41 @@ public class PlayerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+
+        timer += Time.deltaTime;
+        //Debug.Log(timer);
 
         if (Input.GetButton("Fire1")) //mouse1
         {
-            Shoot();
+            if(timer >= fireCoolDown)
+            {
+                Shoot();
+                timer = 0;
+            }
         }
 
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb2D.MovePosition(rb2D.position + movement * moveSpeed * Time.fixedDeltaTime);
 
-        Vector2 lookDir = mousePos - rb.position;
+        Vector2 lookDir = mousePosition - rb2D.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f; //rotaatiosetit: Miten kierretään hahmoa että osoitetaan mousepositioon
-        rb.rotation = angle;
+        rb2D.rotation = angle;
     }
 
-    void Shoot()
+    private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+            GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+    }
+
+    public void ChangePlayerColor(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
     }
 
 }

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    private int hp;
-    private int maxHp;
+   // private int hp;
+   // private int maxHp;
 
+        /*
     public int Hp
     {
         get { return hp; }
         set { hp = value; }
     }
+    */
 
     // Start is called before the first frame update
     void Awake()
@@ -24,7 +26,7 @@ public class MovingObject : MonoBehaviour
     {
 
     }
-
+    /*
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
@@ -35,4 +37,5 @@ public class MovingObject : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    */
 }

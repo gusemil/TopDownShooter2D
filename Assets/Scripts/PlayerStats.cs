@@ -19,25 +19,40 @@ public class PlayerStats
         set { maxHp = value; }
     }
 
-    /*
+
     public int Damage
     {
         get { return damage; }
         set { damage = value; }
     }
-    */
+
+
     public PlayerStats()
     {
-        hp = 100;
+        hp = 50;
         maxHp = 100;
+        Damage = 20;
     }
 
-        // Start is called before the first frame update
-        void Start()
+
+    public void HealPlayer(int healAmount)
     {
-        //hp = 100;
-        //maxHp = 100;
-        //damage = 10;
+        if (Hp < MaxHp)
+        {
+            if ((Hp + healAmount) > MaxHp)
+            {
+                Hp = MaxHp;
+            }
+            else
+            {
+                Hp += healAmount;
+            }
+        }
     }
 
+    public void TakeDamage(int dmg)
+    {
+        hp -= dmg;
+        Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
+    }
 }

@@ -8,11 +8,14 @@ public class Bullet : MonoBehaviour
 
     private float bulletLifeTime;
     private bool isBulletLifeOver;
-    private int damage;
+    private int bulletDamage;
+    private int weaponDamage;
 
     void Start()
     {
-        damage = 20;
+        PlayerStats playerStats = GameManager.status.PlayerStats;
+        weaponDamage = 0;
+        bulletDamage = playerStats.Damage + weaponDamage;
 
         bulletLifeTime = 2f;
         isBulletLifeOver = true;
@@ -45,7 +48,7 @@ public class Bullet : MonoBehaviour
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
             Debug.Log("Enemy hit!");
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(bulletDamage);
         }
     }
 }
