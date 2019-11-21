@@ -8,9 +8,11 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     private PlayerStats playerStats;
+    private Pause pause;
 
     public static GameManager status; //miten tämä on singleton?
     public PlayerStats PlayerStats { get { return playerStats; } }
+    public Pause Pause { get { return pause; } }
 
     public GameObject enemy;
 
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
         }
 
         playerStats = new PlayerStats();
+        pause = new Pause();
 
         //playerHealth = 100;
         //playerMaxHealth = 100;
@@ -44,6 +47,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            pause.TogglePause();
+        }
+
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer >= enemySpawnRate)
