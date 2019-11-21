@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (enemyDamageTimer >= enemyDamageCooldown)
+        if ( (enemyDamageTimer >= enemyDamageCooldown) && collision.gameObject.tag == "Player")
         {
             DamagePlayerOnCollision(collision);
             enemyDamageTimer = 0;
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (enemyDamageTimer >= enemyDamageCooldown)
+        if ( (enemyDamageTimer >= enemyDamageCooldown) && collision.gameObject.tag == "Player")
         {
             DamagePlayerOnCollision(collision);
             enemyDamageTimer = 0;
@@ -63,14 +63,11 @@ public class Enemy : MonoBehaviour
 
     public void DamagePlayerOnCollision(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
             PlayerStats playerStats = GameManager.status.PlayerStats;
             playerStats.TakeDamage(damage);
             if (playerStats.Hp <= 0)
             {
                 Destroy(collision.gameObject); //player destruction might not be needed later
             }
-        }
     }
 }
