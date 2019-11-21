@@ -9,15 +9,22 @@ public class GameManager : MonoBehaviour
 {
     private PlayerStats playerStats;
     private Pause pause;
+    private bool isGameOver;
 
     public static GameManager status; //miten tämä on singleton?
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
 
+    public bool IsGameOver
+    {
+        get { return isGameOver; }
+        set { isGameOver = value; }
+    }
+
     public GameObject enemy;
 
     private float spawnTimer = 0;
-    private float enemySpawnRate = 5f;
+    private float enemySpawnRate = 2f;
 
     void Awake()
     {
@@ -34,8 +41,7 @@ public class GameManager : MonoBehaviour
         playerStats = new PlayerStats();
         pause = new Pause();
 
-        //playerHealth = 100;
-        //playerMaxHealth = 100;
+        isGameOver = false;
     }
 
     // Start is called before the first frame update
@@ -47,19 +53,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!isGameOver)
         {
-            pause.TogglePause();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                pause.TogglePause();
+            }
+
+            spawnTimer += Time.deltaTime;
+
+            if (spawnTimer >= enemySpawnRate)
+            {
+                SpawnEnemy();
+                spawnTimer = 0;
+            }
         }
-
-        spawnTimer += Time.deltaTime;
-
-        if (spawnTimer >= enemySpawnRate)
-        {
-            SpawnEnemy();
-            spawnTimer = 0;
-        }
-
     }
 
     void SpawnEnemy()

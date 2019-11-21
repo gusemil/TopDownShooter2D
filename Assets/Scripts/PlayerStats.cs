@@ -33,14 +33,12 @@ public class PlayerStats
         set { isPoweredUp = value; }
     }
 
-
     public PlayerStats()
     {
         hp = 50;
         maxHp = 100;
         damage = 20;
         isPoweredUp = false;
-        
     }
 
 
@@ -63,6 +61,12 @@ public class PlayerStats
     {
         hp -= dmg;
         Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
+
+        if(hp <= 0)
+        {
+            GameManager.status.IsGameOver = true;
+            GameManager.status.Pause.TogglePause();
+        }
     }
 
     /*
