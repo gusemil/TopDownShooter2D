@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private float bulletForce = 20f;
 
     private float timer = 0;
+    private float dashTime = 0.2f;
+    private bool isDashOn = false;
     private float fireCoolDown = 0.1f;
 
     public Transform firePoint;
@@ -19,7 +21,11 @@ public class PlayerController : MonoBehaviour
     Vector2 mousePosition;
 
     private Color originalColor;
+    private Color powerUpColor = new Color(0, 1, 1, 1);
+    private Color dashColor = new Color(0, 1, 0, 1);
+
     public Color OriginalColor { get { return originalColor; } }
+    public Color PowerUpColor { get { return powerUpColor; } }
 
     void Start()
     {
@@ -32,8 +38,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal") + rb2D.velocity.x;
+        movement.y = Input.GetAxisRaw("Vertical") + rb2D.velocity.y;
+
+        Debug.Log(rb2D.velocity);
 
         mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
@@ -47,6 +55,11 @@ public class PlayerController : MonoBehaviour
                 Shoot();
                 timer = 0;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            StartCoroutine(Dash());
         }
 
     }
@@ -70,6 +83,35 @@ public class PlayerController : MonoBehaviour
     public void ChangePlayerColor(Color color)
     {
         GetComponent<SpriteRenderer>().color = color;
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashOn = true;
+        while (isDashOn)
+        {
+            ChangePlayerColor(dashColor);
+            
+            if (Input.GetAxisRaw("Horizontal") > 0)
+                //movement.x +=  0.1f;
+                rb2D.velocity = Vector2.right * 3;
+            else if (Input.GetAxisRaw("Horizontal") < 0)
+                //movement.x -= 0.1f;
+                rb2D.velocity = Vector2.left * 3;
+
+            if (Input.GetAxisRaw("Vertical") > 0)
+                //movement.y += 0.1f;
+                rb2D.velocity = Vector2.up * 3;
+            else if (Input.GetAxisRaw("Vertical") < 0)
+                //movement.y -= 0.1f;
+                rb2D.velocity = Vector2.down * 3;
+                
+            yield return new WaitForSeconds(dashTime);
+            isDashOn = false;
+            rb2D.velocity = Vector2.zero;
+            ChangePlayerColor(originalColor);
+        }
+
     }
 
 }

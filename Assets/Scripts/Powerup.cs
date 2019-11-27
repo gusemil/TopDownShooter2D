@@ -7,6 +7,7 @@ public class Powerup : Pickup
     private float hexDamageDuration = 5f;
     private bool isHexDamageOn;
     private int healAmount = 20;
+    
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class Powerup : Pickup
             PlayerController pc = playerCollider.GetComponent<PlayerController>();
             Color originalColor = pc.OriginalColor;
 
-            pc.ChangePlayerColor(new Color(0, 1, 1, 1)); 
+            pc.ChangePlayerColor(pc.PowerUpColor); 
             int originalDamage = player.Damage;
             player.Damage *= 6;
             yield return new WaitForSeconds(hexDamageDuration);

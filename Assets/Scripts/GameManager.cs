@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameOver)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 pause.TogglePause();
             }

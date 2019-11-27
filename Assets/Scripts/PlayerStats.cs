@@ -8,6 +8,7 @@ public class PlayerStats
     private int maxHp;
     private int damage;
     private bool isPoweredUp;
+    private bool isDashing;
 
     public int Hp
     {
@@ -33,12 +34,19 @@ public class PlayerStats
         set { isPoweredUp = value; }
     }
 
+    public bool IsDashing
+    {
+        get { return isDashing; }
+        set { isDashing = value; }
+    }
+
     public PlayerStats()
     {
         hp = 50;
         maxHp = 100;
         damage = 20;
         isPoweredUp = false;
+        isDashing = false;
     }
 
 
