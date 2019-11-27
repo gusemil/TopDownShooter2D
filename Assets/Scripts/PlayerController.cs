@@ -29,10 +29,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        PlayerStats stats = GameManager.status.PlayerStats;
+        //PlayerStats stats = GameManager.status.PlayerStats;
         originalColor = GetComponent<SpriteRenderer>().color;
-        Debug.Log(stats.Hp);
-        Debug.Log(stats.MaxHp);
     }
 
     // Update is called once per frame
@@ -46,7 +44,6 @@ public class PlayerController : MonoBehaviour
         mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
         timer += Time.deltaTime;
-        //Debug.Log(timer);
 
         if (Input.GetButton("Fire1")) //mouse1
         {
@@ -82,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangePlayerColor(Color color)
     {
-        GetComponent<SpriteRenderer>().color = color;
+            GetComponent<SpriteRenderer>().color = color;
     }
 
     private IEnumerator Dash()
