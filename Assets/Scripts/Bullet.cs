@@ -47,7 +47,6 @@ public class Bullet : MonoBehaviour
         if (collision.transform.GetComponent<Enemy>())
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
-            Debug.Log("Enemy hit!");
             enemy.TakeDamage(bulletDamage);
         }
     }

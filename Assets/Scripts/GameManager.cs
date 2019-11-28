@@ -21,10 +21,16 @@ public class GameManager : MonoBehaviour
         set { isGameOver = value; }
     }
 
-    public GameObject enemy;
+    public GameObject crab;
+    public GameObject jumper;
+    public GameObject octopus;
 
-    private float spawnTimer = 0;
-    private float enemySpawnRate = 2f;
+    private float crabSpawnTimer = 0;
+    private float crabSpawnRate = 2f;
+    private float jumperSpawnTimer = 0;
+    private float jumperSpawnRate = 5f;
+    private float octopusSpawnTimer = 0;
+    private float octopusSpawnRate = 3f;
 
     void Awake()
     {
@@ -60,20 +66,34 @@ public class GameManager : MonoBehaviour
                 pause.TogglePause();
             }
 
-            spawnTimer += Time.deltaTime;
+            crabSpawnTimer += Time.deltaTime;
+            jumperSpawnTimer += Time.deltaTime;
+            octopusSpawnTimer += Time.deltaTime;
 
-            if (spawnTimer >= enemySpawnRate)
+            if (crabSpawnTimer >= crabSpawnRate)
             {
-                SpawnEnemy();
-                spawnTimer = 0;
+                SpawnEnemy(crab);
+                crabSpawnTimer = 0;
+            }
+
+            if (jumperSpawnTimer >= jumperSpawnRate)
+            {
+                SpawnEnemy(jumper);
+                jumperSpawnTimer = 0;
+            }
+
+            if (octopusSpawnTimer >= octopusSpawnRate)
+            {
+                SpawnEnemy(octopus);
+                octopusSpawnTimer = 0;
             }
         }
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(GameObject enemyType)
     {
         //Lista vihollisista myöhemmin
-        Instantiate(enemy, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        Instantiate(enemyType, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
     }
     
 }

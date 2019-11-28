@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = true;
             player.IsDashing = false;
             rb2D.velocity = Vector2.zero;
-            ChangePlayerColor(previousColor);
+            ChangePlayerColor(originalColor);
         }
 
     }

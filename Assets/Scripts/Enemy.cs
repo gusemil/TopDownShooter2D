@@ -7,10 +7,12 @@ public class Enemy : MonoBehaviour
     public int hp;
     public int damage;
     public float moveSpeed;
+    public bool shooterEnemy;
     private GameObject player;
     private Vector2 direction;
     private float enemyDamageTimer = 0;
     private float enemyDamageCooldown = 0.5f;
+    private Rigidbody2D rb2D;
 
     PlayerStats playerStats;
 
@@ -19,15 +21,16 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = GameManager.status.PlayerStats;
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        direction = player.transform.position - transform.position; //direction vector to player position
-        direction.Normalize(); //convert to unit vector
+            direction = player.transform.position - transform.position; //direction vector to player position
+            direction.Normalize(); //convert to unit vector
 
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
+            transform.Translate(direction * moveSpeed * Time.deltaTime);
     }
 
     void Update()
@@ -66,7 +69,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
-        Debug.Log("hp: " + gameObject.transform.tag + " " + hp);
 
         if (hp <= 0)
         {
