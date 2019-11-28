@@ -8,9 +8,8 @@ public class PlayerController : MonoBehaviour
     private float bulletForce = 20f;
 
     private float timer = 0;
-    private float dashTime = 0.2f;
-    private float dashSpeed = 4f;
-    private bool isDashOn = false;
+    private float dashTime = 0.3f; //0.2f
+    private float dashSpeed = 4f; //4f
     private float fireCoolDown = 0.1f;
 
     public Transform firePoint;
@@ -99,8 +98,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        isDashOn = true;
-        while (isDashOn)
+        PlayerStats player = GameManager.status.PlayerStats;
+
+        player.IsDashing = true;
+        while (player.IsDashing)
         {
             SetPreviousColor();
             ChangePlayerColor(dashColor);
@@ -119,9 +120,11 @@ public class PlayerController : MonoBehaviour
             else if (Input.GetAxisRaw("Vertical") < 0)
                 //movement.y -= 0.1f;
                 rb2D.velocity = Vector2.down * dashSpeed;
-                
+
+            GetComponent<BoxCollider2D>().enabled = false;
             yield return new WaitForSeconds(dashTime);
-            isDashOn = false;
+            GetComponent<BoxCollider2D>().enabled = true;
+            player.IsDashing = false;
             rb2D.velocity = Vector2.zero;
             ChangePlayerColor(previousColor);
         }

@@ -12,10 +12,13 @@ public class Enemy : MonoBehaviour
     private float enemyDamageTimer = 0;
     private float enemyDamageCooldown = 0.5f;
 
+    PlayerStats playerStats;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = GameManager.status.PlayerStats;
     }
 
     // Update is called once per frame
@@ -32,22 +35,32 @@ public class Enemy : MonoBehaviour
         enemyDamageTimer += Time.deltaTime;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if ( (enemyDamageTimer >= enemyDamageCooldown) && collision.gameObject.tag == "Player")
+        if ( (enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
         {
-            DamagePlayerOnCollision(collision);
+            DamagePlayerOnCollision(other);
             enemyDamageTimer = 0;
         }
+        /*else if (playerStats.IsDashing && other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(player.GetComponent<Collider>(),this.GetComponent<Collider>());
+        }*/
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D other)
     {
-        if ( (enemyDamageTimer >= enemyDamageCooldown) && collision.gameObject.tag == "Player")
+        if ( (enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
         {
-            DamagePlayerOnCollision(collision);
+            DamagePlayerOnCollision(other);
             enemyDamageTimer = 0;
         }
+        /*
+        else if (playerStats.IsDashing && other.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(player.GetComponent<Collider>(), this.GetComponent<Collider>());
+        }
+        */
     }
 
     public void TakeDamage(int dmg)
@@ -61,13 +74,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DamagePlayerOnCollision(Collision2D collision)
+    public void DamagePlayerOnCollision(Collision2D other)
     {
             PlayerStats playerStats = GameManager.status.PlayerStats;
             playerStats.TakeDamage(damage);
             if (playerStats.Hp <= 0)
             {
-                Destroy(collision.gameObject); //player destruction might not be needed later
+                Destroy(other.gameObject); //player destruction might not be needed later
             }
     }
 }

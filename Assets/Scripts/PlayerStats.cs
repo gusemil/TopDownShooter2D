@@ -67,13 +67,16 @@ public class PlayerStats
 
     public void TakeDamage(int dmg)
     {
-        hp -= dmg;
-        Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
-
-        if(hp <= 0)
+        if (!isDashing) //don't take damage if player is dashing
         {
-            GameManager.status.IsGameOver = true;
-            GameManager.status.Pause.TogglePause();
+            hp -= dmg;
+            Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
+
+            if(hp <= 0)
+            {
+                GameManager.status.IsGameOver = true;
+                GameManager.status.Pause.TogglePause();
+            }
         }
     }
 
