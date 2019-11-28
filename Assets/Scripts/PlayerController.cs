@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (Input.GetButton("Fire2")) //mouse2
+        {
+            Bomb();
+        }
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             StartCoroutine(Dash());
@@ -77,9 +82,25 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 
+    private void Bomb()
+    {
+            GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
+            enemy[0].GetComponent<Enemy>().TakeDamage(10000);
+    }
+
     public void ChangePlayerColor(Color color)
     {
+        PlayerStats player = GameManager.status.PlayerStats;
+
+        if (!player.IsDashing && !player.IsPoweredUp)
+        {
+            previousColor = originalColor;
+            GetComponent<SpriteRenderer>().color = originalColor;
+
+        } else
+        {
             GetComponent<SpriteRenderer>().color = color;
+        }
     }
 
     public void SetPreviousColor()
@@ -126,7 +147,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = true;
             player.IsDashing = false;
             rb2D.velocity = Vector2.zero;
-            ChangePlayerColor(originalColor);
+            ChangePlayerColor(previousColor);
         }
 
     }
