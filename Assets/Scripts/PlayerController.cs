@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private float timer = 0;
     private float dashTime = 0.2f;
+    private float dashSpeed = 4f;
     private bool isDashOn = false;
     private float fireCoolDown = 0.1f;
 
@@ -23,9 +24,11 @@ public class PlayerController : MonoBehaviour
     private Color originalColor;
     private Color powerUpColor = new Color(0, 1, 1, 1);
     private Color dashColor = new Color(0, 1, 0, 1);
+    private Color previousColor;
 
     public Color OriginalColor { get { return originalColor; } }
     public Color PowerUpColor { get { return powerUpColor; } }
+    public Color PreviousColor {  get { return previousColor; }}
 
     void Start()
     {
@@ -38,8 +41,6 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal") + rb2D.velocity.x;
         movement.y = Input.GetAxisRaw("Vertical") + rb2D.velocity.y;
-
-        Debug.Log(rb2D.velocity);
 
         mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
@@ -82,31 +83,47 @@ public class PlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().color = color;
     }
 
+    public void SetPreviousColor()
+    {
+        PlayerStats player = GameManager.status.PlayerStats;
+
+        if(!player.IsDashing && !player.IsPoweredUp)
+        {
+            previousColor = originalColor;
+            GetComponent<SpriteRenderer>().color = originalColor;
+        } else
+        {
+            previousColor = GetComponent<SpriteRenderer>().color;
+        }
+    }
+
     private IEnumerator Dash()
     {
         isDashOn = true;
         while (isDashOn)
         {
+            SetPreviousColor();
             ChangePlayerColor(dashColor);
+            
             
             if (Input.GetAxisRaw("Horizontal") > 0)
                 //movement.x +=  0.1f;
-                rb2D.velocity = Vector2.right * 3;
+                rb2D.velocity = Vector2.right * dashSpeed;
             else if (Input.GetAxisRaw("Horizontal") < 0)
                 //movement.x -= 0.1f;
-                rb2D.velocity = Vector2.left * 3;
+                rb2D.velocity = Vector2.left * dashSpeed;
 
             if (Input.GetAxisRaw("Vertical") > 0)
                 //movement.y += 0.1f;
-                rb2D.velocity = Vector2.up * 3;
+                rb2D.velocity = Vector2.up * dashSpeed;
             else if (Input.GetAxisRaw("Vertical") < 0)
                 //movement.y -= 0.1f;
-                rb2D.velocity = Vector2.down * 3;
+                rb2D.velocity = Vector2.down * dashSpeed;
                 
             yield return new WaitForSeconds(dashTime);
             isDashOn = false;
             rb2D.velocity = Vector2.zero;
-            ChangePlayerColor(originalColor);
+            ChangePlayerColor(previousColor);
         }
 
     }

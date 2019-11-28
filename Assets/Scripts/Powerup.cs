@@ -50,7 +50,6 @@ public class Powerup : Pickup
         while (isHexDamageOn)
         {
             PlayerController pc = playerCollider.GetComponent<PlayerController>();
-            Color originalColor = pc.OriginalColor;
 
             pc.ChangePlayerColor(pc.PowerUpColor); 
             int originalDamage = player.Damage;
@@ -58,25 +57,12 @@ public class Powerup : Pickup
             yield return new WaitForSeconds(hexDamageDuration);
             
             player.Damage = originalDamage;
-            pc.ChangePlayerColor(originalColor);
             isHexDamageOn = false;
             player.IsPoweredUp = false;
+            pc.SetPreviousColor();
             Destroy(gameObject);
         }
 
-        /*
-        if (!isHexDamageOn)
-        {
-            Destroy(gameObject);
-        }
-        */
-
     }
 
-    /*
-    private void ChangePlayerColor(Color color, Collider2D playerCollider)
-    {
-        playerCollider.GetComponent<SpriteRenderer>().color = color;
-    }
-    */
 }

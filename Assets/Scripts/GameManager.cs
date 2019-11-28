@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private Pause pause;
     private bool isGameOver;
 
-    public static GameManager status; //miten tämä on singleton?
+    public static GameManager status; //singleton?
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
 

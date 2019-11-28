@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public GameObject hitEffect;
 
     private float bulletLifeTime;
-    private bool isBulletLifeOver;
+    private bool isBulletAlive;
     private int bulletDamage;
     private int weaponDamage;
 
@@ -18,20 +18,20 @@ public class Bullet : MonoBehaviour
         bulletDamage = playerStats.Damage + weaponDamage;
 
         bulletLifeTime = 2f;
-        isBulletLifeOver = true;
+        isBulletAlive = true;
 
         StartCoroutine(BulletGoing());
     }
 
     private IEnumerator BulletGoing()
     {
-        while (isBulletLifeOver == true)
+        while (isBulletAlive == true)
         {
             yield return new WaitForSeconds(bulletLifeTime);
-            isBulletLifeOver = false;
+            isBulletAlive = false;
         }
 
-        if (!isBulletLifeOver)
+        if (!isBulletAlive)
         {
             Destroy(gameObject);
         }
