@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private float enemyDamageCooldown = 0.5f;
     private Rigidbody2D rb2D;
 
-    private float stopDistance = 10f;
+    private float stopDistance = 7.5f;
     private float retreatDistance = 5f;
 
     PlayerStats playerStats;

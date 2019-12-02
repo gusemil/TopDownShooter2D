@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
 
         //Tee tägeillä mielummin?
 
-        if (collision.transform.GetComponent<Enemy>() && this.gameObject != this.gameObject.GetComponent<Enemy>()) //osuu viholliseen ja scriptin omistaja ei ole vihollinen
+        if (collision.transform.GetComponent<Enemy>() && !this.gameObject.GetComponent<Enemy>()) //osuu viholliseen ja scriptin omistaja ei ole vihollinen
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
             enemy.TakeDamage(bulletDamage);
@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
             Debug.Log("osuu vihuun!");
         }
 
-        else if (collision.transform.GetComponent<PlayerController>() && this.gameObject != this.gameObject.GetComponent<PlayerController>()) //osuu pelaajaan ja scriptin omistaja ei ole pelaajaa
+        else if (collision.transform.GetComponent<PlayerController>() && !this.gameObject.GetComponent<PlayerController>()) //osuu pelaajaan ja scriptin omistaja ei ole pelaajaa
         {
             PlayerStats player = GameManager.status.PlayerStats;
             player.TakeDamage(bulletDamage);
