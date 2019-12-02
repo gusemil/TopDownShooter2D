@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float moveSpeed = 5f;
+    private float moveSpeed = 10f;
     private float bulletForce = 20f;
 
     private float timer = 0;
-    private float dashTime = 0.3f; //0.2f
-    private float dashSpeed = 4f; //4f
+    private float dashTime = 0.2f; //0.2f
+    private float dashSpeed = 6f; //4f
     private float fireCoolDown = 0.1f;
+    private float dashInvulnerabilityDelay = 0.5f;
 
     public Transform firePoint;
     public GameObject bulletPreFab;
@@ -145,8 +146,11 @@ public class PlayerController : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             yield return new WaitForSeconds(dashTime);
             GetComponent<BoxCollider2D>().enabled = true;
-            player.IsDashing = false;
             rb2D.velocity = Vector2.zero;
+            player.IsDashing = false;
+            player.IsInvulnerable = true;
+            yield return new WaitForSeconds(dashInvulnerabilityDelay);
+            player.IsInvulnerable = false;
             ChangePlayerColor(previousColor);
         }
 

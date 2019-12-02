@@ -95,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d1d555b8b8b2c4bb17f5b8a852c7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1000
+  hp: 500
   damage: 25
-  moveSpeed: 1.5
+  moveSpeed: 3
   shooterEnemy: 0
 --- !u!50 &992120344103593087
 Rigidbody2D:

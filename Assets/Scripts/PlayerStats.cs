@@ -9,6 +9,7 @@ public class PlayerStats
     private int damage;
     private bool isPoweredUp;
     private bool isDashing;
+    private bool isInvulnerable;
 
     public int Hp
     {
@@ -40,6 +41,12 @@ public class PlayerStats
         set { isDashing = value; }
     }
 
+    public bool IsInvulnerable
+    {
+        get { return isInvulnerable; }
+        set { isInvulnerable = value; }
+    }
+
     public PlayerStats()
     {
         hp = 50;
@@ -47,6 +54,7 @@ public class PlayerStats
         damage = 20;
         isPoweredUp = false;
         isDashing = false;
+        isInvulnerable = false;
     }
 
 
@@ -67,7 +75,7 @@ public class PlayerStats
 
     public void TakeDamage(int dmg)
     {
-        if (!isDashing) //don't take damage if player is dashing
+        if (!isDashing && !isInvulnerable) //don't take damage if player is dashing
         {
             hp -= dmg;
             Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);

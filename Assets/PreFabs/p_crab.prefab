@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d1d555b8b8b2c4bb17f5b8a852c7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 100
   damage: 10
-  moveSpeed: 3
+  moveSpeed: 6
   shooterEnemy: 0
