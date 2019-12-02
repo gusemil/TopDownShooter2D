@@ -14,7 +14,14 @@ public class Enemy : MonoBehaviour
     private float enemyDamageCooldown = 0.5f;
     private Rigidbody2D rb2D;
 
+    private float stopDistance = 10f;
+    private float retreatDistance = 5f;
+
     PlayerStats playerStats;
+
+    //public Transform firePoint;
+    public GameObject bulletPreFab;
+    private float bulletForce = 20f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +34,40 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!shooterEnemy)
+        {
             direction = player.transform.position - transform.position; //direction vector to player position
             direction.Normalize(); //convert to unit vector
 
             transform.Translate(direction * moveSpeed * Time.deltaTime);
+        } else if (shooterEnemy) {
+            float playerEnemyDistance = Vector2.Distance(player.transform.position, this.transform.position);
+
+            if (playerEnemyDistance > stopDistance) //liian kaukana
+            {
+                direction = player.transform.position - transform.position; //direction vector to player position
+                direction.Normalize(); //convert to unit vector
+
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+                //lähestytään pelaajaa
+            } else if(playerEnemyDistance > stopDistance && playerEnemyDistance > retreatDistance) //sopiva etäisyys
+            {
+                transform.position = transform.position;
+                //pysähdytään
+            } else if (playerEnemyDistance < retreatDistance)
+            {
+                direction = player.transform.position - transform.position; //direction vector to player position
+                direction.Normalize(); //convert to unit vector
+
+                transform.Translate(direction * -moveSpeed * Time.deltaTime);
+                //paetaan
+            }
+
+
+            //Shoot(); //jos shooter enemy
+        }
+           
     }
 
     void Update()
@@ -85,4 +122,13 @@ public class Enemy : MonoBehaviour
                 Destroy(other.gameObject); //player destruction might not be needed later
             }
     }
+
+    /*
+    private void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPreFab, transform.position, Quaternion.identity); //GameObject bullet = jotta päästään käsiksi myöhemmin
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(transform.position * bulletForce, ForceMode2D.Impulse);
+    }
+    */
 }

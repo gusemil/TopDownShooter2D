@@ -146,3 +146,5 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 10
   shooterEnemy: 1
+  bulletPreFab: {fileID: 6531947342222055162, guid: 9a2c19c43f2cb8845b787b642c5e707b,
+    type: 3}
