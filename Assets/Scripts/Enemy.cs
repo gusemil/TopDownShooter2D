@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     private float stopDistance = 7.5f;
     private float retreatDistance = 5f;
+    float playerEnemyDistance;
 
     PlayerStats playerStats;
 
@@ -27,43 +28,12 @@ public class Enemy : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if(!shooterEnemy)
-        {
-            direction = player.transform.position - transform.position; //direction vector to player position
-            direction.Normalize(); //convert to unit vector
-
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
-        } else if (shooterEnemy) {
-            float playerEnemyDistance = Vector2.Distance(player.transform.position, this.transform.position);
-
-            if (playerEnemyDistance > stopDistance) //liian kaukana
-            {
-                direction = player.transform.position - transform.position; //direction vector to player position
-                direction.Normalize(); //convert to unit vector
-
-                transform.Translate(direction * moveSpeed * Time.deltaTime);
-
-                //lähestytään pelaajaa
-            } else if(playerEnemyDistance > stopDistance && playerEnemyDistance > retreatDistance) //sopiva etäisyys
-            {
-                transform.position = transform.position;
-                //pysähdytään
-            } else if (playerEnemyDistance < retreatDistance)
-            {
-                direction = player.transform.position - transform.position; //direction vector to player position
-                direction.Normalize(); //convert to unit vector
-
-                transform.Translate(direction * -moveSpeed * Time.deltaTime);
-                //paetaan
-            }
-
-        }
-           
+        EnemyMovementTowardsPlayer();
     }
 
+    // Update is called once per frame
     void Update()
     {
         enemyDamageTimer += Time.deltaTime;
@@ -115,6 +85,58 @@ public class Enemy : MonoBehaviour
             {
                 Destroy(other.gameObject); //player destruction might not be needed later
             }
+    }
+
+    void EnemyMovementTowardsPlayer()
+    {
+
+        playerEnemyDistance = Vector2.Distance(player.transform.position, this.transform.position);
+        int multiplier;
+
+        if (shooterEnemy)
+        {
+            multiplier = -1;
+        }
+        else
+        {
+            multiplier = 1;
+        }
+
+        if (!shooterEnemy || (shooterEnemy && playerEnemyDistance < retreatDistance))
+        {
+            direction = player.transform.position - transform.position; //direction vector to player position
+            direction.Normalize(); //convert to unit vector
+            transform.Translate(direction * multiplier * moveSpeed * Time.deltaTime);
+        }
+        else if (shooterEnemy)
+        {
+
+            if (playerEnemyDistance > stopDistance) //liian kaukana
+            {
+                direction = player.transform.position - transform.position; //direction vector to player position
+                direction.Normalize(); //convert to unit vector
+
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+                //lähestytään pelaajaa
+            }
+            else if (playerEnemyDistance > stopDistance && playerEnemyDistance > retreatDistance) //sopiva etäisyys
+            {
+                transform.position = transform.position;
+                //pysähdytään
+            }
+            /*
+            else if (playerEnemyDistance < retreatDistance)
+            {
+                direction = player.transform.position - transform.position; //direction vector to player position
+                direction.Normalize(); //convert to unit vector
+
+                transform.Translate(direction * -moveSpeed * Time.deltaTime);
+                //paetaan
+            }
+            */
+
+        }
     }
 
 }
