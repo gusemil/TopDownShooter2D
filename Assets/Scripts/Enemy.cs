@@ -19,10 +19,6 @@ public class Enemy : MonoBehaviour
 
     PlayerStats playerStats;
 
-    //public Transform firePoint;
-    public GameObject bulletPreFab;
-    private float bulletForce = 20f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -64,8 +60,6 @@ public class Enemy : MonoBehaviour
                 //paetaan
             }
 
-
-            //Shoot(); //jos shooter enemy
         }
            
     }
@@ -123,12 +117,4 @@ public class Enemy : MonoBehaviour
             }
     }
 
-    /*
-    private void Shoot()
-    {
-        GameObject bullet = Instantiate(bulletPreFab, transform.position, Quaternion.identity); //GameObject bullet = jotta päästään käsiksi myöhemmin
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.position * bulletForce, ForceMode2D.Impulse);
-    }
-    */
 }
