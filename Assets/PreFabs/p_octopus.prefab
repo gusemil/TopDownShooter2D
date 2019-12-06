@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6215381391955867718}
   - component: {fileID: 6215381391955867769}
   - component: {fileID: 6215381391955867770}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: p_octopus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -146,5 +146,3 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 10
   shooterEnemy: 1
-  bulletPreFab: {fileID: 6531947342222055162, guid: 9a2c19c43f2cb8845b787b642c5e707b,
-    type: 3}

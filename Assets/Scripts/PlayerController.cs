@@ -138,7 +138,8 @@ public class PlayerController : MonoBehaviour
             SetPreviousColor();
             ChangePlayerColor(dashColor);
             
-            
+
+
             if (Input.GetAxisRaw("Horizontal") > 0)
                 //movement.x +=  0.1f;
                 rb2D.velocity = Vector2.right * dashSpeed;
@@ -153,9 +154,11 @@ public class PlayerController : MonoBehaviour
                 //movement.y -= 0.1f;
                 rb2D.velocity = Vector2.down * dashSpeed;
 
-            GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().enabled = false;
+            this.gameObject.layer = 11; //Dash Layer
             yield return new WaitForSeconds(dashTime);
-            GetComponent<BoxCollider2D>().enabled = true;
+            this.gameObject.layer = 10; //Player Layer
+            //GetComponent<BoxCollider2D>().enabled = true;
             rb2D.velocity = Vector2.zero;
             player.IsDashing = false;
             player.IsInvulnerable = true;

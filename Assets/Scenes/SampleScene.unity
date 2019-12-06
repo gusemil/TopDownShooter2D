@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 329568167}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Firepoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329568166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0.17, z: 0}
+  m_LocalPosition: {x: 0.15, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7944583421165293227}
@@ -464,7 +464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1164471730}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Firepoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164471729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0.17, z: 0}
+  m_LocalPosition: {x: -0.07, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7944583421165293227}
@@ -837,7 +837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1892891069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,6 +938,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433456888520020952, guid: e8e2dc3b292c50d4ab5c5b53c596dce7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3854580059877227932, guid: e8e2dc3b292c50d4ab5c5b53c596dce7,
         type: 3}

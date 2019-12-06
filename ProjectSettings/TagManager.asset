@@ -16,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - Projectile Layer
-  - No Collision
-  - Collision
-  - 
+  - Projectile
+  - Enemy
+  - Player
+  - Dash
   - 
   - 
   - 
