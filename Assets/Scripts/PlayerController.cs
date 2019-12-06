@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float dashInvulnerabilityDelay = 0.5f;
 
     public Transform firePoint;
+    public Transform firePoint2;
+    public Transform firePoint3;
     public GameObject bulletPreFab;
     public Rigidbody2D rb2D;
     public Camera _camera; //variable name 'camera' is not available
@@ -81,6 +83,14 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+        GameObject bullet2 = Instantiate(bulletPreFab, firePoint2.position, firePoint2.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
+        Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
+        rb2.AddForce(firePoint2.up * bulletForce, ForceMode2D.Impulse);
+
+        GameObject bullet3 = Instantiate(bulletPreFab, firePoint3.position, firePoint3.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
+        Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
+        rb3.AddForce(firePoint3.up * bulletForce, ForceMode2D.Impulse);
     }
 
     private void Bomb()
