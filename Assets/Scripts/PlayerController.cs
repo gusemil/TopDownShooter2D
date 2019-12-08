@@ -63,14 +63,29 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha1))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             weapon.ChangePreviousWeapon();
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             weapon.ChangeNextWeapon();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            weapon.ChangeWeapon(0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            weapon.ChangeWeapon(1);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha3))
+        {
+            weapon.ChangeWeapon(2);
         }
 
     }
@@ -90,7 +105,6 @@ public class PlayerController : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        //rb.AddForce(firePoint.up * weapon.WeaponList[0].FireCoolDown, ForceMode2D.Impulse);
         rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
         if(weapon.CurrentWeapon.WeaponName == "shotgun")

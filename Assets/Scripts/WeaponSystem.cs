@@ -18,26 +18,6 @@ public class WeaponSystem : MonoBehaviour
     Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.01f);
     Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 1f);
 
-    public void ChangePreviousWeapon()
-    {
-        weaponIndex--;
-
-        if (weaponIndex < 0)
-            weaponIndex = weaponList.Count-1;
-
-        currentWeapon = weaponList[weaponIndex];
-    }
-
-    public void ChangeNextWeapon()
-    {
-        weaponIndex++;
-
-        if(weaponIndex > WeaponList.Count - 1)
-            weaponIndex = 0;
-
-        currentWeapon = weaponList[weaponIndex];
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -58,4 +38,30 @@ public class WeaponSystem : MonoBehaviour
     {
         shotTimer += Time.deltaTime;
     }
+
+    public void ChangePreviousWeapon()
+    {
+        weaponIndex--;
+
+        if (weaponIndex < 0)
+            weaponIndex = weaponList.Count - 1;
+
+        currentWeapon = weaponList[weaponIndex];
+    }
+
+    public void ChangeNextWeapon()
+    {
+        weaponIndex++;
+
+        if (weaponIndex > WeaponList.Count - 1)
+            weaponIndex = 0;
+
+        currentWeapon = weaponList[weaponIndex];
+    }
+
+    public void ChangeWeapon(int weaponChoice)
+    {
+        currentWeapon = weaponList[weaponChoice];
+    }
+
 }

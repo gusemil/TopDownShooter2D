@@ -5,9 +5,9 @@ using UnityEngine;
 public class Weapon
 {
     private string _weaponName;
-    private int _weaponNumber; //0 machine gun, 1 shotgun
-    private float _bulletForce; //20f;
-    private float _fireCoolDown; //0.1f;
+    private int _weaponNumber;
+    private float _bulletForce;
+    private float _fireCoolDown;
     private int _weaponDamage;
 
     public string WeaponName { get { return _weaponName; } set { _weaponName = value; } }
@@ -24,20 +24,5 @@ public class Weapon
         _bulletForce = bulletForce;
         _fireCoolDown = fireCoolDown;
     }
-
-    //private float weaponTimer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //weaponTimer += Time.deltaTime;
-    }
-
 
 }
