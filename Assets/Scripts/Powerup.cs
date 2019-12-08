@@ -52,11 +52,11 @@ public class Powerup : Pickup
             PlayerController pc = playerCollider.GetComponent<PlayerController>();
 
             pc.ChangePlayerColor(pc.PowerUpColor); 
-            int originalDamage = player.Damage;
-            player.Damage *= 6;
+            int originalDamageMultiplier = player.DamageMultiplier;
+            player.DamageMultiplier = 6;
             yield return new WaitForSeconds(hexDamageDuration);
             
-            player.Damage = originalDamage;
+            player.DamageMultiplier = originalDamageMultiplier;
             isHexDamageOn = false;
             player.IsPoweredUp = false;
             pc.SetPreviousColor();

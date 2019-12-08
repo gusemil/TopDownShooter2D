@@ -6,7 +6,7 @@ public class PlayerStats
 {
     private int hp;
     private int maxHp;
-    private int damage;
+    private int damageMultiplier;
     private bool isPoweredUp;
     private bool isDashing;
     private bool isInvulnerable;
@@ -23,10 +23,10 @@ public class PlayerStats
     }
 
 
-    public int Damage
+    public int DamageMultiplier
     {
-        get { return damage; }
-        set { damage = value; }
+        get { return damageMultiplier; }
+        set { damageMultiplier = value; }
     }
 
     public bool IsPoweredUp
@@ -51,7 +51,7 @@ public class PlayerStats
     {
         hp = 50;
         maxHp = 100;
-        damage = 20;
+        damageMultiplier = 1;
         isPoweredUp = false;
         isDashing = false;
         isInvulnerable = false;
