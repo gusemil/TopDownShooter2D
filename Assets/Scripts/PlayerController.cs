@@ -103,19 +103,25 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(weapon.CurrentWeapon.WeaponName);
 
-        GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
-
-        if(weapon.CurrentWeapon.WeaponName == "shotgun")
+        if(weapon.CurrentWeapon.Ammo > 0)
         {
-            GameObject bullet2 = Instantiate(bulletPreFab, firePoint2.position, firePoint2.rotation);
-            Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
-            rb2.AddForce(firePoint2.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
+            GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
-            GameObject bullet3 = Instantiate(bulletPreFab, firePoint3.position, firePoint3.rotation);
-            Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
-            rb3.AddForce(firePoint3.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
+            weapon.loseAmmo();
+
+            if(weapon.CurrentWeapon.WeaponName == "shotgun")
+            {
+                GameObject bullet2 = Instantiate(bulletPreFab, firePoint2.position, firePoint2.rotation);
+                Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
+                rb2.AddForce(firePoint2.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
+
+                GameObject bullet3 = Instantiate(bulletPreFab, firePoint3.position, firePoint3.rotation);
+                Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
+                rb3.AddForce(firePoint3.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
+            }
+
         }
 
     }

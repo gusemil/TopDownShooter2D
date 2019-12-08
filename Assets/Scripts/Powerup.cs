@@ -21,6 +21,7 @@ public class Powerup : Pickup
         if (other.transform.GetComponent<PlayerController>())
         {
             PlayerStats playerStats = GameManager.status.PlayerStats;
+            WeaponSystem weapon = GameManager.status.WeaponSystem;
             if (gameObject.tag == "HpPack")
             {
                 HpPack(playerStats);
@@ -29,6 +30,10 @@ public class Powerup : Pickup
             {
                 RemoveGraphicsAndCollider();
                 StartCoroutine(HexDamage(playerStats, other));
+            }
+            else if(gameObject.tag == "Ammo")
+            {
+                AmmoPack(weapon);
             }
         }
     }
@@ -41,6 +46,15 @@ public class Powerup : Pickup
             Destroy(gameObject);
         }
         Debug.Log(player.Hp);
+    }
+
+    private void AmmoPack(WeaponSystem weapon)
+    {
+        weapon.WeaponList[0].Ammo += 50;
+        weapon.WeaponList[1].Ammo += 100;
+        weapon.WeaponList[2].Ammo += 10;
+
+        Destroy(gameObject);
     }
 
     private IEnumerator HexDamage(PlayerStats player, Collider2D playerCollider)

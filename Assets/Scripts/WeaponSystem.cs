@@ -14,9 +14,9 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f);
-    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.01f);
-    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 1f);
+    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 100);
+    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100);
+    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 1f, 5);
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,6 @@ public class WeaponSystem : MonoBehaviour
         weaponIndex = 0;
         currentWeapon = weaponList[0];
         shotTimer = 0f;
-
     }
 
     // Update is called once per frame
@@ -61,7 +60,17 @@ public class WeaponSystem : MonoBehaviour
 
     public void ChangeWeapon(int weaponChoice)
     {
-        currentWeapon = weaponList[weaponChoice];
+        weaponIndex = weaponChoice;
+        currentWeapon = weaponList[weaponIndex];
+    }
+
+    public void loseAmmo()
+    {
+        if (currentWeapon.Ammo > 0)
+        {
+            currentWeapon.Ammo--;
+            Debug.Log(currentWeapon.WeaponName + " ammo count: " + currentWeapon.Ammo);
+        }
     }
 
 }
