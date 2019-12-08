@@ -5,17 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float moveSpeed = 10f;
-    private float bulletForce = 20f;
+    //private float bulletForce = 20f;
 
-    private float timer = 0;
+    //private float shotTimer = 0;
     private float dashTime = 0.2f; //0.2f
     private float dashSpeed = 6f; //4f
-    private float fireCoolDown = 0.1f;
+    //private float fireCoolDown = 0.1f;
     private float dashInvulnerabilityDelay = 0.5f;
 
     public Transform firePoint;
-    public Transform firePoint2;
-    public Transform firePoint3;
+    //public Transform firePoint2;
+    //public Transform firePoint3;
     public GameObject bulletPreFab;
     public Rigidbody2D rb2D;
     public Camera _camera; //variable name 'camera' is not available
@@ -32,10 +32,15 @@ public class PlayerController : MonoBehaviour
     public Color PowerUpColor { get { return powerUpColor; } }
     public Color PreviousColor {  get { return previousColor; }}
 
+    //private WeaponSystem weapon = new WeaponSystem();
+    
+    
+
     void Start()
     {
         //PlayerStats stats = GameManager.status.PlayerStats;
         originalColor = GetComponent<SpriteRenderer>().color;
+       // WeaponSystem weapon = GetComponent<WeaponSystem>();
     }
 
     // Update is called once per frame
@@ -46,14 +51,20 @@ public class PlayerController : MonoBehaviour
 
         mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-        timer += Time.deltaTime;
+        //PlayerStats playerStats = GameManager.status.PlayerStats;
+        WeaponSystem weapon = GameManager.status.WeaponSystem;
+
+        //shotTimer += Time.deltaTime;
+
+        //weapon.Timer += Time.deltaTime;
+        Debug.Log(weapon.ShotTimer);
 
         if (Input.GetButton("Fire1")) //mouse1
         {
-            if(timer >= fireCoolDown)
+            if(weapon.ShotTimer >= weapon.CurrentWeapon.FireCoolDown) //weapon.CurrentWeapon.FireCoolDown
             {
                 Shoot();
-                timer = 0;
+                weapon.ShotTimer = 0;
             }
         }
 
@@ -65,6 +76,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             StartCoroutine(Dash());
+        }
+
+        if(Input.GetKeyUp(KeyCode.X))
+        {
+            //change weapon
         }
 
     }
@@ -80,17 +96,13 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
+        WeaponSystem weapon = GameManager.status.WeaponSystem;
+
         GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        //rb.AddForce(firePoint.up * weapon.WeaponList[0].FireCoolDown, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
-        GameObject bullet2 = Instantiate(bulletPreFab, firePoint2.position, firePoint2.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
-        Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
-        rb2.AddForce(firePoint2.up * bulletForce, ForceMode2D.Impulse);
-
-        GameObject bullet3 = Instantiate(bulletPreFab, firePoint3.position, firePoint3.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
-        Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
-        rb3.AddForce(firePoint3.up * bulletForce, ForceMode2D.Impulse);
     }
 
     private void Bomb()

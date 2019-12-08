@@ -1083,12 +1083,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1892891069}
-  firePoint2: {fileID: 329568167}
-  firePoint3: {fileID: 1164471730}
   bulletPreFab: {fileID: 6531947342222055162, guid: 9a2c19c43f2cb8845b787b642c5e707b,
     type: 3}
   rb2D: {fileID: 7944583421165293225}
   _camera: {fileID: 797997469}
+--- !u!114 &7944583421165293229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944583421165293223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4c98367a0a6c44cba1c5d44c2b042b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7945785692613645718
 PrefabInstance:
   m_ObjectHideFlags: 0

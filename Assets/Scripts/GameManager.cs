@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
 {
     private PlayerStats playerStats;
     private Pause pause;
+    private WeaponSystem weaponSystem;
     private bool isGameOver;
 
-    public static GameManager status; //singleton?
+    public static GameManager status;
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
+    public WeaponSystem WeaponSystem { get { return weaponSystem; } }
 
     public bool IsGameOver
     {
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
 
         playerStats = new PlayerStats();
         pause = new Pause();
+        weaponSystem = new WeaponSystem();
 
         isGameOver = false;
     }
