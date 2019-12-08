@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class WeaponSystem : MonoBehaviour
 {
-    Weapon pistol = new Weapon("machinegun", 0, 20f, 0.1f );
-    Weapon machineGun = new Weapon("machinegun", 1, 40f, 0.05f);
+    private int weaponIndex;
 
     public static Weapon currentWeapon;
     public static List<Weapon> weaponList;
@@ -15,9 +14,27 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    public void ChangeWeapon()
+    Weapon pistol = new Weapon("machinegun", 0, 20f, 0.1f);
+    Weapon machineGun = new Weapon("machinegun", 1, 40f, 0.01f);
+
+    public void ChangePreviousWeapon()
     {
-        //currentWeapon 
+        weaponIndex--;
+
+        if (weaponIndex < 0)
+            weaponIndex = weaponList.Count-1;
+
+        currentWeapon = weaponList[weaponIndex];
+    }
+
+    public void ChangeNextWeapon()
+    {
+        weaponIndex++;
+
+        if(weaponIndex > WeaponList.Count - 1)
+            weaponIndex = 0;
+
+        currentWeapon = weaponList[weaponIndex];
     }
 
     // Start is called before the first frame update
@@ -28,17 +45,15 @@ public class WeaponSystem : MonoBehaviour
         weaponList.Add(pistol);
         weaponList.Add(machineGun);
 
+        weaponIndex = 0;
         currentWeapon = weaponList[0];
         shotTimer = 0f;
-
-        //Debug.Log("Weapon count: " + weaponList.Count);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(timer);
-        ShotTimer += Time.deltaTime;
+        shotTimer += Time.deltaTime;
     }
 }

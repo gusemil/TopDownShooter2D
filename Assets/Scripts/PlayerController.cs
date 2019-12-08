@@ -78,9 +78,14 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        if(Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.Alpha1))
         {
-            //change weapon
+            weapon.ChangePreviousWeapon();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            weapon.ChangeNextWeapon();
         }
 
     }
