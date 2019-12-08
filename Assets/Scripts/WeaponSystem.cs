@@ -14,7 +14,7 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 100);
+    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 0);
     Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100);
     Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 1f, 5);
 
@@ -64,9 +64,9 @@ public class WeaponSystem : MonoBehaviour
         currentWeapon = weaponList[weaponIndex];
     }
 
-    public void loseAmmo()
+    public void LoseAmmo()
     {
-        if (currentWeapon.Ammo > 0)
+        if (currentWeapon.Ammo > 0 && currentWeapon.WeaponName != "pistol" )
         {
             currentWeapon.Ammo--;
             Debug.Log(currentWeapon.WeaponName + " ammo count: " + currentWeapon.Ammo);
