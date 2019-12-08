@@ -9,13 +9,13 @@ public class Bullet : MonoBehaviour
     private float bulletLifeTime;
     private bool isBulletAlive;
     private int bulletDamage;
-    private int weaponDamage;
+    //private int weaponDamage;
 
     void Start()
     {
         PlayerStats playerStats = GameManager.status.PlayerStats;
-        weaponDamage = 0;
-        bulletDamage = playerStats.Damage + weaponDamage;
+        WeaponSystem weapon = GameManager.status.WeaponSystem;
+        bulletDamage = playerStats.Damage + weapon.CurrentWeapon.WeaponDamage;
 
         bulletLifeTime = 2f;
         isBulletAlive = true;
@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
             Enemy enemy = collision.transform.GetComponent<Enemy>();
             enemy.TakeDamage(bulletDamage);
 
-            Debug.Log("osuu vihuun!");
+            Debug.Log("osuu vihuun!" + bulletDamage);
         }
     }
 }

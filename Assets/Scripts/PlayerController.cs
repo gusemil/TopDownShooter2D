@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
+        Debug.Log(weapon.CurrentWeapon.WeaponName);
+
         GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         //rb.AddForce(firePoint.up * weapon.WeaponList[0].FireCoolDown, ForceMode2D.Impulse);

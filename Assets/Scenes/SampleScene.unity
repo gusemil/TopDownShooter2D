@@ -1083,6 +1083,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1892891069}
+  firePoint2: {fileID: 329568167}
+  firePoint3: {fileID: 1164471730}
   bulletPreFab: {fileID: 6531947342222055162, guid: 9a2c19c43f2cb8845b787b642c5e707b,
     type: 3}
   rb2D: {fileID: 7944583421165293225}

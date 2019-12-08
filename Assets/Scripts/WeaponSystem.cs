@@ -14,9 +14,9 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 20f, 0.1f);
-    Weapon machineGun = new Weapon("machinegun", 1, 40f, 0.01f);
-    Weapon shotgun = new Weapon("shotgun", 2, 100f, 1f);
+    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f);
+    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.01f);
+    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 1f);
 
     public void ChangePreviousWeapon()
     {

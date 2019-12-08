@@ -8,16 +8,19 @@ public class Weapon
     private int _weaponNumber; //0 machine gun, 1 shotgun
     private float _bulletForce; //20f;
     private float _fireCoolDown; //0.1f;
+    private int _weaponDamage;
 
     public string WeaponName { get { return _weaponName; } set { _weaponName = value; } }
     public int WeaponNumber { get { return _weaponNumber; } set { _weaponNumber = value; } }
     public float BulletForce { get { return _bulletForce; } set { _bulletForce = value; } }
     public float FireCoolDown { get { return _fireCoolDown; } set { _fireCoolDown = value; } }
+    public int WeaponDamage { get { return _weaponDamage; } set { _weaponDamage = value; } }
 
-    public Weapon(string weaponName, int weaponNumber, float bulletForce, float fireCoolDown)
+    public Weapon(string weaponName, int weaponNumber, int weaponDamage, float bulletForce, float fireCoolDown)
     {
         _weaponName = weaponName;
         _weaponNumber = weaponNumber;
+        _weaponDamage = weaponDamage;
         _bulletForce = bulletForce;
         _fireCoolDown = fireCoolDown;
     }
