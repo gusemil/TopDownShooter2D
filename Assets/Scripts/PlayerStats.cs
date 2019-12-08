@@ -87,14 +87,4 @@ public class PlayerStats
             }
         }
     }
-
-    /*
-    [Serializable]
-    class PlayerData
-    {
-        public float health;
-        public float maxHealth;
-        public string currentLevel;
-    }
-    */
 }

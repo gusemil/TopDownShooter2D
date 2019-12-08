@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2423037293829845458}
   - component: {fileID: 6959214048285715666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bullet_hit_effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
