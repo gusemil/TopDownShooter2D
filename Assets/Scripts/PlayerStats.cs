@@ -49,8 +49,8 @@ public class PlayerStats
 
     public PlayerStats()
     {
-        hp = 50;
-        maxHp = 100;
+        hp = 1;
+        maxHp = 10;
         damageMultiplier = 1;
         isPoweredUp = false;
         isDashing = false;

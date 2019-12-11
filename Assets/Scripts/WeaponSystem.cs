@@ -14,9 +14,9 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 0);
+    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1);
     Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100);
-    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 1f, 5);
+    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.6f, 5);
 
     // Start is called before the first frame update
     void Start()

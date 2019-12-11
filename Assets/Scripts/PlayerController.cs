@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(weapon.CurrentWeapon.WeaponName);
 
-        if(weapon.CurrentWeapon.Ammo > 0 || weapon.CurrentWeapon.WeaponName == "pistol")
+        if(weapon.CurrentWeapon.Ammo > 0)
         {
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
