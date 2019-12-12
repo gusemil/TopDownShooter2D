@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject hitEffect;
 
-    private float bulletLifeTime;
+    //private float bulletLifeTime;
     private bool isBulletAlive;
     private int bulletDamage;
     //private int weaponDamage;
@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         weapon = GameManager.status.WeaponSystem;
         bulletDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
 
-        bulletLifeTime = 2f;
+        //bulletLifeTime = 2f;
         isBulletAlive = true;
 
         StartCoroutine(BulletGoing());
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
     {
         while (isBulletAlive == true)
         {
-            yield return new WaitForSeconds(bulletLifeTime);
+            yield return new WaitForSeconds(weapon.CurrentWeapon.ProjectileLifeTime);
             isBulletAlive = false;
         }
 
@@ -60,13 +60,16 @@ public class Bullet : MonoBehaviour
         }
 
         //Splash damage
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
+        if (weapon.CurrentWeapon.SplashDamageRadius > 0)
         {
-            if (weapon.CurrentWeapon.SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(weapon.CurrentWeapon.WeaponDamage);
+                if (weapon.CurrentWeapon.SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(weapon.CurrentWeapon.WeaponDamage);
+                }
             }
         }
     }

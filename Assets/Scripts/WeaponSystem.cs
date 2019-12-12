@@ -14,10 +14,11 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f);
-    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100, 0f);
-    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.6f, 20, 2f);
-    Weapon rocketLauncher = new Weapon("rocketlauncher", 3, 500, 5f, 1f, 5, 10f);
+    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
+    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100, 0f, 2f);
+    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.6f, 10, 2f, 2f);
+    Weapon rocketLauncher = new Weapon("rocketlauncher", 3, 500, 7f, 1f, 5, 10f, 5f);
+    Weapon flameThrower = new Weapon("flameThrower", 4, 100, 30f, 0.01f, 1000, 2f, 0.3f);
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class WeaponSystem : MonoBehaviour
         weaponList.Add(machineGun);
         weaponList.Add(shotgun);
         WeaponList.Add(rocketLauncher);
+        WeaponList.Add(flameThrower);
 
         weaponIndex = 0;
         currentWeapon = weaponList[0];
@@ -38,6 +40,42 @@ public class WeaponSystem : MonoBehaviour
     void Update()
     {
         shotTimer += Time.deltaTime;
+
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            ChangePreviousWeapon();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            ChangeNextWeapon();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            ChangeWeapon(0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            ChangeWeapon(1);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha3))
+        {
+            ChangeWeapon(2);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            ChangeWeapon(3);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha5))
+        {
+            ChangeWeapon(4);
+        }
     }
 
     public void ChangePreviousWeapon()

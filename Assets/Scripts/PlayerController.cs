@@ -63,36 +63,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            weapon.ChangePreviousWeapon();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            weapon.ChangeNextWeapon();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            weapon.ChangeWeapon(0);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            weapon.ChangeWeapon(1);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            weapon.ChangeWeapon(2);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            weapon.ChangeWeapon(3);
-        }
-
     }
 
     void FixedUpdate()
@@ -133,10 +103,6 @@ public class PlayerController : MonoBehaviour
 
     private void GodMode()
     {
-        /*
-        GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        enemy[0].GetComponent<Enemy>().TakeDamage(10000);
-        */
         PlayerStats player = GameManager.status.PlayerStats;
         if (player.IsInvulnerable == false)
         {
@@ -145,6 +111,9 @@ public class PlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 1);
             this.gameObject.layer = 11;
 
+            weapon.WeaponList[1].Ammo += 10000;
+            weapon.WeaponList[2].Ammo += 10000;
+            weapon.WeaponList[3].Ammo += 10000;
         }
     }
 
