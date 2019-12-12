@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour
             weapon.WeaponList[1].Ammo += 10000;
             weapon.WeaponList[2].Ammo += 10000;
             weapon.WeaponList[3].Ammo += 10000;
+            weapon.WeaponList[4].Ammo += 10000;
         }
     }
 
