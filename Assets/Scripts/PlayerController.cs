@@ -53,9 +53,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButton("Fire2")) //mouse2
+        if (Input.GetKeyUp(KeyCode.G)) //mouse2
         {
-            Bomb();
+            GodMode();
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
@@ -86,6 +86,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
             weapon.ChangeWeapon(2);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            weapon.ChangeWeapon(3);
         }
 
     }
@@ -126,10 +131,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Bomb()
+    private void GodMode()
     {
-            GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
-            enemy[0].GetComponent<Enemy>().TakeDamage(10000);
+        /*
+        GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        enemy[0].GetComponent<Enemy>().TakeDamage(10000);
+        */
+        PlayerStats player = GameManager.status.PlayerStats;
+        if (player.IsInvulnerable == false)
+        {
+            player.IsInvulnerable = true;
+            moveSpeed = 20f;
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 1);
+            this.gameObject.layer = 11;
+
+        }
     }
 
     public void ChangePlayerColor(Color color)

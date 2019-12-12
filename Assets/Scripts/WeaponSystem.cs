@@ -14,9 +14,10 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1);
-    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100);
-    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.6f, 5);
+    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f);
+    Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100, 0f);
+    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.6f, 20, 2f);
+    Weapon rocketLauncher = new Weapon("rocketlauncher", 3, 500, 5f, 1f, 5, 10f);
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class WeaponSystem : MonoBehaviour
         weaponList.Add(pistol);
         weaponList.Add(machineGun);
         weaponList.Add(shotgun);
+        WeaponList.Add(rocketLauncher);
 
         weaponIndex = 0;
         currentWeapon = weaponList[0];

@@ -52,7 +52,8 @@ public class Powerup : Pickup
     {
         //weapon.WeaponList[0].Ammo += 50;
         weapon.WeaponList[1].Ammo += 100;
-        weapon.WeaponList[2].Ammo += 10;
+        weapon.WeaponList[2].Ammo += 40;
+        weapon.WeaponList[3].Ammo += 5;
 
         Destroy(gameObject);
     }

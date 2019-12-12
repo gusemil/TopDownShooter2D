@@ -11,10 +11,12 @@ public class Bullet : MonoBehaviour
     private int bulletDamage;
     //private int weaponDamage;
 
+    private WeaponSystem weapon;
+
     void Start()
     {
         PlayerStats playerStats = GameManager.status.PlayerStats;
-        WeaponSystem weapon = GameManager.status.WeaponSystem;
+        weapon = GameManager.status.WeaponSystem;
         bulletDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
 
         bulletLifeTime = 2f;
@@ -55,6 +57,17 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(bulletDamage);
 
             Debug.Log("osuu vihuun!" + bulletDamage);
+        }
+
+        //Splash damage
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (weapon.CurrentWeapon.SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(weapon.CurrentWeapon.WeaponDamage);
+            }
         }
     }
 }
