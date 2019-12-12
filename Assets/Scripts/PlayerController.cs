@@ -53,7 +53,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.G)) //mouse2
+        if (Input.GetButtonUp("Fire2")) //mouse2
+        {
+            Bomb();
+        }
+
+        if (Input.GetKeyUp(KeyCode.G))
         {
             GodMode();
         }
@@ -117,6 +122,17 @@ public class PlayerController : MonoBehaviour
             weapon.WeaponList[4].Ammo += 10000;
         }
     }
+
+    private void Bomb()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+                enemy.GetComponent<Enemy>().TakeDamage(1000);
+        }
+    }
+
 
     public void ChangePlayerColor(Color color)
     {

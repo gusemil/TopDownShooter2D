@@ -13,6 +13,7 @@ public class Weapon
     private float _splashDamageRadius;
     private float _projectileLifeTime;
 
+    //public string WeaponName { get ; set ;}
     public string WeaponName { get { return _weaponName; } set { _weaponName = value; } }
     public int WeaponNumber { get { return _weaponNumber; } set { _weaponNumber = value; } }
     public float BulletForce { get { return _bulletForce; } set { _bulletForce = value; } }
