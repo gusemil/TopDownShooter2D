@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -90,6 +91,20 @@ public class GameManager : MonoBehaviour
                 SpawnEnemy(octopus);
                 octopusSpawnTimer = 0;
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            if (pause.IsPause)
+            {
+                pause.TogglePause();
+            }
+            isGameOver = false;
+            crabSpawnTimer = 0;
+            jumperSpawnTimer = 0;
+            octopusSpawnTimer = 0;
+            playerStats = new PlayerStats(); //reset player stats
+            SceneManager.LoadScene(0);   
         }
     }
 
