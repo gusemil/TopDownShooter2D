@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 500
   damage: 25
-  moveSpeed: 5
+  moveSpeed: 4
   shooterEnemy: 0
 --- !u!50 &992120344103593087
 Rigidbody2D:
