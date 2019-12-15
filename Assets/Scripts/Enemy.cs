@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerStats = GameManager.status.PlayerStats;
+        playerStats = GameManager.instance.PlayerStats;
         rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -79,12 +79,14 @@ public class Enemy : MonoBehaviour
 
     public void DamagePlayerOnCollision(Collision2D other)
     {
-            PlayerStats playerStats = GameManager.status.PlayerStats;
+            PlayerStats playerStats = GameManager.instance.PlayerStats;
             playerStats.TakeDamage(damage);
+        /*
             if (playerStats.Hp <= 0)
             {
                 Destroy(other.gameObject); //player destruction might not be needed later
             }
+       */
     }
 
     void EnemyMovementTowardsPlayer()

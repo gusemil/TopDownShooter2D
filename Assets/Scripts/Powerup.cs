@@ -20,8 +20,8 @@ public class Powerup : Pickup
 
         if (other.transform.GetComponent<PlayerController>())
         {
-            PlayerStats playerStats = GameManager.status.PlayerStats;
-            WeaponSystem weapon = GameManager.status.WeaponSystem;
+            PlayerStats playerStats = GameManager.instance.PlayerStats;
+            WeaponSystem weapon = GameManager.instance.WeaponSystem;
             if (gameObject.tag == "HpPack")
             {
                 HpPack(playerStats);

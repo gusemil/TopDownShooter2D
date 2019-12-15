@@ -27,13 +27,14 @@ public class PlayerController : MonoBehaviour
     public Color OriginalColor { get { return originalColor; } }
     public Color PowerUpColor { get { return powerUpColor; } }
     public Color PreviousColor {  get { return previousColor; }}
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 
     private WeaponSystem weapon;
     
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
-        weapon = GameManager.status.WeaponSystem;
+        weapon = GameManager.instance.WeaponSystem;
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp("Fire2")) //mouse2
         {
-            Bomb();
+            weapon.Bomb();
         }
 
         if (Input.GetKeyUp(KeyCode.G))
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     private void GodMode()
     {
-        PlayerStats player = GameManager.status.PlayerStats;
+        PlayerStats player = GameManager.instance.PlayerStats;
         if (player.IsInvulnerable == false)
         {
             player.IsInvulnerable = true;
@@ -123,25 +124,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Bomb()
-    {
-        if(weapon.BombCount > 0)
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            foreach (GameObject enemy in enemies)
-            {
-                enemy.GetComponent<Enemy>().TakeDamage(1000);
-            }
-
-            weapon.LoseBomb();
-        }
-    }
+    
 
 
     public void ChangePlayerColor(Color color)
     {
-        PlayerStats player = GameManager.status.PlayerStats;
+        PlayerStats player = GameManager.instance.PlayerStats;
 
         if (!player.IsDashing && !player.IsPoweredUp)
         {
@@ -156,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetPreviousColor()
     {
-        PlayerStats player = GameManager.status.PlayerStats;
+        PlayerStats player = GameManager.instance.PlayerStats;
 
         if(!player.IsDashing && !player.IsPoweredUp)
         {
@@ -170,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        PlayerStats player = GameManager.status.PlayerStats;
+        PlayerStats player = GameManager.instance.PlayerStats;
 
         player.IsDashing = true;
         while (player.IsDashing)
@@ -178,8 +166,6 @@ public class PlayerController : MonoBehaviour
             SetPreviousColor();
             ChangePlayerColor(dashColor);
             
-
-
             if (Input.GetAxisRaw("Horizontal") > 0)
                 //movement.x +=  0.1f;
                 rb2D.velocity = Vector2.right * dashSpeed;

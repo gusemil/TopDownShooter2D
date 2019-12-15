@@ -15,8 +15,8 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        PlayerStats playerStats = GameManager.status.PlayerStats;
-        weapon = GameManager.status.WeaponSystem;
+        PlayerStats playerStats = GameManager.instance.PlayerStats;
+        weapon = GameManager.instance.WeaponSystem;
         bulletDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
 
         //bulletLifeTime = 2f;

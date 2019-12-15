@@ -82,8 +82,8 @@ public class PlayerStats
 
             if(hp <= 0)
             {
-                GameManager.status.IsGameOver = true;
-                GameManager.status.Pause.TogglePause();
+                GameManager.instance.LoseLife();
+                //GameManager.status.Pause.TogglePause();
             }
         }
     }

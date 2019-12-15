@@ -6,8 +6,8 @@ public class WeaponSystem : MonoBehaviour
 {
     private int weaponIndex;
 
-    private int _bombCount;
 
+    public static int bombCount;
     public static Weapon currentWeapon;
     public static List<Weapon> weaponList;
     public static float shotTimer;
@@ -15,7 +15,7 @@ public class WeaponSystem : MonoBehaviour
     public float ShotTimer { get { return shotTimer; } set { shotTimer = value; } }
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
-    public int BombCount { get { return _bombCount; } set { _bombCount = value; } }
+    public int BombCount { get { return bombCount; } set { bombCount = value; } }
 
     Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
     Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100, 0f, 2f);
@@ -40,7 +40,7 @@ public class WeaponSystem : MonoBehaviour
         currentWeapon = weaponList[0];
         shotTimer = 0f;
 
-        _bombCount = 0;
+        bombCount = 1;
     }
 
     // Update is called once per frame
@@ -120,12 +120,27 @@ public class WeaponSystem : MonoBehaviour
         }
     }
 
+    public void Bomb()
+    {
+        if (bombCount > 0)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(1000);
+            }
+
+            LoseBomb();
+        }
+    }
+
     public void LoseBomb()
     {
-        if (_bombCount > 0)
+        if (bombCount > 0)
         {
             BombCount--;
-            Debug.Log(_bombCount + " Bombs");
+            Debug.Log(bombCount + " Bombs");
         }
     }
 
