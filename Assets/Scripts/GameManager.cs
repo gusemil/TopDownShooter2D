@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
     public GameObject octopus;
 
     private float crabSpawnTimer = 0;
-    private float crabSpawnRate = 0.5f; //2f
+    private float crabSpawnRate = 5f; //0.5f
     private float jumperSpawnTimer = 0;
     private float jumperSpawnRate = 5f; //5f
     private float octopusSpawnTimer = 0;
-    private float octopusSpawnRate = 3f; //3f
+    private float octopusSpawnRate = 5f; //3f
 
     void Awake()
     {

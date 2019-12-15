@@ -34,6 +34,9 @@ public class Powerup : Pickup
             else if(gameObject.tag == "Ammo")
             {
                 AmmoPack(weapon);
+            } else if(gameObject.tag == "Bomb")
+            {
+                BombPack(weapon);
             }
         }
     }
@@ -48,6 +51,12 @@ public class Powerup : Pickup
         Debug.Log(player.Hp);
     }
 
+    private void BombPack(WeaponSystem weapon)
+    {
+        weapon.BombCount++;
+        Destroy(gameObject);
+    }
+
     private void AmmoPack(WeaponSystem weapon)
     {
         //weapon.WeaponList[0].Ammo += 50;
@@ -55,6 +64,7 @@ public class Powerup : Pickup
         weapon.WeaponList[2].Ammo += 10;
         weapon.WeaponList[3].Ammo += 5;
         weapon.WeaponList[4].Ammo += 1000;
+        weapon.BombCount += 1;
 
         Destroy(gameObject);
     }

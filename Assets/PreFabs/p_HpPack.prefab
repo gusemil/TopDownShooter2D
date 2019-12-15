@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3373386389340381147}
   - component: {fileID: 812779411283375488}
   m_Layer: 0
-  m_Name: powerup
+  m_Name: p_bomb
   m_TagString: HpPack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

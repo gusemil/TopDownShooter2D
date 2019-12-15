@@ -6,6 +6,8 @@ public class WeaponSystem : MonoBehaviour
 {
     private int weaponIndex;
 
+    private int _bombCount;
+
     public static Weapon currentWeapon;
     public static List<Weapon> weaponList;
     public static float shotTimer;
@@ -13,12 +15,15 @@ public class WeaponSystem : MonoBehaviour
     public float ShotTimer { get { return shotTimer; } set { shotTimer = value; } }
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
+    public int BombCount { get { return _bombCount; } set { _bombCount = value; } }
 
     Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
     Weapon machineGun = new Weapon("machinegun", 1, 10, 40f, 0.05f, 100, 0f, 2f);
     Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.6f, 10, 2f, 2f);
     Weapon rocketLauncher = new Weapon("rocketlauncher", 3, 500, 7f, 1f, 5, 10f, 5f);
     Weapon flameThrower = new Weapon("flameThrower", 4, 100, 30f, 0.01f, 1000, 2f, 0.3f);
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +39,8 @@ public class WeaponSystem : MonoBehaviour
         weaponIndex = 0;
         currentWeapon = weaponList[0];
         shotTimer = 0f;
+
+        _bombCount = 1;
     }
 
     // Update is called once per frame
@@ -110,6 +117,15 @@ public class WeaponSystem : MonoBehaviour
         {
             currentWeapon.Ammo--;
             Debug.Log(currentWeapon.WeaponName + " ammo count: " + currentWeapon.Ammo);
+        }
+    }
+
+    public void LoseBomb()
+    {
+        if (_bombCount > 0)
+        {
+            BombCount--;
+            Debug.Log(_bombCount + " Bombs");
         }
     }
 

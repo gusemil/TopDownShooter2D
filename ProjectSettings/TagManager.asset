@@ -8,6 +8,7 @@ TagManager:
   - HpPack
   - HexDamage
   - Ammo
+  - Bomb
   layers:
   - Default
   - TransparentFX

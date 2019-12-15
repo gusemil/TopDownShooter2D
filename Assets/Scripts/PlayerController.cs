@@ -125,11 +125,16 @@ public class PlayerController : MonoBehaviour
 
     private void Bomb()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
+        if(weapon.BombCount > 0)
         {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject enemy in enemies)
+            {
                 enemy.GetComponent<Enemy>().TakeDamage(1000);
+            }
+
+            weapon.LoseBomb();
         }
     }
 
