@@ -40,7 +40,7 @@ public class WeaponSystem : MonoBehaviour
         currentWeapon = weaponList[0];
         shotTimer = 0f;
 
-        _bombCount = 1;
+        _bombCount = 0;
     }
 
     // Update is called once per frame
