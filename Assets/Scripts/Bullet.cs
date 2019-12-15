@@ -7,8 +7,9 @@ public class Bullet : MonoBehaviour
     public GameObject hitEffect;
 
     //private float bulletLifeTime;
-    private bool isBulletAlive;
-    private int bulletDamage;
+    private bool isProjectileAlive;
+    private int totalProjectileDamage;
+    private float localSplashDamageRadius;
     //private int weaponDamage;
 
     private WeaponSystem weapon;
@@ -17,23 +18,24 @@ public class Bullet : MonoBehaviour
     {
         PlayerStats playerStats = GameManager.instance.PlayerStats;
         weapon = GameManager.instance.WeaponSystem;
-        bulletDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
+        totalProjectileDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
+        localSplashDamageRadius = weapon.CurrentWeapon.SplashDamageRadius;
 
         //bulletLifeTime = 2f;
-        isBulletAlive = true;
+        isProjectileAlive = true;
 
-        StartCoroutine(BulletGoing());
+        StartCoroutine(ProjectileGoing());
     }
 
-    private IEnumerator BulletGoing()
+    private IEnumerator ProjectileGoing()
     {
-        while (isBulletAlive == true)
+        while (isProjectileAlive == true)
         {
             yield return new WaitForSeconds(weapon.CurrentWeapon.ProjectileLifeTime);
-            isBulletAlive = false;
+            isProjectileAlive = false;
         }
 
-        if (!isBulletAlive)
+        if (!isProjectileAlive)
         {
             Destroy(gameObject);
         }
@@ -54,21 +56,21 @@ public class Bullet : MonoBehaviour
         if (collision.transform.GetComponent<Enemy>()) //osuu viholliseen
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
-            enemy.TakeDamage(bulletDamage);
+            enemy.TakeDamage(totalProjectileDamage);
 
-            Debug.Log("osuu vihuun!" + bulletDamage);
+            Debug.Log("osuu vihuun!" + totalProjectileDamage);
         }
 
         //Splash damage
-        if (weapon.CurrentWeapon.SplashDamageRadius > 0)
+        if (localSplashDamageRadius > 0)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
             foreach (GameObject enemy in enemies)
             {
-                if (weapon.CurrentWeapon.SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
+                if (localSplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
                 {
-                    enemy.GetComponent<Enemy>().TakeDamage(weapon.CurrentWeapon.WeaponDamage);
+                    enemy.GetComponent<Enemy>().TakeDamage(totalProjectileDamage);
                 }
             }
         }
