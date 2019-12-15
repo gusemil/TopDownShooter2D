@@ -68,6 +68,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("respawn time" + respawnTime);
     }
 
+    void OnGUI()
+    {
+        GUI.Label(new Rect(20, 10, 200, 20), "Pistol (1) " + weaponSystem.WeaponList[0].Ammo);
+        GUI.Label(new Rect(20, 30, 200, 20), "Machine Gun (2) " + weaponSystem.WeaponList[1].Ammo);
+        GUI.Label(new Rect(20, 50, 200, 20), "Shotgun (3) " + weaponSystem.WeaponList[2].Ammo);
+        GUI.Label(new Rect(20, 70, 200, 20), "Rocket Launcher (4) " + weaponSystem.WeaponList[3].Ammo);
+        GUI.Label(new Rect(20, 90, 200, 20), "FlameThrower (5) " + weaponSystem.WeaponList[4].Ammo);
+        GUI.Label(new Rect(20, 110, 200, 20), "Bombs (Right Click) " + weaponSystem.BombCount);
+        GUI.Label(new Rect(40, 150, 300, 40), "ESC to Pause, 'R' to Retry, SPACE to Dash");
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         while (player.IsDashing)
         {
             SetPreviousColor();
-            ChangePlayerColor(dashColor);
+            //ChangePlayerColor(dashColor);
             
             if (Input.GetAxisRaw("Horizontal") > 0)
                 //movement.x +=  0.1f;
@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
             player.IsInvulnerable = true;
             yield return new WaitForSeconds(dashInvulnerabilityDelay);
             player.IsInvulnerable = false;
-            ChangePlayerColor(previousColor);
+            //ChangePlayerColor(previousColor);
         }
 
     }

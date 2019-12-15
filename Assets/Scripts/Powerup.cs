@@ -84,7 +84,8 @@ public class Powerup : Pickup
             player.DamageMultiplier = originalDamageMultiplier;
             isHexDamageOn = false;
             player.IsPoweredUp = false;
-            pc.SetPreviousColor();
+            //pc.SetPreviousColor();
+            pc.ChangePlayerColor(pc.OriginalColor);
             Destroy(gameObject);
         }
 
