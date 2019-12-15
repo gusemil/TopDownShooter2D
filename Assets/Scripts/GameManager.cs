@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
     private float octopusSpawnTimer = 0;
     private float octopusSpawnRate = 3f; //3f
 
+    public float CrabSpawnTimer { get { return crabSpawnTimer; } set { crabSpawnTimer = value; } }
+    public float JumperSpawnTimer { get { return jumperSpawnTimer; } set { jumperSpawnTimer = value; } }
+    public float OctopusSpawnTimer { get { return octopusSpawnTimer; } set { octopusSpawnTimer = value; } }
+
     void Awake()
     {
         if (instance == null) //jos status olio ei ole olemassa
@@ -77,6 +81,7 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 90, 200, 20), "FlameThrower (5) " + weaponSystem.WeaponList[4].Ammo);
         GUI.Label(new Rect(20, 110, 200, 20), "Bombs (Right Click) " + weaponSystem.BombCount);
         GUI.Label(new Rect(40, 150, 300, 40), "ESC to Pause, 'R' to Retry, SPACE to Dash");
+        GUI.Label(new Rect(20, 170, 200, 40), "Lives: " + lives);
     }
 
     // Update is called once per frame
@@ -134,13 +139,10 @@ public class GameManager : MonoBehaviour
         Instantiate(enemyType, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
     }
 
-    public void GameOverCheck()
+    public void GameOver()
     {
-        if(lives < 0)
-        {
             isGameOver = true;
             GameManager.instance.Pause.TogglePause();
-        }
     }
 
     public void LoseLife()
@@ -155,7 +157,7 @@ public class GameManager : MonoBehaviour
 
         } else
         {
-            GameOverCheck();
+            GameOver();
         }
     }
 
@@ -182,9 +184,9 @@ public class GameManager : MonoBehaviour
             weaponSystem.Bomb();
             PlayerStats.Hp = 1;
             //PlayerStats.IsInvulnerable = true;
-            crabSpawnTimer = -3f;
-            jumperSpawnTimer = -3f;
-            octopusSpawnTimer = -3f;
+            //crabSpawnTimer = -3f;
+            //jumperSpawnTimer = -3f;
+            //octopusSpawnTimer = -3f;
 
             yield return new WaitForSeconds(respawnTime);
 

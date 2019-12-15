@@ -131,6 +131,12 @@ public class WeaponSystem : MonoBehaviour
                 enemy.GetComponent<Enemy>().TakeDamage(1000);
             }
 
+            GameManager gm = GameManager.instance;
+
+            gm.CrabSpawnTimer = -3f;
+            gm.JumperSpawnTimer = -3f;
+            gm.OctopusSpawnTimer = -3f;
+
             LoseBomb();
         }
     }
