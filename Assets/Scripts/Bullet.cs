@@ -9,7 +9,8 @@ public class Bullet : MonoBehaviour
     //private float bulletLifeTime;
     private bool isProjectileAlive;
     private int totalProjectileDamage;
-    private float localSplashDamageRadius;
+    private float SplashDamageRadius;
+    private float projectileLifeTime;
     //private int weaponDamage;
 
     private WeaponSystem weapon;
@@ -19,7 +20,8 @@ public class Bullet : MonoBehaviour
         PlayerStats playerStats = GameManager.instance.PlayerStats;
         weapon = GameManager.instance.WeaponSystem;
         totalProjectileDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
-        localSplashDamageRadius = weapon.CurrentWeapon.SplashDamageRadius;
+        SplashDamageRadius = weapon.CurrentWeapon.SplashDamageRadius;
+        projectileLifeTime = weapon.CurrentWeapon.ProjectileLifeTime;
 
         //bulletLifeTime = 2f;
         isProjectileAlive = true;
@@ -31,7 +33,7 @@ public class Bullet : MonoBehaviour
     {
         while (isProjectileAlive == true)
         {
-            yield return new WaitForSeconds(weapon.CurrentWeapon.ProjectileLifeTime);
+            yield return new WaitForSeconds(projectileLifeTime);
             isProjectileAlive = false;
         }
 
@@ -62,13 +64,13 @@ public class Bullet : MonoBehaviour
         }
 
         //Splash damage
-        if (localSplashDamageRadius > 0)
+        if (SplashDamageRadius > 0)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
             foreach (GameObject enemy in enemies)
             {
-                if (localSplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
+                if (SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
                 {
                     enemy.GetComponent<Enemy>().TakeDamage(totalProjectileDamage);
                 }

@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     private bool isGameOver;
     private int lives;
     private float respawnTime;
-    private bool isRespawning;
 
     public static GameManager instance;
     public PlayerStats PlayerStats { get { return playerStats; } }
@@ -63,7 +62,6 @@ public class GameManager : MonoBehaviour
         respawnTime = 1f;
 
         isGameOver = false;
-        isRespawning = false;
     }
 
     // Start is called before the first frame update
@@ -82,6 +80,7 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 110, 200, 20), "Bombs (Right Click) " + weaponSystem.BombCount);
         GUI.Label(new Rect(40, 150, 300, 40), "ESC to Pause, 'R' to Retry, SPACE to Dash");
         GUI.Label(new Rect(20, 170, 200, 40), "Lives: " + lives);
+        GUI.Label(new Rect(20, 190, 200, 40), "Pause state: " + pause.IsPause);
     }
 
     // Update is called once per frame
@@ -163,8 +162,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-        isRespawning = true;
-
         Debug.Log("RESPAWN FUCNTION!");
 
 
@@ -194,7 +191,6 @@ public class GameManager : MonoBehaviour
             pc.MoveSpeed = originalSpeed;
             playerObject.GetComponent<SpriteRenderer>().enabled = true;
             playerObject.GetComponent<Collider2D>().enabled = true;
-            isRespawning = false;
         //}
     }
     
