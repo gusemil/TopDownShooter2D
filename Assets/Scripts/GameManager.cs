@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private PlayerStats playerStats;
     private Pause pause;
     private WeaponSystem weaponSystem;
+    private Dash dash;
     private bool isGameOver;
     private int lives;
     private float respawnTime;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Pause Pause { get { return pause; } }
     public WeaponSystem WeaponSystem { get { return weaponSystem; } }
     public int Lives { get { return lives; } }
+    public Dash Dash { get { return dash; } }
     public GameObject playerObject;
 
     public bool IsGameOver
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
         playerStats = new PlayerStats();
         pause = new Pause();
         weaponSystem = new WeaponSystem();
+        dash = new Dash();
         lives = 3;
         respawnTime = 1f;
 
@@ -81,6 +84,8 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(40, 150, 300, 40), "ESC to Pause, 'R' to Retry, SPACE to Dash");
         GUI.Label(new Rect(20, 170, 200, 40), "Lives: " + lives);
         GUI.Label(new Rect(20, 190, 200, 40), "Pause state: " + pause.IsPause);
+        GUI.Label(new Rect(20, 210, 200, 40), "Dashes: " + dash.Dashes);
+        GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
     }
 
     // Update is called once per frame

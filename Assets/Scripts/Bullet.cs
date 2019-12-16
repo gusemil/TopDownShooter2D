@@ -6,12 +6,10 @@ public class Bullet : MonoBehaviour
 {
     public GameObject hitEffect;
 
-    //private float bulletLifeTime;
     private bool isProjectileAlive;
     private int totalProjectileDamage;
     private float SplashDamageRadius;
     private float projectileLifeTime;
-    //private int weaponDamage;
 
     private WeaponSystem weapon;
 
@@ -23,7 +21,6 @@ public class Bullet : MonoBehaviour
         SplashDamageRadius = weapon.CurrentWeapon.SplashDamageRadius;
         projectileLifeTime = weapon.CurrentWeapon.ProjectileLifeTime;
 
-        //bulletLifeTime = 2f;
         isProjectileAlive = true;
 
         StartCoroutine(ProjectileGoing());

@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float moveSpeed = 10f;
-    private float dashTime = 0.2f; //0.2f
-    private float dashSpeed = 5f; //4f
-    private float dashInvulnerabilityDelay = 0.5f;
+    //private float dashTime = 0.2f; //0.2f
+    //private float dashSpeed = 5f; //4f
+    //private float dashInvulnerabilityDelay = 0.5f;
 
     public Transform firePoint;
     public Transform firePoint2;
@@ -30,11 +30,14 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 
     private WeaponSystem weapon;
+    private Dash dash;
     
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
         weapon = GameManager.instance.WeaponSystem;
+        dash = GameManager.instance.Dash;
+        //dash = new Dash();
     }
 
     // Update is called once per frame
@@ -66,7 +69,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            StartCoroutine(Dash());
+            if(dash.Dashes > 0)
+            {
+                dash.ConsumeDash();
+                StartCoroutine(Dash());
+            }
         }
 
     }
@@ -156,6 +163,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
     private IEnumerator Dash()
     {
         PlayerStats player = GameManager.instance.PlayerStats;
@@ -168,31 +176,32 @@ public class PlayerController : MonoBehaviour
             
             if (Input.GetAxisRaw("Horizontal") > 0)
                 //movement.x +=  0.1f;
-                rb2D.velocity = Vector2.right * dashSpeed;
+                rb2D.velocity = Vector2.right * dash.DashSpeed;
             else if (Input.GetAxisRaw("Horizontal") < 0)
                 //movement.x -= 0.1f;
-                rb2D.velocity = Vector2.left * dashSpeed;
+                rb2D.velocity = Vector2.left * dash.DashSpeed;
 
             if (Input.GetAxisRaw("Vertical") > 0)
                 //movement.y += 0.1f;
-                rb2D.velocity = Vector2.up * dashSpeed;
+                rb2D.velocity = Vector2.up * dash.DashSpeed;
             else if (Input.GetAxisRaw("Vertical") < 0)
                 //movement.y -= 0.1f;
-                rb2D.velocity = Vector2.down * dashSpeed;
+                rb2D.velocity = Vector2.down * dash.DashSpeed;
 
             //GetComponent<BoxCollider2D>().enabled = false;
             this.gameObject.layer = 11; //Dash Layer
-            yield return new WaitForSeconds(dashTime);
+            yield return new WaitForSeconds(dash.DashTime);
             this.gameObject.layer = 10; //Player Layer
             //GetComponent<BoxCollider2D>().enabled = true;
             rb2D.velocity = Vector2.zero;
             player.IsDashing = false;
             player.IsInvulnerable = true;
-            yield return new WaitForSeconds(dashInvulnerabilityDelay);
+            yield return new WaitForSeconds(dash.DashInvulnerabilityDelay);
             player.IsInvulnerable = false;
             //ChangePlayerColor(previousColor);
         }
 
     }
+    
 
 }

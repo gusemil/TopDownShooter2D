@@ -59,7 +59,6 @@ public class Powerup : Pickup
 
     private void AmmoPack(WeaponSystem weapon)
     {
-        //weapon.WeaponList[0].Ammo += 50;
         weapon.WeaponList[1].Ammo += 100;
         weapon.WeaponList[2].Ammo += 10;
         weapon.WeaponList[3].Ammo += 5;
@@ -84,7 +83,6 @@ public class Powerup : Pickup
             player.DamageMultiplier = originalDamageMultiplier;
             isHexDamageOn = false;
             player.IsPoweredUp = false;
-            //pc.SetPreviousColor();
             pc.ChangePlayerColor(pc.OriginalColor);
             Destroy(gameObject);
         }

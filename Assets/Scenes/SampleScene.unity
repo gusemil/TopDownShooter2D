@@ -1169,3 +1169,16 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7944583421165293222}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7944583421165293230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944583421165293223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a73498d64c342d41856f0deb01c2007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 7944583421165293223}
