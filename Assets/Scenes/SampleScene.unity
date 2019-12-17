@@ -1161,6 +1161,12 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 797997469}
+    - target: {fileID: 7944583421165293228, guid: e8e2dc3b292c50d4ab5c5b53c596dce7,
+        type: 3}
+      propertyPath: bombEffect
+      value: 
+      objectReference: {fileID: 7647518200588304277, guid: 7945247b00576d440ab864f7a7d15874,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8e2dc3b292c50d4ab5c5b53c596dce7, type: 3}
 --- !u!1 &7944583421165293223 stripped
