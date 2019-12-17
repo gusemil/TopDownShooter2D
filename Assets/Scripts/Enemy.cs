@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     PlayerStats playerStats;
 
+    public GameObject deathAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,8 +75,15 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0)
         {
+            DeathEffect();
             Destroy(gameObject);
         }
+    }
+
+    private void DeathEffect()
+    {
+        GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
     }
 
     public void DamagePlayerOnCollision(Collision2D other)

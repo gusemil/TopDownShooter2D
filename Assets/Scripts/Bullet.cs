@@ -5,11 +5,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject hitEffect;
+    public GameObject explosion;
 
     private bool isProjectileAlive;
     private int totalProjectileDamage;
     private float SplashDamageRadius;
     private float projectileLifeTime;
+    private string nameOfWeaponShot;
 
     private WeaponSystem weapon;
 
@@ -20,6 +22,7 @@ public class Bullet : MonoBehaviour
         totalProjectileDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
         SplashDamageRadius = weapon.CurrentWeapon.SplashDamageRadius;
         projectileLifeTime = weapon.CurrentWeapon.ProjectileLifeTime;
+        nameOfWeaponShot = weapon.CurrentWeapon.WeaponName; 
 
         isProjectileAlive = true;
 
@@ -43,7 +46,15 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        GameObject effect;
+
+        if (nameOfWeaponShot != "rocketlauncher")
+        {
+            effect = Instantiate(hitEffect, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        } else
+        {
+            effect = Instantiate(explosion, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        }
 
         
         Destroy(effect, 0.1f); //hit effect tuhoutuu 0.1sek

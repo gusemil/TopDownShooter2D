@@ -30,7 +30,7 @@ public class Dash : MonoBehaviour
     {
         dashes = 4;
         maxDashes = 4;
-        dashRechargeTime = 5f;
+        dashRechargeTime = 2.5f;
         dashTimer = 0f;
 
        // pc = playerObject.GetComponent<PlayerController>();
@@ -63,6 +63,7 @@ public class Dash : MonoBehaviour
         if(dashes > 0)
         {
             dashes--;
+            //dashTimer = 0;
         }
     }
 

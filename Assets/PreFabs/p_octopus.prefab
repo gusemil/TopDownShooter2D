@@ -91,11 +91,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5814670038699355177}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -146,3 +146,5 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 6
   shooterEnemy: 0
+  deathAnimation: {fileID: 5848963444842268848, guid: cf1c5bfaba30b5749a8b8288ab87cd43,
+    type: 3}
