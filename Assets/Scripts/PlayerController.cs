@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint2;
     public Transform firePoint3;
     public GameObject bulletPreFab;
+    public GameObject bombEffect;
+    
     public Rigidbody2D rb2D;
     public Camera _camera; //variable name 'camera' is not available
 
@@ -59,6 +61,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp("Fire2")) //mouse2
         {
+            if (weapon.BombCount > 0)
+            {
+                GameObject effect = Instantiate(bombEffect, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+                Destroy(effect, 0.1f); //hit effect tuhoutuu 0.1sek
+            }
+
             weapon.Bomb();
         }
 
