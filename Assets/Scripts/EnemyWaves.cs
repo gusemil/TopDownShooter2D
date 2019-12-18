@@ -7,7 +7,7 @@ public class EnemyWaves : MonoBehaviour
     public static float crabSpawnTimer = 0;
     public static float jumperSpawnTimer = 0;
     public static float octopusSpawnTimer = 0;
-    private float crabSpawnRate = 0.5f; //0.5f
+    private float crabSpawnRate = 1f; //0.5f
     private float jumperSpawnRate = 5f; //5f
     private float octopusSpawnRate = 3f; //3f
 
@@ -17,6 +17,10 @@ public class EnemyWaves : MonoBehaviour
     public GameObject spawnEast;
     public GameObject spawnSouth;
     public GameObject spawnWest;
+    public GameObject spawnNorthEast;
+    public GameObject spawnSouthEast;
+    public GameObject spawnSouthWest;
+    public GameObject spawnNorthWest;
 
     public GameObject crab;
     public GameObject jumper;
@@ -26,11 +30,19 @@ public class EnemyWaves : MonoBehaviour
     public float JumperSpawnTimer { get { return jumperSpawnTimer; } set { jumperSpawnTimer = value; } }
     public float OctopusSpawnTimer { get { return octopusSpawnTimer; } set { octopusSpawnTimer = value; } }
 
+    private List<GameObject> spawnPoints = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        //gameManager = GameManager;
+        spawnPoints.Add(spawnNorth);
+        spawnPoints.Add(spawnEast);
+        spawnPoints.Add(spawnSouth);
+        spawnPoints.Add(spawnWest);
+        spawnPoints.Add(spawnNorthEast);
+        spawnPoints.Add(spawnSouthEast);
+        spawnPoints.Add(spawnSouthWest);
+        spawnPoints.Add(spawnNorthWest);
     }
 
     
@@ -46,28 +58,29 @@ public class EnemyWaves : MonoBehaviour
 
             if (crabSpawnTimer >= crabSpawnRate)
             {
-                SpawnEnemy(crab,spawnNorth);
+                SpawnEnemy(crab);
                 crabSpawnTimer = 0;
             }
 
             if (jumperSpawnTimer >= jumperSpawnRate)
             {
-                SpawnEnemy(jumper,spawnNorth);
+                SpawnEnemy(jumper);
                 jumperSpawnTimer = 0;
             }
 
             if (octopusSpawnTimer >= octopusSpawnRate)
             {
-                SpawnEnemy(octopus,spawnNorth);
+                SpawnEnemy(octopus);
                 octopusSpawnTimer = 0;
             }
 
         //}
     }
 
-    public void SpawnEnemy(GameObject enemyType, GameObject spawnPoint)
+    public void SpawnEnemy(GameObject enemyType)
     {
         //Lista vihollisista myöhemmin
-        Instantiate(enemyType, spawnPoint.transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+
+        Instantiate(enemyType, spawnPoints[Random.Range(0,8)].transform.position, Quaternion.identity); //Quaternion.identity = no rotation
     }
 }
