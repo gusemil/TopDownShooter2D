@@ -11,15 +11,18 @@ public class GameManager : MonoBehaviour
     private PlayerStats playerStats;
     private Pause pause;
     private WeaponSystem weaponSystem;
+    private EnemyWaves enemyWaves;
     private Dash dash;
     private bool isGameOver;
     private int lives;
+    private float gameTime = 0f;
     private float respawnTime;
 
     public static GameManager instance;
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
     public WeaponSystem WeaponSystem { get { return weaponSystem; } }
+    public EnemyWaves EnemyWaves { get { return enemyWaves; } }
     public int Lives { get { return lives; } }
     public Dash Dash { get { return dash; } }
     public GameObject playerObject;
@@ -30,20 +33,7 @@ public class GameManager : MonoBehaviour
         set { isGameOver = value; }
     }
 
-    public GameObject crab;
-    public GameObject jumper;
-    public GameObject octopus;
-
-    private float crabSpawnTimer = 0;
-    private float crabSpawnRate = 0.5f; //0.5f
-    private float jumperSpawnTimer = 0;
-    private float jumperSpawnRate = 5f; //5f
-    private float octopusSpawnTimer = 0;
-    private float octopusSpawnRate = 3f; //3f
-
-    public float CrabSpawnTimer { get { return crabSpawnTimer; } set { crabSpawnTimer = value; } }
-    public float JumperSpawnTimer { get { return jumperSpawnTimer; } set { jumperSpawnTimer = value; } }
-    public float OctopusSpawnTimer { get { return octopusSpawnTimer; } set { octopusSpawnTimer = value; } }
+    public float GameTime { get { return gameTime; } }
 
     void Awake()
     {
@@ -61,6 +51,7 @@ public class GameManager : MonoBehaviour
         pause = new Pause();
         weaponSystem = new WeaponSystem();
         dash = new Dash();
+        enemyWaves = new EnemyWaves();
         lives = 3;
         respawnTime = 1f;
 
@@ -86,6 +77,8 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 190, 200, 40), "Pause state: " + pause.IsPause);
         GUI.Label(new Rect(20, 210, 200, 40), "Dashes: " + dash.Dashes);
         GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
+        GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
+
     }
 
     // Update is called once per frame
@@ -93,31 +86,11 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameOver)
         {
+            gameTime += Time.deltaTime;
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 pause.TogglePause();
-            }
-
-            crabSpawnTimer += Time.deltaTime;
-            jumperSpawnTimer += Time.deltaTime;
-            octopusSpawnTimer += Time.deltaTime;
-
-            if (crabSpawnTimer >= crabSpawnRate)
-            {
-                SpawnEnemy(crab);
-                crabSpawnTimer = 0;
-            }
-
-            if (jumperSpawnTimer >= jumperSpawnRate)
-            {
-                SpawnEnemy(jumper);
-                jumperSpawnTimer = 0;
-            }
-
-            if (octopusSpawnTimer >= octopusSpawnRate)
-            {
-                SpawnEnemy(octopus);
-                octopusSpawnTimer = 0;
             }
         }
 
@@ -128,19 +101,14 @@ public class GameManager : MonoBehaviour
                 pause.TogglePause();
             }
             isGameOver = false;
-            crabSpawnTimer = 0;
-            jumperSpawnTimer = 0;
-            octopusSpawnTimer = 0;
+            enemyWaves.CrabSpawnTimer = 0;
+            enemyWaves.JumperSpawnTimer = 0;
+            enemyWaves.OctopusSpawnTimer = 0;
+
             lives = 3;
             playerStats = new PlayerStats(); //reset player stats
             SceneManager.LoadScene(0);   
         }
-    }
-
-    void SpawnEnemy(GameObject enemyType)
-    {
-        //Lista vihollisista myöhemmin
-        Instantiate(enemyType, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
     }
 
     public void GameOver()
@@ -169,13 +137,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("RESPAWN FUCNTION!");
 
-
-        //while (isRespawning)
-        //{
-
             PlayerController pc = playerObject.GetComponent<PlayerController>();
-            //pc.ChangePlayerColor(pc.PowerUpColor);
-            //Debug.Log("powerup color" + pc.PowerUpColor);
+
             playerObject.GetComponent<SpriteRenderer>().enabled = false;
             playerObject.GetComponent<Collider2D>().enabled = false;
 
@@ -185,18 +148,12 @@ public class GameManager : MonoBehaviour
             weaponSystem.BombCount++;
             weaponSystem.Bomb();
             PlayerStats.Hp = 1;
-            //PlayerStats.IsInvulnerable = true;
-            //crabSpawnTimer = -3f;
-            //jumperSpawnTimer = -3f;
-            //octopusSpawnTimer = -3f;
 
             yield return new WaitForSeconds(respawnTime);
 
-            //pc.ChangePlayerColor(pc.OriginalColor);
             pc.MoveSpeed = originalSpeed;
             playerObject.GetComponent<SpriteRenderer>().enabled = true;
             playerObject.GetComponent<Collider2D>().enabled = true;
-        //}
     }
     
 }
