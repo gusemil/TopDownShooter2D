@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponSystem : MonoBehaviour
 {
     private int weaponIndex;
+    private float bombSpawnDelay = -3f;
 
     public static int bombCount;
     public static Weapon currentWeapon;
@@ -40,12 +41,6 @@ public class WeaponSystem : MonoBehaviour
         shotTimer = 0f;
 
         bombCount = 1;
-    }
-
-    void OnGUI()
-    {
-        EnemyWaves ew = GameManager.instance.EnemyWaves;
-        GUI.Label(new Rect(20, 270, 200, 40), "CrabSpawnTimer: " + ew.CrabSpawnTimer);
     }
 
     // Update is called once per frame
@@ -138,9 +133,12 @@ public class WeaponSystem : MonoBehaviour
 
             EnemyWaves ew = GameManager.instance.EnemyWaves;
 
-            ew.CrabSpawnTimer = -3f;
-            ew.JumperSpawnTimer = -3f;
-            ew.OctopusSpawnTimer = -3f;
+            if (!ew.IsSpawningPaused)
+            {
+               ew.CrabSpawnTimer = bombSpawnDelay;
+               ew.JumperSpawnTimer = bombSpawnDelay;
+               ew.OctopusSpawnTimer = bombSpawnDelay;
+            }
 
             LoseBomb();
         }

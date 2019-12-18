@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("respawn time" + respawnTime);
+        
     }
 
     void OnGUI()
@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 210, 200, 40), "Dashes: " + dash.Dashes);
         GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
         GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
-
     }
 
     // Update is called once per frame
