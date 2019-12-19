@@ -16,9 +16,12 @@ public class Enemy : MonoBehaviour
 
     private float stopDistance = 7.5f;
     private float retreatDistance = 5f;
-    float playerEnemyDistance;
+    private float playerEnemyDistance;
 
-    PlayerStats playerStats;
+    private bool isEnemyDead;
+
+    private PlayerStats playerStats;
+    private EnemyWaves enemyWaves;
 
     public GameObject deathAnimation;
 
@@ -27,7 +30,9 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = GameManager.instance.PlayerStats;
+        enemyWaves = GameManager.instance.EnemyWaves;
         rb2D = GetComponent<Rigidbody2D>();
+        isEnemyDead = false;
     }
 
     void FixedUpdate()
@@ -73,10 +78,12 @@ public class Enemy : MonoBehaviour
     {
         hp -= dmg;
 
-        if (hp <= 0)
+        if (hp <= 0 && !isEnemyDead)
         {
             DeathEffect();
+            enemyWaves.EnemiesAlive--;
             Destroy(gameObject);
+            isEnemyDead = true; 
         }
     }
 

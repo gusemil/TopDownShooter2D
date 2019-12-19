@@ -11,11 +11,11 @@ public class EnemyWaves : MonoBehaviour
     private float jumperSpawnRate = 5f; //5f
     private float octopusSpawnRate = 3f; //3f
     private static bool isSpawningPaused;
+    private static int enemiesAlive;
 
     private int enemiesSpawned;
     private int enemiesPerWave;
     private int wave;
-    private bool isAllEnemiesKilled;
     private float waveSpawnDelay = -10f;
 
     private GameManager gameManager;
@@ -37,6 +37,7 @@ public class EnemyWaves : MonoBehaviour
     public float JumperSpawnTimer { get { return jumperSpawnTimer; } set { jumperSpawnTimer = value; } }
     public float OctopusSpawnTimer { get { return octopusSpawnTimer; } set { octopusSpawnTimer = value; } }
     public bool IsSpawningPaused { get { return isSpawningPaused; } }
+    public int EnemiesAlive { get { return enemiesAlive; } set { enemiesAlive = value; } }
 
     private List<GameObject> spawnPoints = new List<GameObject>();
 
@@ -55,8 +56,8 @@ public class EnemyWaves : MonoBehaviour
         wave = 1;
         enemiesSpawned = 0;
         enemiesPerWave = 10;
+        enemiesAlive = 0;
         isSpawningPaused = false;
-        isAllEnemiesKilled = false;
     }
 
     private void OnGUI()
@@ -66,6 +67,7 @@ public class EnemyWaves : MonoBehaviour
         GUI.Label(new Rect(20, 310, 200, 40), "CrabSpawnTimer: " + crabSpawnTimer);
         GUI.Label(new Rect(20, 330, 200, 40), "OctopusSpawnTimer: " + octopusSpawnTimer);
         GUI.Label(new Rect(20, 350, 200, 40), "JumperSpawnTimer: " + jumperSpawnTimer);
+        GUI.Label(new Rect(20, 370, 200, 40), "Enemies Alive: " + enemiesAlive);
     }
 
 
@@ -79,6 +81,9 @@ public class EnemyWaves : MonoBehaviour
             jumperSpawnTimer += Time.deltaTime;
             octopusSpawnTimer += Time.deltaTime;
 
+
+        //if (!isSpawningPaused)
+        //{
             if (crabSpawnTimer >= crabSpawnRate)
             {
                 crabSpawnTimer = 0;
@@ -96,7 +101,14 @@ public class EnemyWaves : MonoBehaviour
                 octopusSpawnTimer = 0;
                 SpawnEnemy(octopus);
             }
+        //}
 
+        /*
+        if(enemiesAlive <= 0 && enemiesSpawned == enemiesPerWave && CrabSpawnTimer < 0)
+        {
+            ContinueSpawning();
+        }
+        */
         //}
     }
 
@@ -106,26 +118,38 @@ public class EnemyWaves : MonoBehaviour
 
         Instantiate(enemyType, spawnPoints[Random.Range(0,8)].transform.position, Quaternion.identity); //Quaternion.identity = no rotation
         enemiesSpawned++;
+        enemiesAlive++;
 
-        if(enemiesSpawned >= enemiesPerWave* wave)
+        if(enemiesSpawned >= enemiesPerWave * wave)
         {
             NextWave();
         } else
         {
             isSpawningPaused = false;
+            //ContinueSpawning();
         }
 
     }
 
+    /*
+    public void ContinueSpawning()
+    {
+            //enemiesSpawned = 0;
+            crabSpawnTimer = 0f;
+            jumperSpawnTimer = 0f;
+            octopusSpawnTimer = 0f;
+    }
+    */
+
     public void NextWave()
     {
         wave++;
-        enemiesSpawned = 0;
 
         crabSpawnTimer = waveSpawnDelay;
         jumperSpawnTimer = waveSpawnDelay;
         octopusSpawnTimer = waveSpawnDelay;
         isSpawningPaused = true;
+        enemiesSpawned = 0;
     }
 
 }
