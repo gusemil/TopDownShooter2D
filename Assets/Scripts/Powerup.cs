@@ -59,10 +59,10 @@ public class Powerup : Pickup
 
     private void AmmoPack(WeaponSystem weapon)
     {
-        weapon.WeaponList[1].Ammo += 100;
-        weapon.WeaponList[2].Ammo += 10;
+        weapon.WeaponList[1].Ammo += 1000;
+        weapon.WeaponList[2].Ammo += 50;
         weapon.WeaponList[3].Ammo += 5;
-        weapon.WeaponList[4].Ammo += 1000;
+        weapon.WeaponList[4].Ammo += 200;
 
         Destroy(gameObject);
     }

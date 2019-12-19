@@ -16,7 +16,7 @@ public class EnemyWaves : MonoBehaviour
     private int enemiesSpawned;
     private int enemiesPerWave;
     private int wave;
-    private float waveSpawnDelay = -10f;
+    private float waveSpawnDelay = -5f;
 
     private GameManager gameManager;
 
@@ -55,7 +55,7 @@ public class EnemyWaves : MonoBehaviour
 
         wave = 1;
         enemiesSpawned = 0;
-        enemiesPerWave = 10;
+        enemiesPerWave = 50;
         enemiesAlive = 0;
         isSpawningPaused = false;
     }
@@ -77,13 +77,19 @@ public class EnemyWaves : MonoBehaviour
     {
         //if (gameManager.IsGameOver)
         //{
+
+        if (isSpawningPaused && enemiesAlive == 0 && enemiesSpawned == 0)
+        {
+            NextWave();
+        }
+
+        if (!isSpawningPaused)
+        {
             crabSpawnTimer += Time.deltaTime;
             jumperSpawnTimer += Time.deltaTime;
             octopusSpawnTimer += Time.deltaTime;
+        }
 
-
-        //if (!isSpawningPaused)
-        //{
             if (crabSpawnTimer >= crabSpawnRate)
             {
                 crabSpawnTimer = 0;
@@ -101,15 +107,6 @@ public class EnemyWaves : MonoBehaviour
                 octopusSpawnTimer = 0;
                 SpawnEnemy(octopus);
             }
-        //}
-
-        /*
-        if(enemiesAlive <= 0 && enemiesSpawned == enemiesPerWave && CrabSpawnTimer < 0)
-        {
-            ContinueSpawning();
-        }
-        */
-        //}
     }
 
     public void SpawnEnemy(GameObject enemyType)
@@ -122,32 +119,33 @@ public class EnemyWaves : MonoBehaviour
 
         if(enemiesSpawned >= enemiesPerWave * wave)
         {
-            NextWave();
-        } else
+            StopSpawning();
+        }
+        /*else
         {
             isSpawningPaused = false;
             //ContinueSpawning();
-        }
+        }*/
 
     }
 
-    /*
-    public void ContinueSpawning()
-    {
-            //enemiesSpawned = 0;
-            crabSpawnTimer = 0f;
-            jumperSpawnTimer = 0f;
-            octopusSpawnTimer = 0f;
-    }
-    */
-
+    
     public void NextWave()
     {
-        wave++;
+            wave++;
+            crabSpawnTimer = waveSpawnDelay;
+            jumperSpawnTimer = waveSpawnDelay;
+            octopusSpawnTimer = waveSpawnDelay;
+            isSpawningPaused = false;
 
-        crabSpawnTimer = waveSpawnDelay;
-        jumperSpawnTimer = waveSpawnDelay;
-        octopusSpawnTimer = waveSpawnDelay;
+        crabSpawnRate -= 0.05f;
+        jumperSpawnRate -= 0.1f;
+        octopusSpawnRate -= 0.1f;
+    }
+    
+
+    public void StopSpawning()
+    {
         isSpawningPaused = true;
         enemiesSpawned = 0;
     }

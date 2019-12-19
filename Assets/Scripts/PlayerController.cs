@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float moveSpeed = 10f;
+    private float moveSpeed = 7.5f;
     //private float dashTime = 0.2f; //0.2f
     //private float dashSpeed = 5f; //4f
     //private float dashInvulnerabilityDelay = 0.5f;
