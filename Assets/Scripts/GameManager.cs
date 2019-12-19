@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     private int lives;
     private float gameTime = 0f;
     private float respawnTime;
+    private int points;
 
-    public static GameManager instance;
+    public static GameManager instance; //singleton pattern
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
     public WeaponSystem WeaponSystem { get { return weaponSystem; } }
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
     public float GameTime { get { return gameTime; } }
+    public int Points { get { return points; } set { points = value; } }
 
     void Awake()
     {
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 210, 200, 40), "Dashes: " + dash.Dashes);
         GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
         GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
+        GUI.Label(new Rect(20, 390, 200, 40), "Points: " + points);
     }
 
     // Update is called once per frame

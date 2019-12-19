@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public int hp;
     public int damage;
     public float moveSpeed;
+    public int enemyPointValue;
     public bool shooterEnemy;
     private GameObject player;
     private Vector2 direction;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
 
     private PlayerStats playerStats;
     private EnemyWaves enemyWaves;
+    private GameManager gm;
 
     public GameObject deathAnimation;
 
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = GameManager.instance.PlayerStats;
         enemyWaves = GameManager.instance.EnemyWaves;
+        gm = GameManager.instance;
         rb2D = GetComponent<Rigidbody2D>();
         isEnemyDead = false;
     }
@@ -83,7 +86,8 @@ public class Enemy : MonoBehaviour
             DeathEffect();
             enemyWaves.EnemiesAlive--;
             Destroy(gameObject);
-            isEnemyDead = true; 
+            isEnemyDead = true;
+            gm.Points += enemyPointValue;
         }
     }
 
