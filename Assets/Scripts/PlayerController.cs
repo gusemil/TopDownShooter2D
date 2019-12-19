@@ -33,12 +33,14 @@ public class PlayerController : MonoBehaviour
 
     private WeaponSystem weapon;
     private Dash dash;
+    private Pause pause;
     
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
         weapon = GameManager.instance.WeaponSystem;
         dash = GameManager.instance.Dash;
+        pause = GameManager.instance.Pause;
         //dash = new Dash();
     }
 
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetButton("Fire1")) //mouse1
+        if (Input.GetButton("Fire1") && !pause.IsPause) //mouse1
         {
             if(weapon.ShotTimer >= weapon.CurrentWeapon.FireCoolDown)
             {
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Fire2")) //mouse2
+        if (Input.GetButtonUp("Fire2") && !pause.IsPause) //mouse2
         {
             if (weapon.BombCount > 0)
             {
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
             GodMode();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && !pause.IsPause)
         {
             if(dash.Dashes > 0)
             {
