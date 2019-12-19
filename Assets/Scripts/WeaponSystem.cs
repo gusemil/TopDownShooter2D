@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponSystem : MonoBehaviour
 {
     private int weaponIndex;
-    private float bombSpawnDelay = -3f;
+    private float bombSpawnDelay = -1f;
 
     public static int bombCount;
     public static Weapon currentWeapon;
@@ -141,6 +141,11 @@ public class WeaponSystem : MonoBehaviour
             }
 
             LoseBomb();
+
+            if (ew.IsSpawningPaused && ew.EnemiesAlive == 0 && ew.EnemiesSpawned == 0)
+            {
+                ew.NextWave();
+            }
         }
     }
 

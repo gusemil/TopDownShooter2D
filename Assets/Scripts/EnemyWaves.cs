@@ -13,7 +13,7 @@ public class EnemyWaves : MonoBehaviour
     private static bool isSpawningPaused;
     private static int enemiesAlive;
 
-    private int enemiesSpawned;
+    private static int enemiesSpawned;
     private int enemiesPerWave;
     private int wave;
     private float waveSpawnDelay = -5f;
@@ -38,6 +38,7 @@ public class EnemyWaves : MonoBehaviour
     public float OctopusSpawnTimer { get { return octopusSpawnTimer; } set { octopusSpawnTimer = value; } }
     public bool IsSpawningPaused { get { return isSpawningPaused; } }
     public int EnemiesAlive { get { return enemiesAlive; } set { enemiesAlive = value; } }
+    public int EnemiesSpawned { get { return enemiesSpawned; } set { enemiesSpawned = value; } }
 
     private List<GameObject> spawnPoints = new List<GameObject>();
 
@@ -55,7 +56,7 @@ public class EnemyWaves : MonoBehaviour
 
         wave = 1;
         enemiesSpawned = 0;
-        enemiesPerWave = 50;
+        enemiesPerWave = 20;
         enemiesAlive = 0;
         isSpawningPaused = false;
     }
@@ -68,6 +69,9 @@ public class EnemyWaves : MonoBehaviour
         GUI.Label(new Rect(20, 330, 200, 40), "OctopusSpawnTimer: " + octopusSpawnTimer);
         GUI.Label(new Rect(20, 350, 200, 40), "JumperSpawnTimer: " + jumperSpawnTimer);
         GUI.Label(new Rect(20, 370, 200, 40), "Enemies Alive: " + enemiesAlive);
+        GUI.Label(new Rect(20, 410, 200, 40), "CrabSpawnRate: " + crabSpawnRate);
+        GUI.Label(new Rect(20, 430, 200, 40), "OctopusSpawnRate: " + octopusSpawnRate);
+        GUI.Label(new Rect(20, 450, 200, 40), "JumperSpawnRate: " + jumperSpawnRate);
     }
 
 
@@ -107,6 +111,11 @@ public class EnemyWaves : MonoBehaviour
                 octopusSpawnTimer = 0;
                 SpawnEnemy(octopus);
             }
+
+        if (Input.GetKeyUp(KeyCode.N))
+        {
+            NextWave();
+        }
     }
 
     public void SpawnEnemy(GameObject enemyType)
@@ -138,9 +147,14 @@ public class EnemyWaves : MonoBehaviour
             octopusSpawnTimer = waveSpawnDelay;
             isSpawningPaused = false;
 
-        crabSpawnRate -= 0.05f;
-        jumperSpawnRate -= 0.1f;
-        octopusSpawnRate -= 0.1f;
+        if (crabSpawnRate > 0.1f)
+            crabSpawnRate -= 0.1f;
+
+        if(jumperSpawnRate > 1f)
+            jumperSpawnRate -= 0.5f;
+
+        if(octopusSpawnRate > 0.5f)
+            octopusSpawnRate -= 0.25f;
     }
     
 
