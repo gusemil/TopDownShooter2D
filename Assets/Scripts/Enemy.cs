@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
         gm = GameManager.instance;
         rb2D = GetComponent<Rigidbody2D>();
         isEnemyDead = false;
+
+        moveSpeed += (float)enemyWaves.Wave * 0.5f;
     }
 
     void FixedUpdate()

@@ -15,7 +15,7 @@ public class EnemyWaves : MonoBehaviour
 
     private static int enemiesSpawned;
     private int enemiesPerWave;
-    private int wave;
+    private static int wave;
     private float waveSpawnDelay = -5f;
 
     private GameManager gameManager;
@@ -39,6 +39,7 @@ public class EnemyWaves : MonoBehaviour
     public bool IsSpawningPaused { get { return isSpawningPaused; } }
     public int EnemiesAlive { get { return enemiesAlive; } set { enemiesAlive = value; } }
     public int EnemiesSpawned { get { return enemiesSpawned; } set { enemiesSpawned = value; } }
+    public int Wave { get { return wave; } set { wave = value; } }
 
     private List<GameObject> spawnPoints = new List<GameObject>();
 

@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 7944583421165293228}
   - component: {fileID: 7944583421165293229}
   - component: {fileID: 7944583421165293230}
+  - component: {fileID: 3836789388926263810}
   m_Layer: 10
   m_Name: p_player
   m_TagString: Player
@@ -166,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: b6c2d3a1d0b194296ac57df14d20e8ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -242,6 +243,8 @@ MonoBehaviour:
   firePoint3: {fileID: 1164471730}
   bulletPreFab: {fileID: 6531947342222055162, guid: 9a2c19c43f2cb8845b787b642c5e707b,
     type: 3}
+  bombEffect: {fileID: 7647518200588304277, guid: 7945247b00576d440ab864f7a7d15874,
+    type: 3}
   rb2D: {fileID: 7944583421165293225}
   _camera: {fileID: 0}
 --- !u!114 &7944583421165293229
@@ -268,4 +271,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a73498d64c342d41856f0deb01c2007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 4433456888520020952}
+--- !u!114 &3836789388926263810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433456888520020952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a73498d64c342d41856f0deb01c2007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

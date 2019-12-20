@@ -15,17 +15,23 @@ public class Bullet : MonoBehaviour
 
     private WeaponSystem weapon;
 
-    void Start()
+    private void Awake()
     {
         PlayerStats playerStats = GameManager.instance.PlayerStats;
         weapon = GameManager.instance.WeaponSystem;
         totalProjectileDamage = playerStats.DamageMultiplier * weapon.CurrentWeapon.WeaponDamage;
         SplashDamageRadius = weapon.CurrentWeapon.SplashDamageRadius;
         projectileLifeTime = weapon.CurrentWeapon.ProjectileLifeTime;
-        nameOfWeaponShot = weapon.CurrentWeapon.WeaponName; 
-
+        nameOfWeaponShot = weapon.CurrentWeapon.WeaponName;
         isProjectileAlive = true;
 
+        if (nameOfWeaponShot == "rocketlauncher")
+        {
+            transform.localScale = new Vector3(transform.localScale.x * 2f, transform.localScale.x * 6f, transform.localScale.x * 2f);
+        }
+    }
+    void Start()
+    {
         StartCoroutine(ProjectileGoing());
     }
 

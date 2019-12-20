@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dash : MonoBehaviour
 {
     public static float dashTime = 0.2f; //0.2f
-    public static float dashSpeed = 5f; //4f
+    public static float dashSpeed = 4.75f; //4f
     //private Color dashColor = new Color(0, 1, 0, 1);
     public static float dashInvulnerabilityDelay = 0.5f;
 
@@ -30,7 +30,7 @@ public class Dash : MonoBehaviour
     {
         dashes = 4;
         maxDashes = 4;
-        dashRechargeTime = 2.5f;
+        dashRechargeTime = 4f;
         dashTimer = 0f;
 
        // pc = playerObject.GetComponent<PlayerController>();
