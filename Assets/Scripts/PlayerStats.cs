@@ -7,10 +7,11 @@ public class PlayerStats
     private int hp;
     private int maxHp;
     private int damageMultiplier;
-    private bool isPoweredUp;
+    private bool isHexDamageUp;
     private bool isDashing;
     private bool isInvulnerable;
     private bool isRespawning;
+    private bool isInfiniteAmmoUp;
 
     public int Hp
     {
@@ -30,10 +31,10 @@ public class PlayerStats
         set { damageMultiplier = value; }
     }
 
-    public bool IsPoweredUp
+    public bool IsHexDamageUp
     {
-        get { return isPoweredUp; }
-        set { isPoweredUp = value; }
+        get { return isHexDamageUp; }
+        set { isHexDamageUp = value; }
     }
 
     public bool IsDashing
@@ -54,12 +55,19 @@ public class PlayerStats
         set { isRespawning = value; }
     }
 
+    public bool IsInfiniteAmmoUp
+    {
+        get { return isInfiniteAmmoUp; }
+        set { isInfiniteAmmoUp = value; }
+    }
+
     public PlayerStats()
     {
         hp = 1;
         maxHp = 10;
         damageMultiplier = 1;
-        isPoweredUp = false;
+        isHexDamageUp = false;
+        isInfiniteAmmoUp = false;
         isDashing = false;
         isInvulnerable = false;
         isRespawning = false;

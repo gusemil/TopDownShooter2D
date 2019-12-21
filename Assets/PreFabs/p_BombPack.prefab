@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8155446093328067999}
   - component: {fileID: 9106302789439188407}
   - component: {fileID: 519192980}
-  - component: {fileID: 2365441814818707677}
+  - component: {fileID: 2357295217556458617}
   m_Layer: 0
-  m_Name: power-up-7
+  m_Name: p_BombPack
   m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14977063, y: 0.16186228}
   m_EdgeRadius: 0
---- !u!114 &2365441814818707677
+--- !u!114 &2357295217556458617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7963543030933386316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 011d2bec7754f9448a279a4951d81096, type: 3}
+  m_Script: {fileID: 11500000, guid: 707795ebb338491449a54010654c4d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpDuration: 0

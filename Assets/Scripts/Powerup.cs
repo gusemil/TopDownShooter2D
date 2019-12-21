@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup : Pickup
+public class Powerup : MonoBehaviour
 {
+    /*
+
     private float hexDamageDuration = 5f;
     private bool isHexDamageOn;
     private int healAmount = 20;
@@ -26,7 +28,7 @@ public class Powerup : Pickup
             {
                 HpPack(playerStats);
             }
-            else if (gameObject.tag == "HexDamage" && !playerStats.IsPoweredUp)
+            else if (gameObject.tag == "HexDamage" && !playerStats.IsHexDamageUp)
             {
                 RemoveGraphicsAndCollider();
                 StartCoroutine(HexDamage(playerStats, other));
@@ -70,23 +72,34 @@ public class Powerup : Pickup
     private IEnumerator HexDamage(PlayerStats player, Collider2D playerCollider)
     {
         isHexDamageOn = true;
-        player.IsPoweredUp = true;
+        player.IsHexDamageUp = true;
         while (isHexDamageOn)
         {
             PlayerController pc = playerCollider.GetComponent<PlayerController>();
 
-            pc.ChangePlayerColor(pc.PowerUpColor); 
+            pc.ChangePlayerColor(pc.HexDamageColor); 
             int originalDamageMultiplier = player.DamageMultiplier;
             player.DamageMultiplier = 6;
             yield return new WaitForSeconds(hexDamageDuration);
             
             player.DamageMultiplier = originalDamageMultiplier;
             isHexDamageOn = false;
-            player.IsPoweredUp = false;
+            player.IsHexDamageUp = false;
             pc.ChangePlayerColor(pc.OriginalColor);
             Destroy(gameObject);
         }
 
     }
 
+    public void RemoveGraphicsAndCollider()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
+    */
 }

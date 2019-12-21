@@ -9,6 +9,7 @@ TagManager:
   - HexDamage
   - Ammo
   - Bomb
+  - InfiniteAmmo
   layers:
   - Default
   - TransparentFX

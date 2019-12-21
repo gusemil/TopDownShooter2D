@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     Vector2 mousePosition;
 
     private Color originalColor;
-    private Color powerUpColor = new Color(0, 1, 1, 1);
-    private Color dashColor = new Color(0, 1, 0, 1);
+    private Color hexDamageColor = new Color(0.5f, 0.5f, 1, 1);
+    private Color dashColor = new Color(1, 1, 0, 1);
+    private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
     private Color previousColor;
 
     public Color OriginalColor { get { return originalColor; } }
-    public Color PowerUpColor { get { return powerUpColor; } }
+    public Color HexDamageColor { get { return hexDamageColor; } }
+    public Color InfiniteAmmoColor { get { return infiniteAmmoColor; } }
     public Color PreviousColor {  get { return previousColor; }}
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2D.MovePosition(rb2D.position + movement * moveSpeed * Time.fixedDeltaTime);
 
-        //clamping
+        //prevent player moving outside of screen/camera
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenSize.x + playerSize.x, maxScreenSize.x - playerSize.x), Mathf.Clamp(transform.position.y, minScreenSize.y + playerSize.y, maxScreenSize.y - playerSize.y), transform.position.z);
 
         Vector2 lookDir = mousePosition - rb2D.position;
@@ -116,13 +118,16 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(weapon.CurrentWeapon.WeaponName);
 
-        if(weapon.CurrentWeapon.Ammo > 0)
+        if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp)
         {
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
-            weapon.LoseAmmo();
+            if (!stats.IsInfiniteAmmoUp)
+            {
+                weapon.LoseAmmo();
+            }
 
             if(weapon.CurrentWeapon.WeaponName == "shotgun")
             {
@@ -160,32 +165,17 @@ public class PlayerController : MonoBehaviour
 
     public void ChangePlayerColor(Color color)
     {
-        PlayerStats player = GameManager.instance.PlayerStats;
-
-        if (!player.IsDashing && !player.IsPoweredUp)
-        {
-            previousColor = originalColor;
-            GetComponent<SpriteRenderer>().color = originalColor;
-
-        } else
-        {
-            GetComponent<SpriteRenderer>().color = color;
-        }
+        GetComponent<SpriteRenderer>().color = color;
     }
 
+    
     public void SetPreviousColor()
     {
         PlayerStats player = GameManager.instance.PlayerStats;
 
-        if(!player.IsDashing && !player.IsPoweredUp)
-        {
-            previousColor = originalColor;
-            GetComponent<SpriteRenderer>().color = originalColor;
-        } else
-        {
-            previousColor = GetComponent<SpriteRenderer>().color;
-        }
+        GetComponent<SpriteRenderer>().color = originalColor;
     }
+    
 
     
     private IEnumerator Dash()

@@ -6,6 +6,7 @@ public class WeaponSystem : MonoBehaviour
 {
     private int weaponIndex;
     private float bombSpawnDelay = -1f;
+    private PlayerStats stats;
 
     public static int bombCount;
     public static Weapon currentWeapon;
@@ -16,6 +17,7 @@ public class WeaponSystem : MonoBehaviour
     public Weapon CurrentWeapon { get { return currentWeapon; } set { currentWeapon = value; } }
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
     public int BombCount { get { return bombCount; } set { bombCount = value; } }
+
 
     Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
     Weapon machineGun = new Weapon("machinegun", 1, 20, 40f, 0.05f, 100, 0f, 2f);
@@ -41,6 +43,8 @@ public class WeaponSystem : MonoBehaviour
         shotTimer = 0f;
 
         bombCount = 1;
+
+        stats = GameManager.instance.PlayerStats;
     }
 
     // Update is called once per frame
@@ -113,7 +117,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void LoseAmmo()
     {
-        if (currentWeapon.Ammo > 0 && currentWeapon.WeaponName != "pistol" )
+        if (currentWeapon.Ammo > 0 && currentWeapon.WeaponName != "pistol")
         {
             currentWeapon.Ammo--;
             Debug.Log(currentWeapon.WeaponName + " ammo count: " + currentWeapon.Ammo);
@@ -128,7 +132,7 @@ public class WeaponSystem : MonoBehaviour
 
             foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(1000);
+                enemy.GetComponent<Enemy>().TakeDamage(500);
             }
 
             EnemyWaves ew = GameManager.instance.EnemyWaves;

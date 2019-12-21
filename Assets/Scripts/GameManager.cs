@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
         GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
         GUI.Label(new Rect(20, 390, 200, 40), "Points: " + points);
+        GUI.Label(new Rect(20, 470, 200, 40), "HexDamageOn " + playerStats.IsHexDamageUp);
+        GUI.Label(new Rect(20, 490, 200, 40), "InfiniteAmmoOn: " + playerStats.IsInfiniteAmmoUp);
     }
 
     // Update is called once per frame
