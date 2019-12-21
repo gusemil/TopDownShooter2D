@@ -137,12 +137,12 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-        Debug.Log("RESPAWN FUCNTION!");
-
             PlayerController pc = playerObject.GetComponent<PlayerController>();
 
             playerObject.GetComponent<SpriteRenderer>().enabled = false;
             playerObject.GetComponent<Collider2D>().enabled = false;
+
+        playerStats.IsRespawning = true;
 
             float originalSpeed = pc.MoveSpeed;
             pc.MoveSpeed = 0f;
@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour
             pc.MoveSpeed = originalSpeed;
             playerObject.GetComponent<SpriteRenderer>().enabled = true;
             playerObject.GetComponent<Collider2D>().enabled = true;
+        playerStats.IsRespawning = false;
     }
     
 }

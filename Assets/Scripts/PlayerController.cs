@@ -34,14 +34,25 @@ public class PlayerController : MonoBehaviour
     private WeaponSystem weapon;
     private Dash dash;
     private Pause pause;
-    
+    private PlayerStats stats;
+
+    private Vector3 minScreenSize;
+    private Vector3 maxScreenSize;
+    private Vector3 playerSize;
+
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
         weapon = GameManager.instance.WeaponSystem;
         dash = GameManager.instance.Dash;
         pause = GameManager.instance.Pause;
+        stats = GameManager.instance.PlayerStats;
+
+        playerSize = transform.localScale;
         //dash = new Dash();
+
+        minScreenSize = _camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        maxScreenSize = _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
     }
 
     // Update is called once per frame
@@ -52,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
         mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetButton("Fire1") && !pause.IsPause) //mouse1
+        if (Input.GetButton("Fire1") && !pause.IsPause && !stats.IsRespawning) //mouse1
         {
             if(weapon.ShotTimer >= weapon.CurrentWeapon.FireCoolDown)
             {
@@ -85,15 +96,19 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Dash());
             }
         }
-
     }
+
+
 
     void FixedUpdate()
     {
         rb2D.MovePosition(rb2D.position + movement * moveSpeed * Time.fixedDeltaTime);
 
+        //clamping
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenSize.x + playerSize.x, maxScreenSize.x - playerSize.x), Mathf.Clamp(transform.position.y, minScreenSize.y + playerSize.y, maxScreenSize.y - playerSize.y), transform.position.z);
+
         Vector2 lookDir = mousePosition - rb2D.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f; //rotaatiosetit: Miten kierretään hahmoa että osoitetaan mousepositioon
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg; //rotaatiosetit: Miten kierretään hahmoa että osoitetaan mousepositioon
         rb2D.rotation = angle;
     }
 
@@ -126,10 +141,9 @@ public class PlayerController : MonoBehaviour
 
     private void GodMode()
     {
-        PlayerStats player = GameManager.instance.PlayerStats;
-        if (player.IsInvulnerable == false)
+        if (stats.IsInvulnerable == false)
         {
-            player.IsInvulnerable = true;
+            stats.IsInvulnerable = true;
             moveSpeed = 20f;
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 1);
             this.gameObject.layer = 11;

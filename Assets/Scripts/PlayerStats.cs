@@ -10,6 +10,7 @@ public class PlayerStats
     private bool isPoweredUp;
     private bool isDashing;
     private bool isInvulnerable;
+    private bool isRespawning;
 
     public int Hp
     {
@@ -47,6 +48,12 @@ public class PlayerStats
         set { isInvulnerable = value; }
     }
 
+    public bool IsRespawning
+    {
+        get { return isRespawning; }
+        set { isRespawning = value; }
+    }
+
     public PlayerStats()
     {
         hp = 1;
@@ -55,6 +62,7 @@ public class PlayerStats
         isPoweredUp = false;
         isDashing = false;
         isInvulnerable = false;
+        isRespawning = false;
     }
 
 
