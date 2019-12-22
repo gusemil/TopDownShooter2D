@@ -14,6 +14,8 @@ public class PlayerStats
     private bool isInfiniteAmmoUp;
     private bool isShieldUp;
     private float invulnerabilityTime;
+    private bool isInfiniteDashUp;
+    private bool isGodModeUp;
 
     public int Hp
     {
@@ -75,6 +77,18 @@ public class PlayerStats
         set { invulnerabilityTime = value; }
     }
 
+    public bool IsInfiniteDashUp
+    {
+        get { return isInfiniteDashUp; }
+        set { isInfiniteDashUp = value; }
+    }
+
+    public bool IsGodModeUp
+    {
+        get { return isGodModeUp; }
+        set { isGodModeUp = value; }
+    }
+
     public PlayerStats()
     {
         hp = 1;
@@ -87,6 +101,8 @@ public class PlayerStats
         isInvulnerable = false;
         isRespawning = false;
         isShieldUp = false;
+        isInfiniteDashUp = false;
+        isGodModeUp = false;
     }
 
 

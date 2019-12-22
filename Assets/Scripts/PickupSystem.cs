@@ -10,9 +10,11 @@ public class PickupSystem : MonoBehaviour
     public GameObject bombPreFab;
     public GameObject pointMultiplierPreFab;
     public GameObject shieldPreFab;
+    public GameObject infiniteDashPreFab;
+    public GameObject godModePreFab;
 
     private static List<GameObject> pickupList = new List<GameObject>();
-    private const float pickupDropChance = 20f;
+    private const float pickupDropChance = 5f;
 
     public List<GameObject> PickupList { get { return pickupList; } set { pickupList = value; } }
 
@@ -24,13 +26,9 @@ public class PickupSystem : MonoBehaviour
         pickupList.Add(ammoPreFab);
         pickupList.Add(bombPreFab);
         pickupList.Add(pointMultiplierPreFab);
-        pickupList.Add(shieldPreFab);  
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        pickupList.Add(shieldPreFab);
+        pickupList.Add(infiniteDashPreFab);
+        pickupList.Add(godModePreFab);
     }
 
     public void SpawnPickUpFromEnemy(GameObject enemy)

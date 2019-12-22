@@ -26,12 +26,14 @@ public class PlayerController : MonoBehaviour
     private Color hexDamageColor = new Color(1, 0.5f, 0.5f, 1);
     private Color dashColor = new Color(1, 1, 0, 1);
     private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
+    private Color godModeColor = new Color(0.06f,0.92f,0.9f,1);
     private Color previousColor;
 
     public Color OriginalColor { get { return originalColor; } }
     public Color HexDamageColor { get { return hexDamageColor; } }
     public Color InfiniteAmmoColor { get { return infiniteAmmoColor; } }
     public Color PreviousColor {  get { return previousColor; }}
+    public Color GodModeColor { get { return godModeColor; } }
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 
     private WeaponSystem weapon;
@@ -53,7 +55,6 @@ public class PlayerController : MonoBehaviour
 
         playerSize = transform.localScale;
         TurnOffShieldGraphic();
-        //dash = new Dash();
 
         minScreenSize = _camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
         maxScreenSize = _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -94,9 +95,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space) && !pause.IsPause)
         {
-            if(dash.Dashes > 0)
+            if(dash.Dashes > 0 || stats.IsInfiniteDashUp || stats.IsGodModeUp)
             {
-                dash.ConsumeDash();
+                if (!stats.IsInfiniteDashUp && !stats.IsGodModeUp)
+                {
+                    dash.ConsumeDash();
+                }
+
                 StartCoroutine(Dash());
             }
         }
@@ -120,13 +125,13 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(weapon.CurrentWeapon.WeaponName);
 
-        if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp)
+        if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp || stats.IsGodModeUp)
         {
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
-            if (!stats.IsInfiniteAmmoUp)
+            if (!stats.IsInfiniteAmmoUp && !stats.IsGodModeUp)
             {
                 weapon.LoseAmmo();
             }

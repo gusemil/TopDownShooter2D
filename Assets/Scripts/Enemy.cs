@@ -111,7 +111,11 @@ public class Enemy : MonoBehaviour
     {
             PlayerStats playerStats = GameManager.instance.PlayerStats;
 
-        if (playerStats.IsShieldUp)
+        if (playerStats.IsGodModeUp)
+        {
+            //do nothing
+        }
+        else if (playerStats.IsShieldUp && !playerStats.IsGodModeUp)
         {
             other.gameObject.GetComponent<PlayerController>().TurnOffShieldGraphic();
             other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();

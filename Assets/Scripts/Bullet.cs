@@ -29,6 +29,11 @@ public class Bullet : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x * 2f, transform.localScale.x * 6f, transform.localScale.x * 2f);
         }
+
+        if (playerStats.IsGodModeUp)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * 3f, transform.localScale.x * 3f, transform.localScale.x * 3f);
+        }
     }
     void Start()
     {

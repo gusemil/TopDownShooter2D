@@ -64,6 +64,16 @@ public class Pickup : MonoBehaviour
                 isPickedUp = true;
                 StartCoroutine(PowerUp(playerStats, other));
             }
+            else if (gameObject.tag == "InfiniteDash" && !playerStats.IsInfiniteDashUp)
+            {
+                isPickedUp = true;
+                StartCoroutine(PowerUp(playerStats, other));
+            }
+            else if (gameObject.tag == "GodMode" && !playerStats.IsGodModeUp)
+            {
+                isPickedUp = true;
+                StartCoroutine(PowerUp(playerStats, other));
+            }
         }
     }
 
@@ -112,25 +122,58 @@ public class Pickup : MonoBehaviour
         {
             player.IsInfiniteAmmoUp = true;
             pc.ChangePlayerColor(pc.InfiniteAmmoColor);
+        } else if (gameObject.tag == "InfiniteDash")
+        {
+            player.IsInfiniteDashUp = true;
+            //pc.ChangePlayerColor(pc.InfiniteDashColor);
+        } else if(gameObject.tag == "GodMode")
+        {
+            player.IsGodModeUp = true;
+            pc.ChangePlayerColor(pc.GodModeColor);
         }
+
+
 
         while (isPowerUpOn)
         {
-            //pc.ChangePlayerColor(pc.HexDamageColor);
-            int originalDamageMultiplier = player.DamageMultiplier;
-            player.DamageMultiplier = 6;
-            yield return new WaitForSeconds(powerUpDuration);
+            if (gameObject.tag == "HexDamage" || gameObject.tag == "GodMode")
+            {
+                player.DamageMultiplier = 6;
+            }
 
-            player.DamageMultiplier = originalDamageMultiplier;
-            isPowerUpOn = false;
+            if (gameObject.tag == "GodMode")
+            {
+                pc.MoveSpeed = 15f;
+            }
+
+            yield return new WaitForSeconds(powerUpDuration);
 
             if (gameObject.tag == "HexDamage")
             {
+                if (!player.IsGodModeUp)
+                {
+                    player.DamageMultiplier = 1;
+                }
                 player.IsHexDamageUp = false;
             } else if (gameObject.tag == "InfiniteAmmo")
             {
                 player.IsInfiniteAmmoUp = false;
             }
+            else if (gameObject.tag == "InfiniteDash")
+            {
+                player.IsInfiniteDashUp = false;
+            }
+            else if(gameObject.tag == "GodMode")
+            {
+                if (!player.IsHexDamageUp)
+                {
+                    player.DamageMultiplier = 1;
+                }
+                pc.MoveSpeed = 7.5f;
+                player.IsGodModeUp = false;
+            }
+
+            isPowerUpOn = false;
 
             pc.ChangePlayerColor(pc.OriginalColor);
             Destroy(gameObject);

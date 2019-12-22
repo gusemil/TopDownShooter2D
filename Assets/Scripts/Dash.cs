@@ -13,6 +13,7 @@ public class Dash : MonoBehaviour
     private int maxDashes;
     public static float dashRechargeTime;
     public static float dashTimer;
+    private PlayerStats stats;
     //private PlayerController pc;
 
     //public GameObject playerObject;
@@ -32,6 +33,7 @@ public class Dash : MonoBehaviour
         maxDashes = 4;
         dashRechargeTime = 4f;
         dashTimer = 0f;
+        stats = GameManager.instance.PlayerStats;
 
        // pc = playerObject.GetComponent<PlayerController>();
 
@@ -60,7 +62,7 @@ public class Dash : MonoBehaviour
 
     public void ConsumeDash()
     {
-        if(dashes > 0)
+        if(dashes > 0) 
         {
             dashes--;
             //dashTimer = 0;

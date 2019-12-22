@@ -12,6 +12,8 @@ TagManager:
   - InfiniteAmmo
   - PointMultiplier
   - Shield
+  - InfiniteDash
+  - GodMode
   layers:
   - Default
   - TransparentFX
