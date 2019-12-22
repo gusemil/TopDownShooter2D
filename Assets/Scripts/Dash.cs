@@ -7,7 +7,7 @@ public class Dash : MonoBehaviour
     public static float dashTime = 0.2f; //0.2f
     public static float dashSpeed = 4.75f; //4f
     //private Color dashColor = new Color(0, 1, 0, 1);
-    public static float dashInvulnerabilityDelay = 0.5f;
+    //public static float dashInvulnerabilityDelay = 0.5f;
 
     public static int dashes;
     private int maxDashes;
@@ -22,7 +22,7 @@ public class Dash : MonoBehaviour
     public float DashTimer { get { return dashTimer; } set { dashTimer = value; } }
     public float DashSpeed { get { return dashSpeed; } set { dashSpeed = value; } }
     public float DashTime { get { return dashTime; } set { dashTime = value; } }
-    public float DashInvulnerabilityDelay { get { return dashInvulnerabilityDelay; } set { dashInvulnerabilityDelay = value; } }
+    //public float DashInvulnerabilityDelay { get { return dashInvulnerabilityDelay; } set { dashInvulnerabilityDelay = value; } }
     public float DashRechargeTime { get { return dashRechargeTime; } set { dashRechargeTime = value; } }
 
     // Start is called before the first frame update

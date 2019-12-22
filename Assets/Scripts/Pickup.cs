@@ -5,37 +5,63 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public float powerUpDuration;
-    private bool isPowerUpOn;
-    PlayerController pc;
 
-    private void Awake()
+    private PlayerController pc;
+    private bool isPowerUpOn = false;
+    private float pickupDestroyTime = 5f;
+    private float pickupTimer = 0f;
+    private bool isPickedUp = false;
+
+    private void Update()
     {
-        isPowerUpOn = false;
+        if (!isPickedUp)
+        {
+            pickupTimer += Time.deltaTime;
+        }
+
+        if (pickupTimer >= pickupDestroyTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with powerup");
+        //triggers even when colliding with an enemy
 
-        if (other.transform.GetComponent<PlayerController>())
+        if (other.tag == "Player")
         {
             PlayerStats playerStats = GameManager.instance.PlayerStats;
             WeaponSystem weapon = GameManager.instance.WeaponSystem;
 
             if (gameObject.tag == "HexDamage" && !playerStats.IsHexDamageUp)
             {
+                isPickedUp = true;
                 StartCoroutine(PowerUp(playerStats, other));
             }
             else if (gameObject.tag == "Ammo")
             {
+                isPickedUp = true;
                 AmmoPack(weapon);
             }
             else if (gameObject.tag == "Bomb")
             {
+                isPickedUp = true;
                 BombPack(weapon);
+            }
+            else if(gameObject.tag == "PointMultiplier")
+            {
+                isPickedUp = true;
+                PointMultiplierPack();
+            }
+            else if(gameObject.tag == "Shield" && !playerStats.IsShieldUp)
+            {
+                isPickedUp = true;
+                ShieldPack(playerStats, other);
             }
             else if(gameObject.tag == "InfiniteAmmo" && !playerStats.IsInfiniteAmmoUp)
             {
+                isPickedUp = true;
                 StartCoroutine(PowerUp(playerStats, other));
             }
         }
@@ -54,6 +80,21 @@ public class Pickup : MonoBehaviour
         weapon.WeaponList[3].Ammo += 5;
         weapon.WeaponList[4].Ammo += 100;
 
+        Destroy(gameObject);
+    }
+
+    private void PointMultiplierPack()
+    {
+        GameManager gm = GameManager.instance;
+        gm.PointsMultiplier += 1;
+        Destroy(gameObject);
+    }
+
+    private void ShieldPack(PlayerStats stats, Collider2D playerCollider)
+    {
+        pc = playerCollider.GetComponent<PlayerController>();
+        stats.IsShieldUp = true;
+        pc.TurnOnShieldGraphic();
         Destroy(gameObject);
     }
 

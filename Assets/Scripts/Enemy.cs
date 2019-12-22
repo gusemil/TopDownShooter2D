@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     private PlayerStats playerStats;
     private EnemyWaves enemyWaves;
     private GameManager gm;
+    private PickupSystem ps;
 
     public GameObject deathAnimation;
 
@@ -36,6 +37,7 @@ public class Enemy : MonoBehaviour
         gm = GameManager.instance;
         rb2D = GetComponent<Rigidbody2D>();
         isEnemyDead = false;
+        ps = GameManager.instance.PickupSystem;
 
         moveSpeed += (float)enemyWaves.Wave * 0.5f;
     }
@@ -79,7 +81,7 @@ public class Enemy : MonoBehaviour
         */
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, bool isKilledByBomb)
     {
         hp -= dmg;
 
@@ -87,9 +89,15 @@ public class Enemy : MonoBehaviour
         {
             DeathEffect();
             enemyWaves.EnemiesAlive--;
-            Destroy(gameObject);
             isEnemyDead = true;
-            gm.Points += enemyPointValue;
+
+            if(!isKilledByBomb)
+            {
+                gm.AddPoints(enemyPointValue);
+                ps.SpawnPickUpFromEnemy(this.gameObject);
+            }
+
+            Destroy(gameObject);
         }
     }
 
@@ -102,13 +110,16 @@ public class Enemy : MonoBehaviour
     public void DamagePlayerOnCollision(Collision2D other)
     {
             PlayerStats playerStats = GameManager.instance.PlayerStats;
+
+        if (playerStats.IsShieldUp)
+        {
+            other.gameObject.GetComponent<PlayerController>().TurnOffShieldGraphic();
+            other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();
+            playerStats.IsShieldUp = false;
+        } else
+        {
             playerStats.TakeDamage(damage);
-        /*
-            if (playerStats.Hp <= 0)
-            {
-                Destroy(other.gameObject); //player destruction might not be needed later
-            }
-       */
+        }
     }
 
     void EnemyMovementTowardsPlayer()

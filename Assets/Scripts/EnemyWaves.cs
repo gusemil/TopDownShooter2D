@@ -123,7 +123,7 @@ public class EnemyWaves : MonoBehaviour
     {
         //Lista vihollisista myöhemmin
 
-        Instantiate(enemyType, spawnPoints[Random.Range(0,8)].transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        Instantiate(enemyType, spawnPoints[Random.Range(0,spawnPoints.Count)].transform.position, Quaternion.identity); //Quaternion.identity = no rotation
         enemiesSpawned++;
         enemiesAlive++;
 

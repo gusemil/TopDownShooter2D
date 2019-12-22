@@ -12,6 +12,8 @@ public class PlayerStats
     private bool isInvulnerable;
     private bool isRespawning;
     private bool isInfiniteAmmoUp;
+    private bool isShieldUp;
+    private float invulnerabilityTime;
 
     public int Hp
     {
@@ -61,16 +63,30 @@ public class PlayerStats
         set { isInfiniteAmmoUp = value; }
     }
 
+    public bool IsShieldUp
+    {
+        get { return isShieldUp; }
+        set { isShieldUp = value; }
+    }
+
+    public float InvulnerabilityTime
+    {
+        get { return invulnerabilityTime; }
+        set { invulnerabilityTime = value; }
+    }
+
     public PlayerStats()
     {
         hp = 1;
         maxHp = 10;
         damageMultiplier = 1;
+        invulnerabilityTime = 0.5f;
         isHexDamageUp = false;
         isInfiniteAmmoUp = false;
         isDashing = false;
         isInvulnerable = false;
         isRespawning = false;
+        isShieldUp = false;
     }
 
 
@@ -96,7 +112,7 @@ public class PlayerStats
             hp -= dmg;
             Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
 
-            if(hp <= 0)
+            if(hp <= 0 && !isShieldUp)
             {
                 GameManager.instance.LoseLife();
                 //GameManager.status.Pause.TogglePause();

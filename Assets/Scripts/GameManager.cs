@@ -13,17 +13,20 @@ public class GameManager : MonoBehaviour
     private WeaponSystem weaponSystem;
     private EnemyWaves enemyWaves;
     private Dash dash;
+    private PickupSystem pickupSystem;
     private bool isGameOver;
     private int lives;
     private float gameTime = 0f;
     private float respawnTime;
     private int points;
+    private int pointsMultiplier;
 
     public static GameManager instance; //singleton pattern
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
     public WeaponSystem WeaponSystem { get { return weaponSystem; } }
     public EnemyWaves EnemyWaves { get { return enemyWaves; } }
+    public PickupSystem PickupSystem { get { return pickupSystem; } }
     public int Lives { get { return lives; } }
     public Dash Dash { get { return dash; } }
     public GameObject playerObject;
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public float GameTime { get { return gameTime; } }
     public int Points { get { return points; } set { points = value; } }
+    public int PointsMultiplier { get { return pointsMultiplier; } set { pointsMultiplier = value; } }
 
     void Awake()
     {
@@ -54,8 +58,11 @@ public class GameManager : MonoBehaviour
         weaponSystem = new WeaponSystem();
         dash = new Dash();
         enemyWaves = new EnemyWaves();
+        pickupSystem = new PickupSystem();
         lives = 3;
         respawnTime = 1f;
+        points = 0;
+        PointsMultiplier = 1;
 
         isGameOver = false;
     }
@@ -83,6 +90,8 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 390, 200, 40), "Points: " + points);
         GUI.Label(new Rect(20, 470, 200, 40), "HexDamageOn " + playerStats.IsHexDamageUp);
         GUI.Label(new Rect(20, 490, 200, 40), "InfiniteAmmoOn: " + playerStats.IsInfiniteAmmoUp);
+        GUI.Label(new Rect(20, 510, 200, 40), "PointsMultiplier " + pointsMultiplier);
+        GUI.Label(new Rect(20, 530, 200, 40), "PlayerStats ShieldUp " + playerStats.IsShieldUp);
     }
 
     // Update is called once per frame
@@ -128,13 +137,18 @@ public class GameManager : MonoBehaviour
         if (lives > 0)
         {
             Debug.Log("life lost" + lives);
-
+            pointsMultiplier = 1;
             StartCoroutine(Respawn());
 
         } else
         {
             GameOver();
         }
+    }
+
+    public void AddPoints(int pointsToBeAdded)
+    {
+        points += pointsToBeAdded * pointsMultiplier;
     }
 
     private IEnumerator Respawn()
@@ -161,4 +175,5 @@ public class GameManager : MonoBehaviour
         playerStats.IsRespawning = false;
     }
     
+
 }

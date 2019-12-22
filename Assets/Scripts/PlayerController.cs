@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public Transform firePoint2;
     public Transform firePoint3;
+    public GameObject shield;
     public GameObject bulletPreFab;
     public GameObject bombEffect;
     
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     Vector2 mousePosition;
 
     private Color originalColor;
-    private Color hexDamageColor = new Color(0.5f, 0.5f, 1, 1);
+    private Color hexDamageColor = new Color(1, 0.5f, 0.5f, 1);
     private Color dashColor = new Color(1, 1, 0, 1);
     private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
     private Color previousColor;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
         stats = GameManager.instance.PlayerStats;
 
         playerSize = transform.localScale;
+        TurnOffShieldGraphic();
         //dash = new Dash();
 
         minScreenSize = _camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
@@ -175,15 +177,23 @@ public class PlayerController : MonoBehaviour
 
         GetComponent<SpriteRenderer>().color = originalColor;
     }
-    
 
+    public void TurnOnShieldGraphic()
+    {
+            shield.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    public void TurnOffShieldGraphic()
+    {
+        shield.GetComponent<SpriteRenderer>().enabled = false;
+    }
     
     private IEnumerator Dash()
     {
-        PlayerStats player = GameManager.instance.PlayerStats;
+        PlayerStats stats = GameManager.instance.PlayerStats;
 
-        player.IsDashing = true;
-        while (player.IsDashing)
+        stats.IsDashing = true;
+        while (stats.IsDashing)
         {
             SetPreviousColor();
             //ChangePlayerColor(dashColor);
@@ -208,13 +218,21 @@ public class PlayerController : MonoBehaviour
             this.gameObject.layer = 10; //Player Layer
             //GetComponent<BoxCollider2D>().enabled = true;
             rb2D.velocity = Vector2.zero;
-            player.IsDashing = false;
-            player.IsInvulnerable = true;
-            yield return new WaitForSeconds(dash.DashInvulnerabilityDelay);
-            player.IsInvulnerable = false;
+            stats.IsDashing = false;
+            stats.IsInvulnerable = true;
+            yield return new WaitForSeconds(stats.InvulnerabilityTime);
+            stats.IsInvulnerable = false;
             //ChangePlayerColor(previousColor);
         }
 
+    }
+
+    public IEnumerator InvulnerabilityTimer()
+    {
+        PlayerStats stats = GameManager.instance.PlayerStats;
+        stats.IsInvulnerable = true;
+        yield return new WaitForSeconds(stats.InvulnerabilityTime);
+        stats.IsInvulnerable = false;
     }
     
 

@@ -20,7 +20,7 @@ public class WeaponSystem : MonoBehaviour
 
 
     Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
-    Weapon machineGun = new Weapon("machinegun", 1, 20, 40f, 0.05f, 100, 0f, 2f);
+    Weapon machineGun = new Weapon("machinegun", 1, 20, 40f, 0.05f, 1000, 0f, 2f);
     Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.4f, 10, 2f, 2f);
     Weapon rocketLauncher = new Weapon("rocketlauncher", 3, 500, 7f, 0.5f, 5, 12f, 5f);
     Weapon flameThrower = new Weapon("flameThrower", 4, 50, 30f, 0.01f, 100, 2f, 0.3f);
@@ -132,7 +132,7 @@ public class WeaponSystem : MonoBehaviour
 
             foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(500);
+                enemy.GetComponent<Enemy>().TakeDamage(500,true);
             }
 
             EnemyWaves ew = GameManager.instance.EnemyWaves;

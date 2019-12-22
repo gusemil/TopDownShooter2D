@@ -10,6 +10,8 @@ TagManager:
   - Ammo
   - Bomb
   - InfiniteAmmo
+  - PointMultiplier
+  - Shield
   layers:
   - Default
   - TransparentFX

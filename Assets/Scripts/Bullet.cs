@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
         if (collision.transform.GetComponent<Enemy>()) //osuu viholliseen
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
-            enemy.TakeDamage(totalProjectileDamage);
+            enemy.TakeDamage(totalProjectileDamage,false);
 
             Debug.Log("osuu vihuun!" + totalProjectileDamage);
         }
@@ -86,7 +86,7 @@ public class Bullet : MonoBehaviour
             {
                 if (SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
                 {
-                    enemy.GetComponent<Enemy>().TakeDamage(totalProjectileDamage);
+                    enemy.GetComponent<Enemy>().TakeDamage(totalProjectileDamage,false);
                 }
             }
         }
