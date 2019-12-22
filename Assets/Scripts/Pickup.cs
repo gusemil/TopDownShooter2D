@@ -8,12 +8,19 @@ public class Pickup : MonoBehaviour
 
     private PlayerController pc;
     private bool isPowerUpOn = false;
-    private float pickupDestroyTime = 5f;
+    private float pickupDestroyTime = 10f;
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
+    private Color pickupColor;
+
+    private void Start()
+    {
+        pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
+    }
 
     private void Update()
     {
+
         if (!isPickedUp)
         {
             pickupTimer += Time.deltaTime;
