@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     private float retreatDistance = 5f;
     private float playerEnemyDistance;
 
-    private bool isEnemyDead;
+    public bool isEnemyDead;
 
     private PlayerStats playerStats;
     private EnemyWaves enemyWaves;
@@ -87,16 +87,15 @@ public class Enemy : MonoBehaviour
 
         if (hp <= 0 && !isEnemyDead)
         {
-            DeathEffect();
-            enemyWaves.EnemiesAlive--;
-            isEnemyDead = true;
-
-            if(!isKilledByBomb)
+            if (!isKilledByBomb)
             {
                 gm.AddPoints(enemyPointValue);
                 ps.SpawnPickUpFromEnemy(this.gameObject);
             }
 
+            DeathEffect();
+            enemyWaves.EnemiesAlive--;
+            isEnemyDead = true;
             Destroy(gameObject);
         }
     }
@@ -117,11 +116,13 @@ public class Enemy : MonoBehaviour
         }
         else if (playerStats.IsShieldUp && !playerStats.IsGodModeUp)
         {
+            TakeDamage(hp, true);
             other.gameObject.GetComponent<PlayerController>().TurnOffShieldGraphic();
             other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();
             playerStats.IsShieldUp = false;
         } else
         {
+            TakeDamage(hp, true);
             playerStats.TakeDamage(damage);
         }
     }

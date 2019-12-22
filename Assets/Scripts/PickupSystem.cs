@@ -15,6 +15,7 @@ public class PickupSystem : MonoBehaviour
 
     private static List<GameObject> pickupList = new List<GameObject>();
     private const float pickupDropChance = 10f;
+    private GameManager gm;
 
     public List<GameObject> PickupList { get { return pickupList; } set { pickupList = value; } }
 
@@ -29,6 +30,8 @@ public class PickupSystem : MonoBehaviour
         pickupList.Add(shieldPreFab);
         pickupList.Add(infiniteAmmoPreFab);
         pickupList.Add(godModePreFab);
+
+        gm = GameManager.instance;
     }
 
     public void SpawnPickUpFromEnemy(GameObject enemy)
@@ -63,10 +66,23 @@ public class PickupSystem : MonoBehaviour
             Instantiate(pickupList[5], enemy.transform.position, Quaternion.identity); //shield
         } else if (random >= 92.5 && random < 97.5)
         {
-            Instantiate(pickupList[6], enemy.transform.position, Quaternion.identity); //infiniteAmmo
+            if(gm.EnemyWaves.Wave < 4)
+            {
+                Instantiate(pickupList[0], enemy.transform.position, Quaternion.identity); //point
+            } else
+            {
+                Instantiate(pickupList[6], enemy.transform.position, Quaternion.identity); //infiniteAmmo
+            }
         } else if (random >= 97.5 && random < 100)
         {
-            Instantiate(pickupList[7], enemy.transform.position, Quaternion.identity); //GodMode
+            if (gm.EnemyWaves.Wave < 8)
+            {
+                Instantiate(pickupList[1], enemy.transform.position, Quaternion.identity); //ammo
+            }
+            else
+            {
+                Instantiate(pickupList[7], enemy.transform.position, Quaternion.identity); //GodMode
+            }
         }
     }
 }

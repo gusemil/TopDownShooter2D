@@ -11,11 +11,11 @@ public class Pickup : MonoBehaviour
     private float pickupDestroyTime = 10f;
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
-    private Color pickupColor;
+    //private Color pickupColor;
 
     private void Start()
     {
-        pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
+        //pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 
     private void Update()

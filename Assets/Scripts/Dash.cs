@@ -31,7 +31,7 @@ public class Dash : MonoBehaviour
     {
         dashes = 4;
         maxDashes = 4;
-        dashRechargeTime = 4f;
+        dashRechargeTime = 2.5f;
         dashTimer = 0f;
         stats = GameManager.instance.PlayerStats;
 
