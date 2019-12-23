@@ -68,15 +68,13 @@ public class GameManager : MonoBehaviour
         points = 0;
         PointsMultiplier = 1;
         isGameOver = false;
-
-        uiManager = FindObjectOfType<UIManager>();
-        uiManager.UpdateScore(instance);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.UpdateScore(instance);
     }
 
     void OnGUI()
@@ -118,19 +116,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.R))
         {
-            if (pause.IsPause)
-            {
-                pause.TogglePause();
-            }
-            //uiManager.ToggleGameOverScreen(instance);
-            isGameOver = false;
-            enemyWaves.CrabSpawnTimer = 0;
-            enemyWaves.JumperSpawnTimer = 0;
-            enemyWaves.OctopusSpawnTimer = 0;
-
-            lives = 3;
-            playerStats = new PlayerStats(); //reset player stats
-            SceneManager.LoadScene(0);   
+            Restart();
         }
     }
 
@@ -180,6 +166,7 @@ public class GameManager : MonoBehaviour
             weaponSystem.Bomb();
             PlayerStats.Hp = 1;
             uiManager.UpdateScore(instance);
+        uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
 
         yield return new WaitForSeconds(respawnTime);
 
@@ -188,6 +175,24 @@ public class GameManager : MonoBehaviour
             playerObject.GetComponent<Collider2D>().enabled = true;
         playerStats.IsRespawning = false;
     }
+
+    private void Restart()
+    {
+        if (pause.IsPause)
+        {
+            pause.TogglePause();
+        }
+        //uiManager.ToggleGameOverScreen(instance);
+        isGameOver = false;
+        enemyWaves.CrabSpawnTimer = 0;
+        enemyWaves.JumperSpawnTimer = 0;
+        enemyWaves.OctopusSpawnTimer = 0;
+
+        lives = 3;
+        playerStats = new PlayerStats(); //reset player stats
+        SceneManager.LoadScene(0);
+    }
+
     
 
 }

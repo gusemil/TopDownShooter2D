@@ -54,14 +54,14 @@ public class PlayerController : MonoBehaviour
         pause = GameManager.instance.Pause;
         stats = GameManager.instance.PlayerStats;
 
-        uiManager = FindObjectOfType<UIManager>();
-        uiManager.UpdateWeaponText(weapon.CurrentWeapon);
-
         playerSize = transform.localScale;
         TurnOffShieldGraphic();
 
         minScreenSize = _camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
         maxScreenSize = _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.UpdateWeaponText(weapon.CurrentWeapon);
     }
 
     // Update is called once per frame
