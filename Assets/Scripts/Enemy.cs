@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour
     {
             PlayerStats playerStats = GameManager.instance.PlayerStats;
 
-        if (playerStats.IsGodModeUp)
+        if (playerStats.IsGodModeUp || playerStats.IsInvulnerable)
         {
             //do nothing
         }

@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
     private Color godModeColor = new Color(0.06f,0.92f,0.9f,1);
     private Color previousColor;
+    private UIManager uiManager;
 
     public Color OriginalColor { get { return originalColor; } }
     public Color HexDamageColor { get { return hexDamageColor; } }
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
         dash = GameManager.instance.Dash;
         pause = GameManager.instance.Pause;
         stats = GameManager.instance.PlayerStats;
+
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.UpdateWeaponText(weapon.CurrentWeapon);
 
         playerSize = transform.localScale;
         TurnOffShieldGraphic();
@@ -105,6 +109,36 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Dash());
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            weapon.ChangeWeapon(0);
+            uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            weapon.ChangeWeapon(1);
+            uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha3))
+        {
+            weapon.ChangeWeapon(2);
+            uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            weapon.ChangeWeapon(3);
+            uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha5))
+        {
+            weapon.ChangeWeapon(4);
+            uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+        }
     }
 
 
@@ -125,6 +159,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(weapon.CurrentWeapon.WeaponName);
 
+
         if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp || stats.IsGodModeUp)
         {
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
@@ -134,6 +169,7 @@ public class PlayerController : MonoBehaviour
             if (!stats.IsInfiniteAmmoUp && !stats.IsGodModeUp)
             {
                 weapon.LoseAmmo();
+                uiManager.UpdateWeaponText(weapon.CurrentWeapon);
             }
 
             if(weapon.CurrentWeapon.WeaponName == "shotgun")

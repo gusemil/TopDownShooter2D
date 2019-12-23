@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private EnemyWaves enemyWaves;
     private Dash dash;
     private PickupSystem pickupSystem;
+    private UIManager uiManager;
     private bool isGameOver;
     private int lives;
     private float gameTime = 0f;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public WeaponSystem WeaponSystem { get { return weaponSystem; } }
     public EnemyWaves EnemyWaves { get { return enemyWaves; } }
     public PickupSystem PickupSystem { get { return pickupSystem; } }
+    //public UIManager UIManager { get { return uiManager; } }
     public int Lives { get { return lives; } }
     public Dash Dash { get { return dash; } }
     public GameObject playerObject;
@@ -39,7 +41,8 @@ public class GameManager : MonoBehaviour
 
     public float GameTime { get { return gameTime; } }
     public int Points { get { return points; } set { points = value; } }
-    public int PointsMultiplier { get { return pointsMultiplier; } set { pointsMultiplier = value; } }
+    public int PointsMultiplier { get { return pointsMultiplier; }
+        set { pointsMultiplier = value; } }
 
     void Awake()
     {
@@ -59,12 +62,15 @@ public class GameManager : MonoBehaviour
         dash = new Dash();
         enemyWaves = new EnemyWaves();
         pickupSystem = new PickupSystem();
+        
         lives = 3;
         respawnTime = 1f;
         points = 0;
         PointsMultiplier = 1;
-
         isGameOver = false;
+
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.UpdateScore(instance);
     }
 
     // Start is called before the first frame update
@@ -103,7 +109,10 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                //pause.TogglePause();
+                //uiManager.ToggleGameOverScreen(instance);
                 pause.TogglePause();
+                uiManager.TogglePauseText(pause);
             }
         }
 
@@ -113,6 +122,7 @@ public class GameManager : MonoBehaviour
             {
                 pause.TogglePause();
             }
+            //uiManager.ToggleGameOverScreen(instance);
             isGameOver = false;
             enemyWaves.CrabSpawnTimer = 0;
             enemyWaves.JumperSpawnTimer = 0;
@@ -126,6 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+            uiManager.ShowGameOverScreen();
             isGameOver = true;
             GameManager.instance.Pause.TogglePause();
     }
@@ -134,10 +145,11 @@ public class GameManager : MonoBehaviour
     {
 
         lives--;
-        if (lives > 0)
+        if (lives >= 0)
         {
             Debug.Log("life lost" + lives);
             pointsMultiplier = 1;
+            uiManager.UpdateLives(instance);
             StartCoroutine(Respawn());
 
         } else
@@ -149,6 +161,7 @@ public class GameManager : MonoBehaviour
     public void AddPoints(int pointsToBeAdded)
     {
         points += pointsToBeAdded * pointsMultiplier;
+        uiManager.UpdateScore(instance);
     }
 
     private IEnumerator Respawn()
@@ -166,8 +179,9 @@ public class GameManager : MonoBehaviour
             weaponSystem.BombCount++;
             weaponSystem.Bomb();
             PlayerStats.Hp = 1;
+            uiManager.UpdateScore(instance);
 
-            yield return new WaitForSeconds(respawnTime);
+        yield return new WaitForSeconds(respawnTime);
 
             pc.MoveSpeed = originalSpeed;
             playerObject.GetComponent<SpriteRenderer>().enabled = true;

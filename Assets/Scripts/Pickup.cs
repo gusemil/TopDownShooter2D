@@ -12,10 +12,12 @@ public class Pickup : MonoBehaviour
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
     //private Color pickupColor;
+    private UIManager uiManager;
 
     private void Start()
     {
         //pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
@@ -92,7 +94,7 @@ public class Pickup : MonoBehaviour
 
     private void AmmoPack(WeaponSystem weapon)
     {
-        weapon.WeaponList[1].Ammo += 1000;
+        weapon.WeaponList[1].Ammo += 500;
         weapon.WeaponList[2].Ammo += 50;
         weapon.WeaponList[3].Ammo += 5;
         weapon.WeaponList[4].Ammo += 100;
@@ -104,6 +106,7 @@ public class Pickup : MonoBehaviour
     {
         GameManager gm = GameManager.instance;
         gm.PointsMultiplier += 1;
+        uiManager.UpdateScore(gm);
         Destroy(gameObject);
     }
 
