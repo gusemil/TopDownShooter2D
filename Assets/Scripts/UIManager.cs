@@ -26,8 +26,17 @@ public class UIManager : MonoBehaviour
     public Image dash3;
     public Image dash4;
 
+    public Image weaponIcon;
+
+    public Sprite pistolSprite;
+    public Sprite machinegunSprite;
+    public Sprite shotgunSprite;
+    public Sprite rocketlauncherSprite;
+    public Sprite flamethrowerSprite;
+
     public Image gameOverScreen;
     public Text gameOverText;
+    public Text restartText;
     public Text pauseText;
 
     // Start is called before the first frame update
@@ -40,10 +49,12 @@ public class UIManager : MonoBehaviour
 
         gameOverScreen.enabled = false;
         gameOverText.enabled = false;
+        restartText.enabled = false;
         pauseText.enabled = false;
 
         dash = GameManager.instance.Dash;
         currentDash = dash4;
+        weaponIcon.sprite = pistolSprite;
     }
 
     // Update is called once per frame
@@ -106,6 +117,26 @@ public class UIManager : MonoBehaviour
         ammoText.text = currentweapon.Ammo.ToString();
     }
 
+    public void UpdateWeaponImage(Weapon currentweapon)
+    {
+        if(currentweapon.WeaponName == "Pistol")
+        {
+            weaponIcon.sprite = pistolSprite;
+        } else if (currentweapon.WeaponName == "Machine Gun")
+        {
+            weaponIcon.sprite = machinegunSprite;
+        } else if (currentweapon.WeaponName == "Shotgun")
+        {
+            weaponIcon.sprite = shotgunSprite;
+        } else if (currentweapon.WeaponName == "Rocket Launcher")
+        {
+            weaponIcon.sprite = rocketlauncherSprite;
+        } else if (currentweapon.WeaponName == "Flamethrower")
+        {
+            weaponIcon.sprite = flamethrowerSprite;
+        }
+    }
+
     
     public void UpdatePointMultiplierText(GameManager gm)
     {
@@ -148,6 +179,7 @@ public class UIManager : MonoBehaviour
         }*/
         gameOverText.enabled = true;
         gameOverScreen.enabled = true;
+        restartText.enabled = true;
     }
 
     public void TogglePauseText(Pause pause)

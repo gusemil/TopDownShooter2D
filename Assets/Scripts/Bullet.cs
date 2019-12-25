@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         nameOfWeaponShot = weapon.CurrentWeapon.WeaponName;
         isProjectileAlive = true;
 
-        if (nameOfWeaponShot == "rocketlauncher")
+        if (nameOfWeaponShot == "Rocket Launcher")
         {
             transform.localScale = new Vector3(transform.localScale.x * 2f, transform.localScale.x * 6f, transform.localScale.x * 2f);
         }
@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
     {
         GameObject effect;
 
-        if (nameOfWeaponShot != "rocketlauncher")
+        if (nameOfWeaponShot != "Rocket Launcher")
         {
             effect = Instantiate(hitEffect, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
         } else

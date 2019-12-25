@@ -19,11 +19,11 @@ public class WeaponSystem : MonoBehaviour
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
     public int BombCount { get { return bombCount; } set { bombCount = value; } }
 
-    Weapon pistol = new Weapon("pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
-    Weapon machineGun = new Weapon("machinegun", 1, 20, 40f, 0.05f, 500, 0f, 2f);
-    Weapon shotgun = new Weapon("shotgun", 2, 200, 100f, 0.3f, 50, 5f, 3f);
-    Weapon rocketLauncher = new Weapon("rocketlauncher", 3, 500, 7f, 0.5f, 5, 12f, 5f);
-    Weapon flameThrower = new Weapon("flameThrower", 4, 50, 30f, 0.01f, 100, 2f, 0.3f);
+    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
+    Weapon machineGun = new Weapon("Machine Gun", 1, 20, 40f, 0.05f, 500, 0f, 2f);
+    Weapon shotgun = new Weapon("Shotgun", 2, 200, 100f, 0.3f, 50, 5f, 2f);
+    Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.5f, 5, 12f, 5f);
+    Weapon flameThrower = new Weapon("Flamethrower", 4, 50, 30f, 0.01f, 100, 2f, 0.3f);
 
 
 
@@ -105,7 +105,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void LoseAmmo()
     {
-        if (currentWeapon.Ammo > 0 && currentWeapon.WeaponName != "pistol")
+        if (currentWeapon.Ammo > 0 && currentWeapon.WeaponName != "Pistol")
         {
             currentWeapon.Ammo--;
         }

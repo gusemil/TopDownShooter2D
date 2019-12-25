@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float moveSpeed = 7.5f;
+    //private AudioSource gunSound;
     //private float dashTime = 0.2f; //0.2f
     //private float dashSpeed = 5f; //4f
     //private float dashInvulnerabilityDelay = 0.5f;
@@ -62,6 +63,9 @@ public class PlayerController : MonoBehaviour
 
         uiManager = FindObjectOfType<UIManager>();
         uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+        uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
+
+        //gunSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -115,30 +119,35 @@ public class PlayerController : MonoBehaviour
         {
             weapon.ChangeWeapon(0);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+            uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha2))
         {
             weapon.ChangeWeapon(1);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+            uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha3))
         {
             weapon.ChangeWeapon(2);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+            uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha4))
         {
             weapon.ChangeWeapon(3);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+            uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha5))
         {
             weapon.ChangeWeapon(4);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+            uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
     }
 
@@ -160,6 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp || stats.IsGodModeUp)
         {
+            //gunSound.Play();
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
@@ -168,9 +178,10 @@ public class PlayerController : MonoBehaviour
             {
                 weapon.LoseAmmo();
                 uiManager.UpdateWeaponText(weapon.CurrentWeapon);
+                uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
             }
 
-            if(weapon.CurrentWeapon.WeaponName == "shotgun")
+            if(weapon.CurrentWeapon.WeaponName == "Shotgun")
             {
                 GameObject bullet2 = Instantiate(bulletPreFab, firePoint2.position, firePoint2.rotation);
                 Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
