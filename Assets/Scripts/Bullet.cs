@@ -78,8 +78,6 @@ public class Bullet : MonoBehaviour
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
             enemy.TakeDamage(totalProjectileDamage,false);
-
-            Debug.Log("osuu vihuun!" + totalProjectileDamage);
         }
 
         //Splash damage

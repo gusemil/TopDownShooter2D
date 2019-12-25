@@ -12,12 +12,14 @@ public class Pickup : MonoBehaviour
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
     //private Color pickupColor;
+    private float powerupTimer;
     private UIManager uiManager;
 
     private void Start()
     {
         //pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
         uiManager = FindObjectOfType<UIManager>();
+        powerupTimer = powerUpDuration;
     }
 
     private void Update()
@@ -31,6 +33,12 @@ public class Pickup : MonoBehaviour
         if (pickupTimer >= pickupDestroyTime)
         {
             Destroy(gameObject);
+        }
+
+        if (isPowerUpOn)
+        {
+            powerupTimer -= Time.deltaTime;
+            //Debug.Log(powerupTimer);
         }
     }
 
@@ -106,7 +114,7 @@ public class Pickup : MonoBehaviour
     {
         GameManager gm = GameManager.instance;
         gm.PointsMultiplier += 1;
-        uiManager.UpdateScore(gm);
+        uiManager.UpdatePointMultiplierText(gm);
         Destroy(gameObject);
     }
 

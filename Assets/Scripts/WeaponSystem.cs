@@ -108,7 +108,6 @@ public class WeaponSystem : MonoBehaviour
         if (currentWeapon.Ammo > 0 && currentWeapon.WeaponName != "pistol")
         {
             currentWeapon.Ammo--;
-            Debug.Log(currentWeapon.WeaponName + " ammo count: " + currentWeapon.Ammo);
         }
 
         //uiManager.UpdateWeaponText(GameManager.instance.WeaponSystem.CurrentWeapon);

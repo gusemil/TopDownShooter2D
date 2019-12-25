@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
                 if (!stats.IsInfiniteDashUp && !stats.IsGodModeUp)
                 {
                     dash.ConsumeDash();
+                    //uiManager.UpdateDashes(dash);
                 }
 
                 StartCoroutine(Dash());
@@ -157,9 +158,6 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log(weapon.CurrentWeapon.WeaponName);
-
-
         if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp || stats.IsGodModeUp)
         {
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
@@ -255,7 +253,7 @@ public class PlayerController : MonoBehaviour
 
             //GetComponent<BoxCollider2D>().enabled = false;
             this.gameObject.layer = 11; //Dash Layer
-            yield return new WaitForSeconds(dash.DashTime);
+            yield return new WaitForSeconds(dash.DashingTime);
             this.gameObject.layer = 10; //Player Layer
             //GetComponent<BoxCollider2D>().enabled = true;
             rb2D.velocity = Vector2.zero;

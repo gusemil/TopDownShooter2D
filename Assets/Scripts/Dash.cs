@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour
 {
-    public static float dashTime = 0.2f; //0.2f
+    private UIManager uiManager;
+    public static float dashingTime = 0.2f; //0.2f
     public static float dashSpeed = 4.75f; //4f
     //private Color dashColor = new Color(0, 1, 0, 1);
     //public static float dashInvulnerabilityDelay = 0.5f;
@@ -22,7 +23,7 @@ public class Dash : MonoBehaviour
     public int Dashes { get { return dashes; } set { dashes = value; } }
     public float DashTimer { get { return dashTimer; } set { dashTimer = value; } }
     public float DashSpeed { get { return dashSpeed; } set { dashSpeed = value; } }
-    public float DashTime { get { return dashTime; } set { dashTime = value; } }
+    public float DashingTime { get { return dashingTime; } set { dashingTime = value; } }
     //public float DashInvulnerabilityDelay { get { return dashInvulnerabilityDelay; } set { dashInvulnerabilityDelay = value; } }
     public float DashRechargeTime { get { return dashRechargeTime; } set { dashRechargeTime = value; } }
 
@@ -34,10 +35,7 @@ public class Dash : MonoBehaviour
         dashRechargeTime = 2.5f;
         dashTimer = 0f;
         stats = GameManager.instance.PlayerStats;
-
-       // pc = playerObject.GetComponent<PlayerController>();
-
-        //Debug.Log("movespeed" + pc.MoveSpeed);
+        uiManager = FindObjectOfType<UIManager>();
     }
 
         // Update is called once per frame
@@ -58,6 +56,7 @@ public class Dash : MonoBehaviour
     {
         dashes++;
         dashTimer = 0;
+        uiManager.UpdateDashes(GameManager.instance.Dash);
     }
 
     public void ConsumeDash()
@@ -65,47 +64,6 @@ public class Dash : MonoBehaviour
         if(dashes > 0) 
         {
             dashes--;
-            //dashTimer = 0;
         }
     }
-
-    /*
-    public IEnumerator DashIENumerator()
-    {
-        PlayerStats player = GameManager.instance.PlayerStats;
-
-        player.IsDashing = true;
-        while (player.IsDashing)
-        {
-            //SetPreviousColor();
-            //ChangePlayerColor(dashColor);
-
-            if (Input.GetAxisRaw("Horizontal") > 0)
-                //movement.x +=  0.1f;
-                pc.rb2D.velocity = Vector2.right * dashSpeed;
-            else if (Input.GetAxisRaw("Horizontal") < 0)
-                //movement.x -= 0.1f;
-                pc.rb2D.velocity = Vector2.left * dashSpeed;
-
-            if (Input.GetAxisRaw("Vertical") > 0)
-                //movement.y += 0.1f;
-                pc.rb2D.velocity = Vector2.up * dashSpeed;
-            else if (Input.GetAxisRaw("Vertical") < 0)
-                //movement.y -= 0.1f;
-                pc.rb2D.velocity = Vector2.down * dashSpeed;
-
-            //GetComponent<BoxCollider2D>().enabled = false;
-            pc.gameObject.layer = 11; //Dash Layer
-            yield return new WaitForSeconds(dashTime);
-            pc.gameObject.layer = 10; //Player Layer
-            //GetComponent<BoxCollider2D>().enabled = true;
-            pc.rb2D.velocity = Vector2.zero;
-            player.IsDashing = false;
-            player.IsInvulnerable = true;
-            yield return new WaitForSeconds(dashInvulnerabilityDelay);
-            player.IsInvulnerable = false;
-            //ChangePlayerColor(previousColor);
-        } //while
-    } //method
-    */
 }

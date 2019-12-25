@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager = FindObjectOfType<UIManager>();
         uiManager.UpdateScore(instance);
+        uiManager.UpdatePointMultiplierText(instance);
     }
 
     void OnGUI()
@@ -133,8 +134,6 @@ public class GameManager : MonoBehaviour
         lives--;
         if (lives >= 0)
         {
-            Debug.Log("life lost" + lives);
-            pointsMultiplier = 1;
             uiManager.UpdateLives(instance);
             StartCoroutine(Respawn());
 
@@ -165,7 +164,14 @@ public class GameManager : MonoBehaviour
             weaponSystem.BombCount++;
             weaponSystem.Bomb();
             PlayerStats.Hp = 1;
-            uiManager.UpdateScore(instance);
+        playerStats.IsHexDamageUp = false;
+        playerStats.IsInfiniteAmmoUp = false;
+        playerStats.IsInfiniteDashUp = false;
+        playerStats.DamageMultiplier = 1;
+        pointsMultiplier = 1;
+        pc.ChangePlayerColor(pc.OriginalColor);
+
+        uiManager.UpdatePointMultiplierText(instance);
         uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
 
         yield return new WaitForSeconds(respawnTime);
@@ -190,9 +196,10 @@ public class GameManager : MonoBehaviour
 
         lives = 3;
         playerStats = new PlayerStats(); //reset player stats
+        weaponSystem.ChangeWeapon(0);
         SceneManager.LoadScene(0);
     }
 
-    
+
 
 }
