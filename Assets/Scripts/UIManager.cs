@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
 
         if (dash.Dashes == 3)
         {
-            //dash4.fillAmount = 0f;
+            dash4.fillAmount = 0f;
             currentDash = dash4;
         } else if (dash.Dashes == 2)
         {
@@ -76,29 +76,13 @@ public class UIManager : MonoBehaviour
         } else if (dash.Dashes == 0)
         {
             dash2.fillAmount = 0f;
+
             currentDash = dash1;
         }
 
 
         DashUIUpdate(currentDash);
 
-        /*
-         * if (timerOn)
-    {
-        timer = timer - Time.deltaTime;
-        Debug.Log("Timer" + timer);
-
-        // Radial Fill
-        radialImage.fillAmount = timer / startTime;
-
-        if (timer <= 0)
-        {
-            timer = startTime;
-            timerOn = false;
-            radialImage.fillAmount = 0f;
-        }
-         * 
-         */
     }
 
     private void DashUIUpdate(Image currentDash)
@@ -106,9 +90,11 @@ public class UIManager : MonoBehaviour
         //dash timer stuff
         currentDash.fillAmount = dash.DashTimer / dash.DashRechargeTime;
 
-        Debug.Log(dash.DashTimer / dash.DashRechargeTime);
+        //Debug.Log(dash.DashTimer / dash.DashRechargeTime);
 
-        if (Dash.dashTimer <= 0)
+        //Debug.Log(dash.DashTimer);
+
+        if ( (dash.DashTimer <= 0) || dash.DashTimer >= dash.DashRechargeTime - 0.02f)
         {
             currentDash.fillAmount = 1f;
         }
@@ -148,53 +134,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateDashes(Dash dash)
-    {
-        
-        if(dash.Dashes == 3)
-        {
-            dash4.fillAmount = 0f;
-
-            dash4.enabled = true;
-            dash3.enabled = true;
-            dash2.enabled = true;
-            dash1.enabled = true;
-        }
-        else if (dash.Dashes == 2)
-        {
-            dash3.fillAmount = 0f;
-
-            dash4.enabled = false;
-            dash3.enabled = true;
-            dash2.enabled = true;
-            dash1.enabled = true;
-        }
-        else if (dash.Dashes == 1)
-        {
-            dash2.fillAmount = 0f;
-
-            dash4.enabled = false;
-            dash3.enabled = false;
-            dash2.enabled = true;
-            dash1.enabled = true;
-        }
-        else if (dash.Dashes <= 0)
-        {
-            dash1.fillAmount = 0f;
-
-            dash4.enabled = false;
-            dash3.enabled = false;
-            dash2.enabled = false;
-            dash1.enabled = true;
-        } else
-        {
-            dash4.enabled = true;
-            dash3.enabled = true;
-            dash2.enabled = true;
-            dash1.enabled = true;
-        }
-        
-    }
 
     public void ShowGameOverScreen()
     {

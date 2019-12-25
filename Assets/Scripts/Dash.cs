@@ -56,7 +56,7 @@ public class Dash : MonoBehaviour
     {
         dashes++;
         dashTimer = 0;
-        uiManager.UpdateDashes(GameManager.instance.Dash);
+        //uiManager.UpdateDashes(GameManager.instance.Dash);
     }
 
     public void ConsumeDash()
