@@ -197,8 +197,13 @@ public class GameManager : MonoBehaviour
         enemyWaves.OctopusSpawnTimer = 0;
 
         lives = 3;
+        weaponSystem.BombCount = 1;
         playerStats = new PlayerStats(); //reset player stats
         weaponSystem.ChangeWeapon(0);
+        uiManager.UpdatePointMultiplierText(instance);
+        uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
+        uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
+        uiManager.UpdateBombText(weaponSystem);
         SceneManager.LoadScene(0);
     }
 

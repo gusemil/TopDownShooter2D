@@ -44,6 +44,10 @@ public class UIManager : MonoBehaviour
     public Text restartText;
     public Text pauseText;
 
+    public Text waveText;
+
+    private float waveTextDuration = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,10 +62,13 @@ public class UIManager : MonoBehaviour
         gameOverPointsAmount.enabled = false;
         restartText.enabled = false;
         pauseText.enabled = false;
+        waveText.enabled = false;
 
         dash = GameManager.instance.Dash;
         currentDash = dash4;
         weaponIcon.sprite = pistolSprite;
+
+        StartCoroutine(ShowWaveText(GameManager.instance.EnemyWaves));
     }
 
     // Update is called once per frame
@@ -196,6 +203,15 @@ public class UIManager : MonoBehaviour
 
         gameOverPointsAmount.text = GameManager.instance.Points.ToString();
     }
+
+    public IEnumerator ShowWaveText(EnemyWaves ew)
+    {
+            waveText.enabled = true;
+            waveText.text = "Wave " + ew.Wave;
+            yield return new WaitForSeconds(waveTextDuration);
+            waveText.enabled = false;
+    }
+
 
     public void TogglePauseText(Pause pause)
     {

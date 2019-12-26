@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Fire2") && !pause.IsPause) //mouse2
+        if (Input.GetButtonUp("Fire2") && !pause.IsPause && !stats.IsRespawning) //mouse2
         {
             if (weapon.BombCount > 0)
             {
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             GodMode();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && !pause.IsPause)
+        if (Input.GetKeyUp(KeyCode.Space) && !pause.IsPause && !stats.IsRespawning)
         {
             if(dash.Dashes > 0 || stats.IsInfiniteDashUp || stats.IsGodModeUp)
             {
