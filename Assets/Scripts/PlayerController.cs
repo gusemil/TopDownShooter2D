@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         uiManager.UpdateWeaponText(weapon.CurrentWeapon);
         uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
+        uiManager.UpdateBombText(weapon);
 
         //gunSound = GetComponent<AudioSource>();
     }
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour
             }
 
             weapon.Bomb();
+            uiManager.UpdateBombText(weapon);
         }
 
         if (Input.GetKeyUp(KeyCode.G))

@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     public Text pointsMultiplierText;
     public Text scoreText;
 
+    public Image bomb;
+    public Text bombText;
+
     public Image life1;
     public Image life2;
     public Image life3;
@@ -36,6 +39,8 @@ public class UIManager : MonoBehaviour
 
     public Image gameOverScreen;
     public Text gameOverText;
+    public Text gameOverPointsText;
+    public Text gameOverPointsAmount;
     public Text restartText;
     public Text pauseText;
 
@@ -49,6 +54,8 @@ public class UIManager : MonoBehaviour
 
         gameOverScreen.enabled = false;
         gameOverText.enabled = false;
+        gameOverPointsText.enabled = false;
+        gameOverPointsAmount.enabled = false;
         restartText.enabled = false;
         pauseText.enabled = false;
 
@@ -137,12 +144,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateBombText(WeaponSystem ws)
+    {
+        bombText.text = "x" + ws.BombCount.ToString();
+    }
+
     
     public void UpdatePointMultiplierText(GameManager gm)
     {
         pointsMultiplierText.text = "X" + gm.PointsMultiplier.ToString();
     }
-    
 
     public void UpdateScore(GameManager gm)
     {
@@ -180,6 +191,10 @@ public class UIManager : MonoBehaviour
         gameOverText.enabled = true;
         gameOverScreen.enabled = true;
         restartText.enabled = true;
+        gameOverPointsText.enabled = true;
+        gameOverPointsAmount.enabled = true;
+
+        gameOverPointsAmount.text = GameManager.instance.Points.ToString();
     }
 
     public void TogglePauseText(Pause pause)

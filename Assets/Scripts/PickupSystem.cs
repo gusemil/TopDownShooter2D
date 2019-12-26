@@ -66,23 +66,11 @@ public class PickupSystem : MonoBehaviour
             Instantiate(pickupList[5], enemy.transform.position, Quaternion.identity); //shield
         } else if (random >= 92.5 && random < 97.5)
         {
-            if(gm.EnemyWaves.Wave < 4)
-            {
-                Instantiate(pickupList[0], enemy.transform.position, Quaternion.identity); //point
-            } else
-            {
                 Instantiate(pickupList[6], enemy.transform.position, Quaternion.identity); //infiniteAmmo
-            }
+
         } else if (random >= 97.5 && random < 100)
         {
-            if (gm.EnemyWaves.Wave < 8)
-            {
-                Instantiate(pickupList[1], enemy.transform.position, Quaternion.identity); //ammo
-            }
-            else
-            {
                 Instantiate(pickupList[7], enemy.transform.position, Quaternion.identity); //GodMode
-            }
         }
     }
 }

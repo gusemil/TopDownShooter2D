@@ -97,15 +97,18 @@ public class Pickup : MonoBehaviour
     private void BombPack(WeaponSystem weapon)
     {
         weapon.BombCount++;
+        uiManager.UpdateBombText(weapon);
         Destroy(gameObject);
     }
 
     private void AmmoPack(WeaponSystem weapon)
     {
+        GameManager gm = GameManager.instance;
         weapon.WeaponList[1].Ammo += 500;
         weapon.WeaponList[2].Ammo += 50;
         weapon.WeaponList[3].Ammo += 5;
         weapon.WeaponList[4].Ammo += 100;
+        uiManager.UpdatePointMultiplierText(gm);
 
         Destroy(gameObject);
     }

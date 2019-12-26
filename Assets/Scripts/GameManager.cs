@@ -174,6 +174,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdatePointMultiplierText(instance);
         uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
         uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
+        uiManager.UpdateBombText(weaponSystem);
 
         yield return new WaitForSeconds(respawnTime);
 
