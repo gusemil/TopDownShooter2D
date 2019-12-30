@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
         points = 0;
         PointsMultiplier = 1;
         isGameOver = false;
+        Time.timeScale = 1;
+        //pause.IsPause = false
+        //Time.timeScale
     }
 
     // Start is called before the first frame update
