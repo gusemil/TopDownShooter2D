@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    private Pickup pickup;
     public float powerUpDuration;
 
     private PlayerController pc;
@@ -12,14 +13,23 @@ public class Pickup : MonoBehaviour
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
     //private Color pickupColor;
-    private float powerupTimer;
+    private float powerUpTimer;
+    private string powerUpName;
     private UIManager uiManager;
+
+    //private List<Pickup> powerUpList = new List<Pickup>();
+
+    //public List<Pickup> PowerUpList { get { return powerUpList; } set { powerUpList = value; } }
+
+    //public float PowerUpTimer { get { return powerUpTimer; } }
+    //public string PowerUpName { get { return powerUpName; } }
 
     private void Start()
     {
         //pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
         uiManager = FindObjectOfType<UIManager>();
-        powerupTimer = powerUpDuration;
+        powerUpTimer = powerUpDuration;
+        //pickup = new Pickup();
     }
 
     private void Update()
@@ -35,9 +45,10 @@ public class Pickup : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (isPowerUpOn)
+        if (isPowerUpOn) 
         {
-            powerupTimer -= Time.deltaTime;
+            powerUpTimer -= Time.deltaTime;
+           // uiManager.UpdatePowerUpText(powerUpTimer, powerUpName);
             //Debug.Log(powerupTimer);
         }
     }
@@ -50,6 +61,7 @@ public class Pickup : MonoBehaviour
         {
             PlayerStats playerStats = GameManager.instance.PlayerStats;
             WeaponSystem weapon = GameManager.instance.WeaponSystem;
+
 
             if (gameObject.tag == "HexDamage" && !playerStats.IsHexDamageUp)
             {
@@ -135,6 +147,11 @@ public class Pickup : MonoBehaviour
         isPowerUpOn = true;
         pc = playerCollider.GetComponent<PlayerController>();
 
+        powerUpName = gameObject.tag;
+       // powerUpList.Add(pickup);
+
+        
+
         if (gameObject.tag == "HexDamage")
         {
             player.IsHexDamageUp = true;
@@ -200,6 +217,7 @@ public class Pickup : MonoBehaviour
             Destroy(gameObject);
         }
 
+       // powerUpList.Remove(pickup);
     }
 
     private void RemoveGraphicsAndCollider()

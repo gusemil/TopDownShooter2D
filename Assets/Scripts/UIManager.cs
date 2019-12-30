@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -46,7 +47,12 @@ public class UIManager : MonoBehaviour
 
     public Text waveText;
 
-    private float waveTextDuration = 5f;
+    public Text powerUpText1;
+    public Text powerUpText2;
+    public Text powerUpText3;
+    public Text powerUpText4;
+
+    private float waveTextDuration = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +69,11 @@ public class UIManager : MonoBehaviour
         restartText.enabled = false;
         pauseText.enabled = false;
         waveText.enabled = false;
+
+        powerUpText1.enabled = true;
+        powerUpText2.enabled = false;
+        powerUpText3.enabled = false;
+        powerUpText4.enabled = false;
 
         dash = GameManager.instance.Dash;
         currentDash = dash4;
@@ -123,6 +134,22 @@ public class UIManager : MonoBehaviour
         {
             currentDash.fillAmount = 1f;
         }
+    }
+
+    public void UpdatePowerUpText(float timer, string powerUpName)
+    {
+        //Math.Round(timer,2);
+       // if(powerUpText1.enabled)
+        //{
+            powerUpText1.text = Math.Round(timer).ToString() + " " + powerUpName;
+       // }
+        /*
+        else if(powerUpText1.enabled && !powerUpText2.enabled)
+        {
+            powerUpText2.enabled = true;
+            powerUpText2.text = Math.Round(timer).ToString() + " " + powerUpName;
+        }
+        */
     }
 
     public void UpdateWeaponText(Weapon currentweapon)
