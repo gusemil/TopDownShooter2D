@@ -101,12 +101,36 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
+        if (Input.GetKeyDown(KeyCode.Escape) && (pause.IsPause))
+        {
+            //pause.TogglePause();
+            //uiManager.ToggleGameOverScreen(instance);
+            pause.TogglePause();
+            SceneManager.LoadScene("MainMenu");
+        }
+
         if (!isGameOver)
         {
             gameTime += Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !pause.IsPause)
+            {
+                //pause.TogglePause();
+                //uiManager.ToggleGameOverScreen(instance);
+                pause.TogglePause();
+                uiManager.TogglePauseText(pause);
+            }
+
+            /*
+            else if (Input.GetKeyDown(KeyCode.Escape) && isGameOver)
+            {
+                //pause.TogglePause();
+                SceneManager.LoadScene("MainMenu");
+            }
+            */
+
+            else if (Input.GetKeyDown(KeyCode.Space) && pause.IsPause)
             {
                 //pause.TogglePause();
                 //uiManager.ToggleGameOverScreen(instance);
@@ -204,7 +228,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
         uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
         uiManager.UpdateBombText(weaponSystem);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
 

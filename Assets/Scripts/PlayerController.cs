@@ -99,11 +99,6 @@ public class PlayerController : MonoBehaviour
             uiManager.UpdateBombText(weapon);
         }
 
-        if (Input.GetKeyUp(KeyCode.G))
-        {
-            GodMode();
-        }
-
         if (Input.GetKeyUp(KeyCode.Space) && !pause.IsPause && !stats.IsRespawning)
         {
             if(dash.Dashes > 0 || stats.IsInfiniteDashUp || stats.IsGodModeUp)
@@ -198,24 +193,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
-    private void GodMode()
-    {
-        if (stats.IsInvulnerable == false)
-        {
-            stats.IsInvulnerable = true;
-            moveSpeed = 20f;
-            GetComponent<SpriteRenderer>().color = new Color(0, 0, 1);
-            this.gameObject.layer = 11;
-
-            weapon.WeaponList[1].Ammo += 10000;
-            weapon.WeaponList[2].Ammo += 10000;
-            weapon.WeaponList[3].Ammo += 10000;
-            weapon.WeaponList[4].Ammo += 10000;
-        }
-    }
-
-    
 
 
     public void ChangePlayerColor(Color color)

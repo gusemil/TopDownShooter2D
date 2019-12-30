@@ -43,6 +43,8 @@ public class UIManager : MonoBehaviour
     public Text gameOverPointsText;
     public Text gameOverPointsAmount;
     public Text restartText;
+
+    public GameObject pauseMenu;
     public Text pauseText;
 
     public Text waveText;
@@ -67,13 +69,15 @@ public class UIManager : MonoBehaviour
         gameOverPointsText.enabled = false;
         gameOverPointsAmount.enabled = false;
         restartText.enabled = false;
-        pauseText.enabled = false;
         waveText.enabled = false;
 
         powerUpText1.enabled = true;
         powerUpText2.enabled = false;
         powerUpText3.enabled = false;
         powerUpText4.enabled = false;
+
+        pauseMenu.SetActive(false);
+        //pauseText.enabled = false;
 
         dash = GameManager.instance.Dash;
         currentDash = dash4;
@@ -246,11 +250,11 @@ public class UIManager : MonoBehaviour
         {
             if (!gameOverText.enabled)
             {
-                pauseText.enabled = true;
+                pauseMenu.SetActive(true);
             }
         } else
         {
-            pauseText.enabled = false;
+            pauseMenu.SetActive(false);
         }
     }
 }

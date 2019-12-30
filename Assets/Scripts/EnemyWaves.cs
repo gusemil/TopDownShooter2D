@@ -18,7 +18,7 @@ public class EnemyWaves : MonoBehaviour
     private static int wave;
     private float waveSpawnDelay = -5f;
 
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private UIManager uiManager;
 
     public GameObject spawnNorth;
@@ -61,7 +61,7 @@ public class EnemyWaves : MonoBehaviour
         enemiesPerWave = 20;
         enemiesAlive = 0;
         isSpawningPaused = false;
-        gameManager = GameManager.instance;
+        //gameManager = GameManager.instance;
         uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -145,12 +145,12 @@ public class EnemyWaves : MonoBehaviour
     
     public void NextWave()
     {
-            wave++;
-        StartCoroutine(uiManager.ShowWaveText(gameManager.EnemyWaves));
+        isSpawningPaused = false;
+        wave++;
+        StartCoroutine(uiManager.ShowWaveText(GameManager.instance.EnemyWaves));
             crabSpawnTimer = waveSpawnDelay;
             jumperSpawnTimer = waveSpawnDelay;
             octopusSpawnTimer = waveSpawnDelay;
-            isSpawningPaused = false;
 
         if (crabSpawnRate > 0.1f)
             crabSpawnRate -= 0.1f;
