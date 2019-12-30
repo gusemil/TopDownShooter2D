@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         uiManager.UpdateScore(instance);
         uiManager.UpdatePointMultiplierText(instance);
+
+        Debug.Log(SceneChangeManager.instance.CurrentLevel);
     }
 
     void OnGUI()
