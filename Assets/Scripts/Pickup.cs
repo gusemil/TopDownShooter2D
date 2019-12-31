@@ -115,11 +115,31 @@ public class Pickup : MonoBehaviour
 
     private void AmmoPack(WeaponSystem weapon)
     {
+        /*
+         * GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(500,true);
+            }
+         */
+
         GameManager gm = GameManager.instance;
-        weapon.WeaponList[1].Ammo += 500;
-        weapon.WeaponList[2].Ammo += 50;
-        weapon.WeaponList[3].Ammo += 5;
-        weapon.WeaponList[4].Ammo += 100;
+
+        /*
+        weapon.WeaponList[0].Ammo += weapon.WeaponList[0].AmmoFromPickup;
+        weapon.WeaponList[1].Ammo += weapon.WeaponList[1].AmmoFromPickup;
+        weapon.WeaponList[2].Ammo += weapon.WeaponList[2].AmmoFromPickup;
+        weapon.WeaponList[3].Ammo += weapon.WeaponList[3].AmmoFromPickup;
+        weapon.WeaponList[4].Ammo += weapon.WeaponList[4].AmmoFromPickup;
+        */
+
+        for(int i=0; i < weapon.WeaponList.Count; i++)
+        {
+            weapon.WeaponList[i].Ammo += weapon.WeaponList[i].AmmoFromPickup;
+
+        }
+
         uiManager.UpdatePointMultiplierText(gm);
 
         Destroy(gameObject);

@@ -134,14 +134,15 @@ public class PlayerController : MonoBehaviour
             uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha4))
+
+            if (Input.GetKeyUp(KeyCode.Alpha4) && LevelManager.instance.CurrentLevel >= 2)
         {
             weapon.ChangeWeapon(3);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
             uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha5))
+        if (Input.GetKeyUp(KeyCode.Alpha5) && LevelManager.instance.CurrentLevel >= 3)
         {
             weapon.ChangeWeapon(4);
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);

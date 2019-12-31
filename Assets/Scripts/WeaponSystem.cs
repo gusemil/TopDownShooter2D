@@ -19,11 +19,11 @@ public class WeaponSystem : MonoBehaviour
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
     public int BombCount { get { return bombCount; } set { bombCount = value; } }
 
-    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f); //name, number, dmg, force, fireRate, ammo, radius, lifetime
-    Weapon machineGun = new Weapon("Machine Gun", 1, 20, 40f, 0.05f, 500, 0f, 2f);
-    Weapon shotgun = new Weapon("Shotgun", 2, 200, 100f, 0.3f, 50, 5f, 2f);
-    Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.5f, 5, 12f, 5f);
-    Weapon flameThrower = new Weapon("Flamethrower", 4, 50, 30f, 0.01f, 100, 2f, 0.3f);
+    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f, 0); //name, number, dmg, force, fireRate, ammo, radius, lifetime
+    Weapon machineGun = new Weapon("Machine Gun", 1, 20, 40f, 0.05f, 500, 0f, 2f, 500);
+    Weapon shotgun = new Weapon("Shotgun", 2, 200, 100f, 0.3f, 50, 5f, 2f, 50);
+    Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.5f, 5, 12f, 5f, 5);
+    Weapon flameThrower = new Weapon("Flamethrower", 4, 50, 30f, 0.01f, 100, 2f, 0.3f, 100);
 
 
 
@@ -35,8 +35,16 @@ public class WeaponSystem : MonoBehaviour
         weaponList.Add(pistol);
         weaponList.Add(machineGun);
         weaponList.Add(shotgun);
-        WeaponList.Add(rocketLauncher);
-        WeaponList.Add(flameThrower);
+
+        if(LevelManager.instance.CurrentLevel >= 2)
+        {
+            WeaponList.Add(rocketLauncher);
+        }
+
+        if(LevelManager.instance.CurrentLevel >= 3)
+        {
+            WeaponList.Add(flameThrower);
+        }
 
         weaponIndex = 0;
         currentWeapon = weaponList[0];

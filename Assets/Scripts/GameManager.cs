@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     void OnGUI()
     {
+        /*
         GUI.Label(new Rect(20, 10, 200, 20), "Pistol (1) " + weaponSystem.WeaponList[0].Ammo);
         GUI.Label(new Rect(20, 30, 200, 20), "Machine Gun (2) " + weaponSystem.WeaponList[1].Ammo);
         GUI.Label(new Rect(20, 50, 200, 20), "Shotgun (3) " + weaponSystem.WeaponList[2].Ammo);
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
         GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
         GUI.Label(new Rect(20, 390, 200, 40), "Points: " + points);
+        */
         GUI.Label(new Rect(20, 470, 200, 40), "HexDamageOn " + playerStats.IsHexDamageUp);
         GUI.Label(new Rect(20, 490, 200, 40), "InfiniteAmmoOn: " + playerStats.IsInfiniteAmmoUp);
         GUI.Label(new Rect(20, 510, 200, 40), "PointsMultiplier " + pointsMultiplier);

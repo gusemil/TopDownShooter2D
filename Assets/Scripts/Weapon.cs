@@ -12,6 +12,7 @@ public class Weapon
     private int _ammo;
     private float _splashDamageRadius;
     private float _projectileLifeTime;
+    private int _ammoFromPickup;
 
     //public string WeaponName { get ; set ;}
     public string WeaponName { get { return _weaponName; } set { _weaponName = value; } }
@@ -22,8 +23,9 @@ public class Weapon
     public int Ammo { get { return _ammo; } set { _ammo = value; } }
     public float SplashDamageRadius { get { return _splashDamageRadius; } set { _splashDamageRadius = value; } }
     public float ProjectileLifeTime { get { return _projectileLifeTime; } set { _projectileLifeTime = value; } }
+    public int AmmoFromPickup { get { return _ammoFromPickup; } set { _ammoFromPickup = value; } }
 
-    public Weapon(string weaponName, int weaponNumber, int weaponDamage, float bulletForce, float fireCoolDown, int ammo, float splashDamageRadius, float projectileLifeTime)
+    public Weapon(string weaponName, int weaponNumber, int weaponDamage, float bulletForce, float fireCoolDown, int ammo, float splashDamageRadius, float projectileLifeTime, int ammoFromPickup)
     {
         _weaponName = weaponName;
         _weaponNumber = weaponNumber;
@@ -33,6 +35,7 @@ public class Weapon
         _ammo = ammo;
         _splashDamageRadius = splashDamageRadius;
         _projectileLifeTime = projectileLifeTime;
+        _ammoFromPickup = ammoFromPickup;
     }
 
 }
