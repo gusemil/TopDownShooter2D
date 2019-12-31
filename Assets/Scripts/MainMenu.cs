@@ -22,25 +22,25 @@ public class MainMenu : MonoBehaviour
 
     public void PlayLevel1()
     {
-        SceneChangeManager.instance.CurrentLevel = 1;
+        LevelManager.instance.CurrentLevel = 1;
         SceneManager.LoadScene(1);
     }
 
     public void PlayLevel2()
     {
-        SceneChangeManager.instance.CurrentLevel = 2;
+        LevelManager.instance.CurrentLevel = 2;
         SceneManager.LoadScene(1);
     }
 
     public void PlayLevel3()
     {
-        SceneChangeManager.instance.CurrentLevel = 3;
+        LevelManager.instance.CurrentLevel = 3;
         SceneManager.LoadScene(1);
     }
 
     public void PlayEndlessMode()
     {
-        SceneChangeManager.instance.CurrentLevel = 4;
+        LevelManager.instance.CurrentLevel = 4;
         SceneManager.LoadScene(1);
     }
 

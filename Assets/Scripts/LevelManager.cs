@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChangeManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
 
-    public static SceneChangeManager instance;
+    public static LevelManager instance;
 
     private int currentLevel;
     private string currentSceneName;

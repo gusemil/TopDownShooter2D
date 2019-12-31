@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private float respawnTime;
     private int points;
     private int pointsMultiplier;
+    private bool levelComplete;
 
     public static GameManager instance; //singleton pattern
     public PlayerStats PlayerStats { get { return playerStats; } }
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     }
 
     public float GameTime { get { return gameTime; } }
+    public bool LevelComplete { get { return levelComplete; } }
     public int Points { get { return points; } set { points = value; } }
     public int PointsMultiplier { get { return pointsMultiplier; }
         set { pointsMultiplier = value; } }
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
         PointsMultiplier = 1;
         isGameOver = false;
         Time.timeScale = 1;
+        levelComplete = false;
         //pause.IsPause = false
         //Time.timeScale
     }
@@ -80,7 +83,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateScore(instance);
         uiManager.UpdatePointMultiplierText(instance);
 
-        Debug.Log(SceneChangeManager.instance.CurrentLevel);
+        Debug.Log(LevelManager.instance.CurrentLevel);
     }
 
     void OnGUI()
@@ -234,6 +237,17 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
         uiManager.UpdateBombText(weaponSystem);
         SceneManager.LoadScene(1);
+    }
+
+    public IEnumerator CompleteLevel()
+    {
+        Debug.Log("winner is you");
+        levelComplete = true;
+        StartCoroutine(uiManager.ShowLevelCompleteText(enemyWaves));
+        //pause.TogglePause();
+        yield return new WaitForSeconds(4f);
+        //pause.TogglePause();
+        GameOver();
     }
 
 

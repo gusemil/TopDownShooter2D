@@ -226,11 +226,16 @@ public class UIManager : MonoBehaviour
         {
             gameOverScreen.enabled = false;
         }*/
-        gameOverText.enabled = true;
         gameOverScreen.enabled = true;
+        gameOverText.enabled = true;
         restartText.enabled = true;
         gameOverPointsText.enabled = true;
         gameOverPointsAmount.enabled = true;
+
+        if (GameManager.instance.LevelComplete)
+        {
+            gameOverText.text = "LEVEL COMPLETE";
+        }
 
         gameOverPointsAmount.text = GameManager.instance.Points.ToString();
     }
@@ -241,6 +246,14 @@ public class UIManager : MonoBehaviour
             waveText.text = "Wave " + ew.Wave;
             yield return new WaitForSeconds(waveTextDuration);
             waveText.enabled = false;
+    }
+
+    public IEnumerator ShowLevelCompleteText(EnemyWaves ew)
+    {
+        waveText.enabled = true;
+        waveText.text = "Level Complete!";
+        yield return new WaitForSeconds(waveTextDuration);
+        waveText.enabled = false;
     }
 
 
