@@ -14,6 +14,7 @@ public class SceneChangeManager : MonoBehaviour
     public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
     public string CurrentSceneName { get { return currentSceneName; } set { currentSceneName = value; } }
 
+
     private void Awake()
     {
         if (instance == null) //jos status olio ei ole olemassa
@@ -32,7 +33,7 @@ public class SceneChangeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

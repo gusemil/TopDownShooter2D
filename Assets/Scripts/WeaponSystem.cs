@@ -135,10 +135,12 @@ public class WeaponSystem : MonoBehaviour
 
             LoseBomb();
 
+            /*
             if (ew.IsSpawningPaused && ew.EnemiesAlive == 0 && ew.EnemiesSpawned == 0)
             {
                 ew.NextWave();
             }
+            */
         }
     }
 
