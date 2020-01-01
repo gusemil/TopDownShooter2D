@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minScreenSize.x + playerSize.x, maxScreenSize.x - playerSize.x), Mathf.Clamp(transform.position.y, minScreenSize.y + playerSize.y, maxScreenSize.y - playerSize.y), transform.position.z);
 
         Vector2 lookDir = mousePosition - rb2D.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg; //rotaatiosetit: Miten kierretään hahmoa että osoitetaan mousepositioon
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg -90f; //rotaatiosetit: Miten kierretään hahmoa että osoitetaan mousepositioon
         rb2D.rotation = angle;
     }
 

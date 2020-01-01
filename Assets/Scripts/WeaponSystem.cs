@@ -157,7 +157,6 @@ public class WeaponSystem : MonoBehaviour
         if (bombCount > 0)
         {
             BombCount--;
-            Debug.Log(bombCount + " Bombs");
         }
     }
 
