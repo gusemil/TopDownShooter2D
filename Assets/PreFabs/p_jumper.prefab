@@ -103,7 +103,9 @@ MonoBehaviour:
   isEnemyDead: 0
   deathAnimation: {fileID: 5848963444842268848, guid: cf1c5bfaba30b5749a8b8288ab87cd43,
     type: 3}
-  bloodEffect: {fileID: 2421003953003174239, guid: 2cc4690e8569b8341a7c4e2bfbe54d1a,
+  bloodParticleEffect: {fileID: 2421003953003174239, guid: 2cc4690e8569b8341a7c4e2bfbe54d1a,
+    type: 3}
+  bloodSplatter: {fileID: 4671361724221970975, guid: 41d99770b761e8045a370dcc54dcb773,
     type: 3}
 --- !u!50 &992120344103593087
 Rigidbody2D:

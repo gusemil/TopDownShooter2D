@@ -27,7 +27,8 @@ public class Enemy : MonoBehaviour
     private PickupSystem ps;
 
     public GameObject deathAnimation;
-    public GameObject bloodEffect;
+    public GameObject bloodParticleEffect;
+    public GameObject bloodSplatter;
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +105,8 @@ public class Enemy : MonoBehaviour
     private void DeathEffect()
     {
         GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
-        GameObject blood = Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        GameObject burst = Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
+        GameObject splatter = Instantiate(bloodSplatter, transform.position, Quaternion.identity);
         Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
     }
 
