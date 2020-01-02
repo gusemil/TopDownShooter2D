@@ -147,5 +147,8 @@ MonoBehaviour:
   moveSpeed: 5
   enemyPointValue: 500
   shooterEnemy: 0
+  isEnemyDead: 0
   deathAnimation: {fileID: 5848963444842268848, guid: cf1c5bfaba30b5749a8b8288ab87cd43,
+    type: 3}
+  bloodEffect: {fileID: 2421003953003174239, guid: 2cc4690e8569b8341a7c4e2bfbe54d1a,
     type: 3}
