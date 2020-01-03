@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponSystem : MonoBehaviour
 {
+    //public static WeaponSystem instance;
+
     private int weaponIndex;
     private float bombSpawnDelay = -1f;
     private PlayerStats stats;
@@ -157,6 +159,17 @@ public class WeaponSystem : MonoBehaviour
         if (bombCount > 0)
         {
             BombCount--;
+        }
+    }
+
+    public void PlayWeaponSound()
+    {
+        Debug.Log("Current weapon" + currentWeapon.WeaponName);
+        if(currentWeapon.WeaponName == "Pistol")
+            AudioManager.instance.PlaySound(0);
+        else if(currentWeapon.WeaponName == "Rocket Launcher")
+        {
+            AudioManager.instance.PlaySound(1);
         }
     }
 
