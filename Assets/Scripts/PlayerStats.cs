@@ -126,7 +126,6 @@ public class PlayerStats
         if (!isDashing && !isInvulnerable) //don't take damage if player is dashing
         {
             hp -= dmg;
-            Debug.Log("Player takes " + dmg + " damage. Hp left: " + hp);
 
             if(hp <= 0 && !isShieldUp)
             {

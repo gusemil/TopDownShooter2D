@@ -173,6 +173,7 @@ public class EnemyWaves : MonoBehaviour
     {
         isSpawningPaused = false;
         wave++;
+        AudioManager.instance.PlaySound(24);
         
             crabSpawnTimer = waveSpawnDelay;
             jumperSpawnTimer = waveSpawnDelay;

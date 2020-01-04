@@ -8,23 +8,69 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource audioSource;
 
+    //weapons and bomb
     public AudioClip pistol;
-    public AudioClip rocket;
+    public AudioClip machinegun;
+    public AudioClip shotgun;
+    public AudioClip rocketLauncher;
+    public AudioClip flamethrower;
+    public AudioClip bomb;
+    public AudioClip rocketExplosion;
+
+    //pickup
+    public AudioClip ammoPickup;
+    public AudioClip pointPickup;
+    public AudioClip hexDamagePickup;
+    public AudioClip infiniteDashPickup;
+    public AudioClip bombPickup;
+    public AudioClip shieldPickup;
+    public AudioClip infiniteAmmoPickup;
+    public AudioClip godmodePickup;
+
+    //powerup end
+    public AudioClip hexDamageEnd;
+    public AudioClip infiniteDashEnd;
+    public AudioClip shieldEnd;
+    public AudioClip infiniteAmmoEnd;
+    public AudioClip godmodeEnd;
+
+    //dash
+    public AudioClip dash;
+    public AudioClip dashRecharge;
+
+    //player
+    public AudioClip playerDeath;
+
+    //misc
+    public AudioClip gameOver;
+    public AudioClip nextWave;
+    public AudioClip completeLevel;
+    public AudioClip button_click;
+
+    //enemy
+    public AudioClip enemyDeath;
+
+    //out of ammo
+    public AudioClip outOfAmmo;
+
 
     public AudioClip[] audioClips;
 
     private void Awake()
     {
-        /*
+        
         if (instance == null) //jos status olio ei ole olemassa
         {
             DontDestroyOnLoad(gameObject);
             Debug.Log("creating audiomanager");
             instance = this;
+        } else
+        {
+            Destroy(gameObject);
         }
-        */
+        
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -32,15 +78,36 @@ public class AudioManager : MonoBehaviour
     {
         audioClips = new AudioClip[]
         {
-            pistol,
-            rocket
+            pistol, //0
+            machinegun, //1
+            shotgun, //2
+            rocketLauncher, //3
+            flamethrower, //4
+            bomb, //5
+            rocketExplosion, //6
+            ammoPickup, //7
+            pointPickup, //8
+            hexDamagePickup, //9
+            infiniteDashPickup, //10
+            bombPickup, //11
+            shieldPickup, //12
+            infiniteAmmoPickup, //13
+            godmodePickup, //14
+            hexDamageEnd, //15
+            infiniteDashEnd, //16
+            shieldEnd, //17
+            infiniteAmmoEnd, //18
+            godmodeEnd, //19
+            dash, //20
+            dashRecharge, //21
+            playerDeath, //22
+            gameOver, //23
+            nextWave, //24
+            completeLevel, //25
+            button_click, //26
+            enemyDeath, //27
+            outOfAmmo //28
         };
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /*
@@ -53,5 +120,10 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(int i)
     {
         audioSource.PlayOneShot(audioClips[i]);
+    }
+
+    public void PlaySound(int i, float volume)
+    {
+        audioSource.PlayOneShot(audioClips[i], volume);
     }
 }

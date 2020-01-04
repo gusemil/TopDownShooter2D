@@ -155,9 +155,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
-            uiManager.ShowGameOverScreen();
+        AudioManager.instance.PlaySound(23);
+        weaponSystem.BombCount++;
+        weaponSystem.Bomb();
+        playerStats.IsRespawning = true;
+        playerObject.GetComponent<SpriteRenderer>().enabled = false;
+        playerObject.GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(3f);
+        uiManager.ShowGameOverScreen();
             isGameOver = true;
             GameManager.instance.Pause.TogglePause();
     }
@@ -168,12 +175,13 @@ public class GameManager : MonoBehaviour
         lives--;
         if (lives >= 0)
         {
+            AudioManager.instance.PlaySound(22);
             uiManager.UpdateLives(instance);
             StartCoroutine(Respawn());
 
         } else
         {
-            GameOver();
+            StartCoroutine(GameOver());
         }
     }
 
@@ -247,9 +255,13 @@ public class GameManager : MonoBehaviour
         levelComplete = true;
         StartCoroutine(uiManager.ShowLevelCompleteText(enemyWaves));
         //pause.TogglePause();
-        yield return new WaitForSeconds(4f);
+        AudioManager.instance.PlaySound(25);
+        yield return new WaitForSeconds(3f);
         //pause.TogglePause();
-        GameOver();
+        //GameOver();
+        uiManager.ShowGameOverScreen();
+        isGameOver = true;
+        GameManager.instance.Pause.TogglePause();
     }
 
 

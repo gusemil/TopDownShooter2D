@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private Vector2 direction;
     private float enemyDamageTimer = 0;
     private float enemyDamageCooldown = 0.5f;
+    private float enemyDeathVolume = 0.5f;
     private Rigidbody2D rb2D;
 
     private float stopDistance = 7.5f;
@@ -104,6 +105,7 @@ public class Enemy : MonoBehaviour
 
     private void DeathEffect()
     {
+        AudioManager.instance.PlaySound(27,enemyDeathVolume);
         GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
         GameObject burst = Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
         GameObject splatter = Instantiate(bloodSplatter, transform.position, Quaternion.identity);
@@ -122,6 +124,7 @@ public class Enemy : MonoBehaviour
         {
             TakeDamage(hp, true);
             other.gameObject.GetComponent<PlayerController>().TurnOffShieldGraphic();
+            AudioManager.instance.PlaySound(17); //shield break
             other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();
             playerStats.IsShieldUp = false;
         } else

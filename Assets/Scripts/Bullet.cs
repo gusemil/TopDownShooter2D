@@ -65,6 +65,7 @@ public class Bullet : MonoBehaviour
         } else
         {
             effect = Instantiate(explosion, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+            weapon.PlayRocketExplosionSound();
         }
 
         

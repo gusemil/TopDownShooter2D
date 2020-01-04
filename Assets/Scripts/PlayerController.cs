@@ -168,7 +168,8 @@ public class PlayerController : MonoBehaviour
     {
         if(weapon.CurrentWeapon.Ammo > 0 || stats.IsInfiniteAmmoUp || stats.IsGodModeUp)
         {
-            weapon.PlayWeaponSound();
+            weapon.PlayWeaponSound(weapon.CurrentWeapon.WeaponName);
+            //AudioManager.instance.PlaySound(1);
 
             GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation); //GameObject bullet = jotta päästään käsiksi myöhemmin
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -193,6 +194,12 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        /*
+        else if (weapon.CurrentWeapon.Ammo <= 0 && !stats.IsInfiniteAmmoUp && !stats.IsGodModeUp)
+        {
+            weapon.PlayOutOfAmmoSound();
+        }
+        */
 
     }
 

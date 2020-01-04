@@ -51,6 +51,7 @@ public class MainMenu : MonoBehaviour
 
     public void ShowLevelMenu()
     {
+        AudioManager.instance.PlaySound(26);
         levelChangePanel.SetActive(true);
         buttonManager.SetActive(false);
 
@@ -58,6 +59,7 @@ public class MainMenu : MonoBehaviour
 
     public void QuitLevelMenu()
     {
+        AudioManager.instance.PlaySound(26);
         levelChangePanel.SetActive(false);
         buttonManager.SetActive(true);
     }

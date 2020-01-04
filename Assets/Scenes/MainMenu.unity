@@ -1224,8 +1224,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 651448999}
-  test: {fileID: 8300000, guid: 5b9e2ad4f11a2df4eaf46f86974bacea, type: 3}
-  test2: {fileID: 8300000, guid: d496c62dbd4622143827f667c6639e94, type: 3}
+  pistol: {fileID: 8300000, guid: 5b9e2ad4f11a2df4eaf46f86974bacea, type: 3}
+  machinegun: {fileID: 8300000, guid: 4b21967da3dd45d419602bf85f1f444a, type: 3}
+  shotgun: {fileID: 8300000, guid: cdd12fd37986049468af27595140b90e, type: 3}
+  rocketLauncher: {fileID: 8300000, guid: d496c62dbd4622143827f667c6639e94, type: 3}
+  flamethrower: {fileID: 8300000, guid: 9106965b1d2560247b2190dbc5497a8c, type: 3}
+  bomb: {fileID: 8300000, guid: 0c7a30185e3421144b1c1c58f6d25ea5, type: 3}
+  rocketExplosion: {fileID: 8300000, guid: f5b4f026e2ab2f74cb6fa06ddaef87eb, type: 3}
+  ammoPickup: {fileID: 8300000, guid: 07699f56cc311934ab407ed8aff05a4b, type: 3}
+  pointPickup: {fileID: 8300000, guid: cdd4e2856e4ff854390d41ec71e2787f, type: 3}
+  hexDamagePickup: {fileID: 8300000, guid: 4b2fd6fea5642ce44abf49de8bebf5cb, type: 3}
+  infiniteDashPickup: {fileID: 8300000, guid: b860b3f89e60e7a429427c857ac7eb5b, type: 3}
+  bombPickup: {fileID: 8300000, guid: 222046bdc8265f845b85b530c891e5c6, type: 3}
+  shieldPickup: {fileID: 8300000, guid: 6883abc2614bb344ea19e6972af1cd26, type: 3}
+  infiniteAmmoPickup: {fileID: 8300000, guid: ade89a4a63dca364eaf0aa7d544b7f83, type: 3}
+  godmodePickup: {fileID: 8300000, guid: 012fe4ba3a073004abd6b2062ca8e91c, type: 3}
+  hexDamageEnd: {fileID: 8300000, guid: 2ca26f709632a5b4c9dd1626b3bf811d, type: 3}
+  infiniteDashEnd: {fileID: 8300000, guid: 3c343a025c47daf4cbcc30fdc02ab91f, type: 3}
+  shieldEnd: {fileID: 8300000, guid: 1b16190019778f844a93408b3dd842b5, type: 3}
+  infiniteAmmoEnd: {fileID: 8300000, guid: 6a1bd4461dd08124385a4a81d023b370, type: 3}
+  godmodeEnd: {fileID: 8300000, guid: ff3ab176a9da41d47bda96267d11ba0f, type: 3}
+  dash: {fileID: 8300000, guid: afc0a2329a189f749a7612a8285a23eb, type: 3}
+  dashRecharge: {fileID: 8300000, guid: 4273ddffed0fdf845972b92ce757d55f, type: 3}
+  playerDeath: {fileID: 8300000, guid: 1442e30e32969c747a67a5778f907b1f, type: 3}
+  gameOver: {fileID: 8300000, guid: 34235108fb6d4ee4899207f93f350362, type: 3}
+  nextWave: {fileID: 8300000, guid: 333eeb92c634c954782436eeb8314d01, type: 3}
+  completeLevel: {fileID: 8300000, guid: a33a013fd54969747aa98c44a9f4b329, type: 3}
+  button_click: {fileID: 8300000, guid: 4f21baca2dbc3364eb9d0259aa28a1bb, type: 3}
+  enemyDeath: {fileID: 8300000, guid: a942ea4fddd32a54ca89f7e8faf7ec49, type: 3}
   audioClips: []
 --- !u!4 &651449001
 Transform:

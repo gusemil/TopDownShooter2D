@@ -56,6 +56,7 @@ public class Dash : MonoBehaviour
     {
         dashes++;
         dashTimer = 0;
+        AudioManager.instance.PlaySound(21);
         //uiManager.UpdateDashes(GameManager.instance.Dash);
     }
 
@@ -64,6 +65,7 @@ public class Dash : MonoBehaviour
         if(dashes > 0) 
         {
             dashes--;
+            AudioManager.instance.PlaySound(20);
         }
     }
 }
