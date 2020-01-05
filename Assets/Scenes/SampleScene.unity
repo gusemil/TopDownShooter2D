@@ -3764,7 +3764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2111204572
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4034,6 +4034,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2054177185, guid: e8e2dc3b292c50d4ab5c5b53c596dce7, type: 3}
       propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054177186, guid: e8e2dc3b292c50d4ab5c5b53c596dce7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.46361598
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054177186, guid: e8e2dc3b292c50d4ab5c5b53c596dce7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.009433985
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054177186, guid: e8e2dc3b292c50d4ab5c5b53c596dce7, type: 3}
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
