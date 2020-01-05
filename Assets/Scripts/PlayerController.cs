@@ -17,7 +17,15 @@ public class PlayerController : MonoBehaviour
     public GameObject shield;
     public GameObject bulletPreFab;
     public GameObject bombEffect;
-    
+    public GameObject hexDamagePreFab;
+    private GameObject hexDamageEffect;
+    public GameObject infiniteDashPreFab;
+    private GameObject infiniteDashEffect;
+    public GameObject infiniteAmmoPreFab;
+    private GameObject infiniteAmmoEffect;
+    public GameObject godModePreFab;
+    private GameObject godModeEffect;
+
     public Rigidbody2D rb2D;
     public Camera _camera; //variable name 'camera' is not available
 
@@ -25,18 +33,18 @@ public class PlayerController : MonoBehaviour
     Vector2 mousePosition;
 
     private Color originalColor;
-    private Color hexDamageColor = new Color(1, 0.5f, 0.5f, 1);
+   // private Color hexDamageColor = new Color(1, 0.5f, 0.5f, 1);
     private Color dashColor = new Color(1, 1, 0, 1);
-    private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
-    private Color godModeColor = new Color(0.06f,0.92f,0.9f,1);
-    private Color previousColor;
+   // private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
+   // private Color godModeColor = new Color(0.06f,0.92f,0.9f,1);
+   // private Color previousColor;
     private UIManager uiManager;
 
     public Color OriginalColor { get { return originalColor; } }
-    public Color HexDamageColor { get { return hexDamageColor; } }
-    public Color InfiniteAmmoColor { get { return infiniteAmmoColor; } }
-    public Color PreviousColor {  get { return previousColor; }}
-    public Color GodModeColor { get { return godModeColor; } }
+    //public Color HexDamageColor { get { return hexDamageColor; } }
+    //public Color InfiniteAmmoColor { get { return infiniteAmmoColor; } }
+    //public Color PreviousColor {  get { return previousColor; }}
+    //public Color GodModeColor { get { return godModeColor; } }
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 
     private WeaponSystem weapon;
@@ -150,6 +158,26 @@ public class PlayerController : MonoBehaviour
             uiManager.UpdateWeaponText(weapon.CurrentWeapon);
             uiManager.UpdateWeaponImage(weapon.CurrentWeapon);
         }
+
+        if (stats.IsHexDamageUp)
+        {
+            hexDamageEffect.transform.position = transform.position;
+        }
+
+        if (stats.IsInfiniteDashUp)
+        {
+            infiniteDashEffect.transform.position = transform.position;
+        }
+
+        if (stats.IsInfiniteAmmoUp)
+        {
+            infiniteAmmoEffect.transform.position = transform.position;
+        }
+
+        if (stats.IsGodModeUp)
+        {
+            godModeEffect.transform.position = transform.position;
+        }
     }
 
 
@@ -177,6 +205,11 @@ public class PlayerController : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
+            if (stats.IsHexDamageUp)
+            {
+                bullet.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
+            }
+
             if (!stats.IsInfiniteAmmoUp && !stats.IsGodModeUp)
             {
                 weapon.LoseAmmo();
@@ -193,6 +226,12 @@ public class PlayerController : MonoBehaviour
                 GameObject bullet3 = Instantiate(bulletPreFab, firePoint3.position, firePoint3.rotation);
                 Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
                 rb3.AddForce(firePoint3.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
+
+                if (stats.IsHexDamageUp)
+                {
+                    bullet2.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
+                    bullet3.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
+                }
             }
 
         }
@@ -211,7 +250,47 @@ public class PlayerController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
     }
 
-    
+    public void TurnOnHexDamageEffect()
+    {
+            hexDamageEffect = Instantiate(hexDamagePreFab, transform.position, Quaternion.identity);
+    }
+
+    public void TurnOffHexDamageEffect()
+    {
+        Destroy(hexDamageEffect);
+    }
+
+
+    public void TurnOnInfiniteDashEffect()
+    {
+        infiniteDashEffect = Instantiate(infiniteDashPreFab, transform.position, Quaternion.identity);
+    }
+
+    public void TurnOffInfiniteDashEffect()
+    {
+        Destroy(infiniteDashEffect);
+    }
+
+    public void TurnOnInfiniteAmmoEffect()
+    {
+        infiniteAmmoEffect = Instantiate(infiniteAmmoPreFab, transform.position, Quaternion.identity);
+    }
+
+    public void TurnOffInfiniteAmmoEffect()
+    {
+        Destroy(infiniteAmmoEffect);
+    }
+
+    public void TurnOnGodModeEffect()
+    {
+        godModeEffect = Instantiate(godModePreFab, transform.position, Quaternion.identity);
+    }
+
+    public void TurnOffGodModeEffect()
+    {
+        Destroy(godModeEffect);
+    }
+
     public void SetPreviousColor()
     {
         PlayerStats player = GameManager.instance.PlayerStats;
@@ -237,7 +316,7 @@ public class PlayerController : MonoBehaviour
         while (stats.IsDashing)
         {
             SetPreviousColor();
-            //ChangePlayerColor(dashColor);
+            ChangePlayerColor(dashColor);
             
             if (Input.GetAxisRaw("Horizontal") > 0)
                 //movement.x +=  0.1f;
@@ -263,7 +342,7 @@ public class PlayerController : MonoBehaviour
             stats.IsInvulnerable = true;
             yield return new WaitForSeconds(stats.InvulnerabilityTime);
             stats.IsInvulnerable = false;
-            //ChangePlayerColor(previousColor);
+            ChangePlayerColor(originalColor);
         }
 
     }

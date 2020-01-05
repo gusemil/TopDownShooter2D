@@ -4097,6 +4097,8 @@ MonoBehaviour:
   bloodCheck: {fileID: 889934393}
   soundMixer: {fileID: 24100000, guid: 494ca2635d848b2428f49146a9697394, type: 2}
   musicMixer: {fileID: 24100000, guid: 7747c29d7259e104f8e600b2e96e6dfa, type: 2}
+  soundSlider: {fileID: 1258162631}
+  musicSlider: {fileID: 615475608}
 --- !u!1 &2100139699
 GameObject:
   m_ObjectHideFlags: 0

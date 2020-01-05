@@ -141,6 +141,9 @@ public class Enemy : MonoBehaviour
         } else
         {
             TakeDamage(hp, true);
+            other.gameObject.GetComponent<PlayerController>().TurnOffHexDamageEffect();
+            other.gameObject.GetComponent<PlayerController>().TurnOffInfiniteDashEffect();
+            other.gameObject.GetComponent<PlayerController>().TurnOffInfiniteAmmoEffect();
             playerStats.TakeDamage(damage);
         }
     }

@@ -94,7 +94,7 @@ public class PlayerStats
         hp = 1;
         maxHp = 10;
         damageMultiplier = 1;
-        invulnerabilityTime = 0.5f;
+        invulnerabilityTime = 0.25f;
         isHexDamageUp = false;
         isInfiniteAmmoUp = false;
         isDashing = false;

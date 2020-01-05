@@ -182,22 +182,26 @@ public class Pickup : MonoBehaviour
         {
             audioManager.PlaySound(9);
             player.IsHexDamageUp = true;
-            pc.ChangePlayerColor(pc.HexDamageColor);
+            pc.TurnOnHexDamageEffect();
+            //pc.ChangePlayerColor(pc.HexDamageColor);
         } else if (gameObject.tag == "InfiniteAmmo")
         {
             audioManager.PlaySound(13);
             player.IsInfiniteAmmoUp = true;
-            pc.ChangePlayerColor(pc.InfiniteAmmoColor);
+            //pc.ChangePlayerColor(pc.InfiniteAmmoColor);
+            pc.TurnOnInfiniteAmmoEffect();
         } else if (gameObject.tag == "InfiniteDash")
         {
             audioManager.PlaySound(10);
             player.IsInfiniteDashUp = true;
+            pc.TurnOnInfiniteDashEffect();
             //pc.ChangePlayerColor(pc.InfiniteDashColor);
         } else if(gameObject.tag == "GodMode")
         {
             audioManager.PlaySound(14);
             player.IsGodModeUp = true;
-            pc.ChangePlayerColor(pc.GodModeColor);
+            pc.TurnOnGodModeEffect();
+            //pc.ChangePlayerColor(pc.GodModeColor);
         }
 
 
@@ -227,6 +231,7 @@ public class Pickup : MonoBehaviour
                     audioManager.PlaySound(15);
                 }
                 player.IsHexDamageUp = false;
+                pc.TurnOffHexDamageEffect();
             } else if (gameObject.tag == "InfiniteAmmo")
             {
                 if (player.IsInfiniteAmmoUp)
@@ -234,13 +239,15 @@ public class Pickup : MonoBehaviour
                     audioManager.PlaySound(18);
                 }
                 player.IsInfiniteAmmoUp = false;
+                pc.TurnOffInfiniteAmmoEffect();
             }
             else if (gameObject.tag == "InfiniteDash")
             {
                 if (player.IsInfiniteDashUp)
                 {
-                    audioManager.PlaySound(16);
+                    audioManager.PlaySound(16);          
                 }
+                pc.TurnOffInfiniteDashEffect();
                 player.IsInfiniteDashUp = false;
             }
             else if(gameObject.tag == "GodMode")
@@ -254,6 +261,7 @@ public class Pickup : MonoBehaviour
                 {
                     audioManager.PlaySound(19);
                 }
+                pc.TurnOffGodModeEffect();
                 player.IsGodModeUp = false;
                 
             }
