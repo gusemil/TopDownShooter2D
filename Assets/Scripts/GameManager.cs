@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private int pointsMultiplier;
     private bool levelComplete;
 
+
     public static GameManager instance; //singleton pattern
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     public int Points { get { return points; } set { points = value; } }
     public int PointsMultiplier { get { return pointsMultiplier; }
         set { pointsMultiplier = value; } }
-
+    
     void Awake()
     {
         if (instance == null) //jos status olio ei ole olemassa
@@ -103,10 +104,12 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
         GUI.Label(new Rect(20, 390, 200, 40), "Points: " + points);
         */
+        /*
         GUI.Label(new Rect(20, 470, 200, 40), "HexDamageOn " + playerStats.IsHexDamageUp);
         GUI.Label(new Rect(20, 490, 200, 40), "InfiniteAmmoOn: " + playerStats.IsInfiniteAmmoUp);
         GUI.Label(new Rect(20, 510, 200, 40), "PointsMultiplier " + pointsMultiplier);
         GUI.Label(new Rect(20, 530, 200, 40), "PlayerStats ShieldUp " + playerStats.IsShieldUp);
+        */
     }
 
     // Update is called once per frame
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
             //pause.TogglePause();
             //uiManager.ToggleGameOverScreen(instance);
             pause.TogglePause();
+            AudioManager.instance.soundSource.Stop();
             SceneManager.LoadScene("MainMenu");
         }
 
@@ -157,6 +161,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        AudioManager.instance.StopMusic();
         AudioManager.instance.PlaySound(23);
         weaponSystem.BombCount++;
         weaponSystem.Bomb();
@@ -247,6 +252,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
         uiManager.UpdateBombText(weaponSystem);
         SceneManager.LoadScene(1);
+        AudioManager.instance.musicSource.Play();
     }
 
     public IEnumerator CompleteLevel()
@@ -257,6 +263,7 @@ public class GameManager : MonoBehaviour
         //pause.TogglePause();
         AudioManager.instance.PlaySound(25);
         yield return new WaitForSeconds(3f);
+        AudioManager.instance.StopMusic();
         //pause.TogglePause();
         //GameOver();
         uiManager.ShowGameOverScreen();

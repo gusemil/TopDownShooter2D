@@ -99,10 +99,12 @@ public class PlayerController : MonoBehaviour
             uiManager.UpdateBombText(weapon);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && !pause.IsPause && !stats.IsRespawning)
+        if (Input.GetKeyDown(KeyCode.Space) && !pause.IsPause && !stats.IsRespawning)
         {
             if(dash.Dashes > 0 || stats.IsInfiniteDashUp || stats.IsGodModeUp)
             {
+                AudioManager.instance.PlaySound(20);
+
                 if (!stats.IsInfiniteDashUp && !stats.IsGodModeUp)
                 {
                     dash.ConsumeDash();

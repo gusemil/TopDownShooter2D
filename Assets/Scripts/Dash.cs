@@ -65,7 +65,7 @@ public class Dash : MonoBehaviour
         if(dashes > 0) 
         {
             dashes--;
-            AudioManager.instance.PlaySound(20);
+            //AudioManager.instance.PlaySound(20);
         }
     }
 }

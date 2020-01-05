@@ -96,7 +96,12 @@ public class Enemy : MonoBehaviour
                 ps.SpawnPickUpFromEnemy(this.gameObject);
             }
 
+            AudioManager.instance.PlaySound(27, enemyDeathVolume);
             DeathEffect();
+            if (LevelManager.instance.IsBloodOn)
+            {
+                BloodEffect();
+            }
             enemyWaves.EnemiesAlive--;
             isEnemyDead = true;
             Destroy(gameObject);
@@ -105,11 +110,17 @@ public class Enemy : MonoBehaviour
 
     private void DeathEffect()
     {
-        AudioManager.instance.PlaySound(27,enemyDeathVolume);
+        AudioManager.instance.PlaySound(27, enemyDeathVolume);
         GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
-        GameObject burst = Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
-        GameObject splatter = Instantiate(bloodSplatter, transform.position, Quaternion.identity);
         Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
+    }
+
+    private void BloodEffect()
+    {
+            GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+            GameObject burst = Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
+            GameObject splatter = Instantiate(bloodSplatter, transform.position, Quaternion.identity);
+            Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
     }
 
     public void DamagePlayerOnCollision(Collision2D other)
