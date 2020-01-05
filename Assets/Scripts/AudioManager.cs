@@ -6,7 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public AudioSource audioSource;
+    public AudioSource soundSource;
+    public AudioSource musicSource;
 
     //weapons and bomb
     public AudioClip pistol;
@@ -54,7 +55,18 @@ public class AudioManager : MonoBehaviour
     public AudioClip outOfAmmo;
 
 
+    //music tracks
+    public AudioClip mainMenu;
+    public AudioClip level1;
+    public AudioClip level2;
+    public AudioClip level3;
+    //public AudioClip endlessMode;
+
+
     public AudioClip[] audioClips;
+    public AudioClip[] musicTracks;
+
+    private AudioClip currentTrack;
 
     private void Awake()
     {
@@ -108,6 +120,15 @@ public class AudioManager : MonoBehaviour
             enemyDeath, //27
             outOfAmmo //28
         };
+
+        musicTracks = new AudioClip[]
+        {
+            mainMenu,
+            level1,
+            level2,
+            level3,
+            //endlessMode
+        };
     }
 
     /*
@@ -119,11 +140,27 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(int i)
     {
-        audioSource.PlayOneShot(audioClips[i]);
+        soundSource.PlayOneShot(audioClips[i]);
     }
 
     public void PlaySound(int i, float volume)
     {
-        audioSource.PlayOneShot(audioClips[i], volume);
+        soundSource.PlayOneShot(audioClips[i], volume);
     }
+
+    public void PlayMusic(int i)
+    {
+        //musicManager.PlayOneShot(musicTracks[i]);
+        musicSource.Stop();
+        musicSource.clip = musicTracks[i];
+        currentTrack = musicTracks[i];
+        musicSource.Play();
+    }
+
+   
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+    
 }
