@@ -68,6 +68,12 @@ public class AudioManager : MonoBehaviour
 
     private AudioClip currentTrack;
 
+    private float soundSliderValue = 1f;
+    private float musicSliderValue = 1f;
+
+    public float SoundSliderValue { get { return soundSliderValue; } set { soundSliderValue = value; } }
+    public float MusicSliderValue { get { return musicSliderValue; } set { musicSliderValue = value; } }
+
     private void Awake()
     {
         

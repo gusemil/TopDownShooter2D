@@ -15,6 +15,14 @@ public class MainMenu : MonoBehaviour
     public AudioMixer soundMixer;
     public AudioMixer musicMixer;
 
+    public GameObject soundSlider;
+    public GameObject musicSlider;
+
+    private void Awake()
+    {
+        //soundSliderValue = 1;
+        //musicSliderValue = 1;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +91,9 @@ public class MainMenu : MonoBehaviour
         AudioManager.instance.PlaySound(26);
         optionsPanel.SetActive(true);
         buttonManager.SetActive(false);
+
+        soundSlider.GetComponent<Slider>().value = AudioManager.instance.SoundSliderValue;
+        musicSlider.GetComponent<Slider>().value = AudioManager.instance.MusicSliderValue;
     }
 
     public void QuitLevelMenu()
@@ -108,6 +119,25 @@ public class MainMenu : MonoBehaviour
         {
             LevelManager.instance.IsBloodOn = false;
         }
+    }
+
+    public void SetSoundLevel(float sliderValue)
+    {
+        soundMixer.SetFloat("SoundVolume", Mathf.Log10(sliderValue) * 20);
+        //soundSliderValue = sliderValue;
+        AudioManager.instance.SoundSliderValue = soundSlider.GetComponent<Slider>().value;
+    }
+
+    public void SetMusicLevel(float sliderValue)
+    {
+        musicMixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        //musicSliderValue = sliderValue;
+        AudioManager.instance.MusicSliderValue = musicSlider.GetComponent<Slider>().value;
+    }
+
+    public void PlaySoundSliderSound()
+    {
+        AudioManager.instance.PlaySound(26);
     }
 }
 
