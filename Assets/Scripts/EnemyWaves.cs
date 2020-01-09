@@ -17,7 +17,7 @@ public class EnemyWaves : MonoBehaviour
     private int enemiesPerWave;
     private static int wave;
     private float waveSpawnDelay = -5f;
-    private int maxWaves;
+    private static int maxWaves;
 
     //private GameManager gameManager;
     private UIManager uiManager;
@@ -43,6 +43,7 @@ public class EnemyWaves : MonoBehaviour
     public int EnemiesAlive { get { return enemiesAlive; } set { enemiesAlive = value; } }
     public int EnemiesSpawned { get { return enemiesSpawned; } set { enemiesSpawned = value; } }
     public int Wave { get { return wave; } set { wave = value; } }
+    public int MaxWaves { get { return maxWaves; } }
 
     private List<GameObject> spawnPoints = new List<GameObject>();
 
@@ -70,7 +71,15 @@ public class EnemyWaves : MonoBehaviour
         if(lvlManager.CurrentLevel == 1)
         {
             maxWaves = 3;
-        } else if(lvlManager.CurrentLevel == 2)
+            //GameManager.instance.Pause.TogglePause();
+            //uiManager.TogglePauseText(GameManager.instance.Pause);
+            //uiManager.pauseMenu.SetActive(true);
+            /*
+            pause.TogglePause();
+            uiManager.TogglePauseText(pause);
+            */
+        }
+        else if(lvlManager.CurrentLevel == 2)
         {
             maxWaves = 5;
         } else if(lvlManager.CurrentLevel == 3)

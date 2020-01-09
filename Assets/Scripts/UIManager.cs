@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     public Text powerUpText4;
 
     private float waveTextDuration = 3f;
+    private LevelManager lvlManager;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +64,7 @@ public class UIManager : MonoBehaviour
         //ammoText.text = ws.CurrentWeapon.Ammo.ToString();
 
         uiManager = FindObjectOfType<UIManager>();
+        lvlManager = FindObjectOfType<LevelManager>();
 
         gameOverScreen.enabled = false;
         gameOverText.enabled = false;
@@ -81,9 +83,20 @@ public class UIManager : MonoBehaviour
 
         dash = GameManager.instance.Dash;
         currentDash = dash4;
-        weaponIcon.sprite = pistolSprite;
+        //weaponIcon.sprite = pistolSprite;
+
+        GameManager.instance.WeaponSystem.ChangeWeapon(0);
+        uiManager.UpdateWeaponText(GameManager.instance.WeaponSystem.CurrentWeapon);
+        uiManager.UpdateWeaponImage(GameManager.instance.WeaponSystem.CurrentWeapon);
 
         StartCoroutine(ShowWaveText(GameManager.instance.EnemyWaves));
+
+
+        if (lvlManager.CurrentLevel == 1) //tutorial
+        {
+            GameManager.instance.Pause.TogglePause();
+            uiManager.TogglePauseText(GameManager.instance.Pause);
+        }
     }
 
     // Update is called once per frame
@@ -243,7 +256,15 @@ public class UIManager : MonoBehaviour
     public IEnumerator ShowWaveText(EnemyWaves ew)
     {
             waveText.enabled = true;
+
+        if(LevelManager.instance.CurrentLevel != 4)
+        {
+            waveText.text = "Wave " + ew.Wave + "/" + ew.MaxWaves;
+        } else
+        {
             waveText.text = "Wave " + ew.Wave;
+        }
+            
             yield return new WaitForSeconds(waveTextDuration);
             waveText.enabled = false;
     }

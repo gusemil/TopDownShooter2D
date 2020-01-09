@@ -115,14 +115,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        if (Input.GetKeyDown(KeyCode.Space) && (pause.IsPause))
-        {
-            //pause.TogglePause();
-            //uiManager.ToggleGameOverScreen(instance);
-            pause.TogglePause();
-            AudioManager.instance.soundSource.Stop();
-            SceneManager.LoadScene("MainMenu");
-        }
+        
 
         if (!isGameOver)
         {
@@ -150,6 +143,25 @@ public class GameManager : MonoBehaviour
                 //uiManager.ToggleGameOverScreen(instance);
                 pause.TogglePause();
                 uiManager.TogglePauseText(pause);
+            }
+
+            else if (Input.GetKeyDown(KeyCode.Space) && pause.IsPause)
+            {
+                //pause.TogglePause();
+                //uiManager.ToggleGameOverScreen(instance);
+                pause.TogglePause();
+                AudioManager.instance.soundSource.Stop();
+                SceneManager.LoadScene("MainMenu");
+            }
+        } else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && (pause.IsPause))
+            {
+                //pause.TogglePause();
+                //uiManager.ToggleGameOverScreen(instance);
+                pause.TogglePause();
+                AudioManager.instance.soundSource.Stop();
+                SceneManager.LoadScene("MainMenu");
             }
         }
 
