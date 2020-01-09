@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private Color originalColor;
    // private Color hexDamageColor = new Color(1, 0.5f, 0.5f, 1);
-    private Color dashColor = new Color(1, 1, 0, 1);
+    private Color dashColor = new Color(0, 1, 0, 1);
    // private Color infiniteAmmoColor = new Color(0.5f, 1, 0.5f, 1);
    // private Color godModeColor = new Color(0.06f,0.92f,0.9f,1);
    // private Color previousColor;

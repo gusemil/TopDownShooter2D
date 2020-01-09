@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        if (Input.GetKeyDown(KeyCode.Escape) && (pause.IsPause))
+        if (Input.GetKeyDown(KeyCode.Space) && (pause.IsPause))
         {
             //pause.TogglePause();
             //uiManager.ToggleGameOverScreen(instance);
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
             }
             */
 
-            else if (Input.GetKeyDown(KeyCode.Space) && pause.IsPause)
+            else if (Input.GetKeyDown(KeyCode.Escape) && pause.IsPause)
             {
                 //pause.TogglePause();
                 //uiManager.ToggleGameOverScreen(instance);
