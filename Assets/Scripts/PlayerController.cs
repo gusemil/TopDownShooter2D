@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
-            if (stats.IsHexDamageUp)
+            if (stats.IsHexDamageUp || stats.IsGodModeUp)
             {
                 bullet.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
             }
@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
                 Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
                 rb3.AddForce(firePoint3.up * weapon.CurrentWeapon.BulletForce, ForceMode2D.Impulse);
 
-                if (stats.IsHexDamageUp)
+                if (stats.IsHexDamageUp || stats.IsGodModeUp)
                 {
                     bullet2.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
                     bullet3.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);

@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public GameObject hitEffect;
     public GameObject explosion;
     public Sprite missile;
+    public Sprite flame;
     //public ParticleSystem flame;
 
     private bool isProjectileAlive;
@@ -30,20 +31,23 @@ public class Bullet : MonoBehaviour
         if (nameOfWeaponShot == "Rocket Launcher")
         {
             GetComponent<SpriteRenderer>().sprite = missile;
-            transform.localScale = new Vector3(transform.localScale.x / 2f, transform.localScale.x / 6f, transform.localScale.x / 2f);
+            transform.localScale = new Vector3(transform.localScale.x / 2f, transform.localScale.x / 3f, transform.localScale.x / 2f);
         }
 
-        /*
+        
         if(nameOfWeaponShot == "Flamethrower")
         {
-            flame.transform.localScale = new Vector3(transform.localScale.x / 2f, transform.localScale.x / 6f, transform.localScale.x / 2f);
+            GetComponent<SpriteRenderer>().sprite = flame;
+            transform.localScale = new Vector3(transform.localScale.x * 0.6f, transform.localScale.x * 0.6f, transform.localScale.x * 0.6f);
         }
-        */
+        
 
         if (playerStats.IsGodModeUp && nameOfWeaponShot != "Rocket Launcher")
         {
             transform.localScale = new Vector3(transform.localScale.x * 3f, transform.localScale.x * 3f, transform.localScale.x * 3f);
         }
+
+
     }
     void Start()
     {
