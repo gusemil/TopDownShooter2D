@@ -49,10 +49,12 @@ public class UIManager : MonoBehaviour
 
     public Text waveText;
 
+    /*
     public Text powerUpText1;
     public Text powerUpText2;
     public Text powerUpText3;
     public Text powerUpText4;
+    */
 
     private float waveTextDuration = 3f;
     private LevelManager lvlManager;
@@ -73,10 +75,12 @@ public class UIManager : MonoBehaviour
         restartText.enabled = false;
         waveText.enabled = false;
 
+        /*
         powerUpText1.enabled = true;
         powerUpText2.enabled = false;
         powerUpText3.enabled = false;
         powerUpText4.enabled = false;
+        */
 
         pauseMenu.SetActive(false);
         //pauseText.enabled = false;
@@ -153,12 +157,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /*
     public void UpdatePowerUpText(float timer, string powerUpName)
     {
         //Math.Round(timer,2);
        // if(powerUpText1.enabled)
         //{
-            powerUpText1.text = Math.Round(timer).ToString() + " " + powerUpName;
+           // powerUpText1.text = Math.Round(timer).ToString() + " " + powerUpName;
        // }
         /*
         else if(powerUpText1.enabled && !powerUpText2.enabled)
@@ -167,7 +172,7 @@ public class UIManager : MonoBehaviour
             powerUpText2.text = Math.Round(timer).ToString() + " " + powerUpName;
         }
         */
-    }
+    //}
 
     public void UpdateWeaponText(Weapon currentweapon)
     {

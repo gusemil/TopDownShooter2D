@@ -99,6 +99,7 @@ MonoBehaviour:
     type: 3}
   explosion: {fileID: 7933467175376725603, guid: ac5a0f004af58b241bda60aab52a3491,
     type: 3}
+  missile: {fileID: 21300000, guid: 8d3afec2ca5858f4aae69bc8ad98d99f, type: 3}
 --- !u!50 &2953202121053963651
 Rigidbody2D:
   serializedVersion: 4

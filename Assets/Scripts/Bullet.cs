@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public GameObject hitEffect;
     public GameObject explosion;
+    public Sprite missile;
+    //public ParticleSystem flame;
 
     private bool isProjectileAlive;
     private int totalProjectileDamage;
@@ -27,10 +29,18 @@ public class Bullet : MonoBehaviour
 
         if (nameOfWeaponShot == "Rocket Launcher")
         {
-            transform.localScale = new Vector3(transform.localScale.x * 2f, transform.localScale.x * 6f, transform.localScale.x * 2f);
+            GetComponent<SpriteRenderer>().sprite = missile;
+            transform.localScale = new Vector3(transform.localScale.x / 2f, transform.localScale.x / 6f, transform.localScale.x / 2f);
         }
 
-        if (playerStats.IsGodModeUp)
+        /*
+        if(nameOfWeaponShot == "Flamethrower")
+        {
+            flame.transform.localScale = new Vector3(transform.localScale.x / 2f, transform.localScale.x / 6f, transform.localScale.x / 2f);
+        }
+        */
+
+        if (playerStats.IsGodModeUp && nameOfWeaponShot != "Rocket Launcher")
         {
             transform.localScale = new Vector3(transform.localScale.x * 3f, transform.localScale.x * 3f, transform.localScale.x * 3f);
         }
@@ -69,7 +79,7 @@ public class Bullet : MonoBehaviour
         }
 
         
-        Destroy(effect, 0.1f); //hit effect tuhoutuu 0.1sek
+        Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
         Destroy(gameObject); //tuhotaan bullet collisionissa
          
 

@@ -14,7 +14,7 @@ public class PickupSystem : MonoBehaviour
     public GameObject godModePreFab;
 
     private static List<GameObject> pickupList = new List<GameObject>();
-    private const float pickupDropChance = 10f;
+    private const float pickupDropChance = 10f; //10f default
     private GameManager gm;
 
     public List<GameObject> PickupList { get { return pickupList; } set { pickupList = value; } }

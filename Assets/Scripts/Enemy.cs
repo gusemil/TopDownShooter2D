@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
     {
         AudioManager.instance.PlaySound(27, enemyDeathVolume);
         GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
-        Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
+        Destroy(effect, 0.3f); //hit effect tuhoutuu 0.1sek
     }
 
     private void BloodEffect()

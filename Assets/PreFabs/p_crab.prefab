@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6779071223058372703}
   - component: {fileID: 6779071223058372704}
   - component: {fileID: 6779071223058372707}
+  - component: {fileID: 1756191302}
   m_Layer: 9
   m_Name: p_crab
   m_TagString: Enemy
@@ -154,3 +155,22 @@ MonoBehaviour:
     type: 3}
   bloodSplatter: {fileID: 4671361724221970975, guid: 41d99770b761e8045a370dcc54dcb773,
     type: 3}
+--- !u!95 &1756191302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6405449876051954736}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5afce3a1e12892d46993d8725039a36e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
