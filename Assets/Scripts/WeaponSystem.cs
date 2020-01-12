@@ -23,10 +23,10 @@ public class WeaponSystem : MonoBehaviour
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
     public int BombCount { get { return bombCount; } set { bombCount = value; } }
 
-    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f, 0); //name, number, dmg, force, fireRate, ammo, radius, lifetime
+    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f, 0); //name, number, dmg, force, fireRate, ammo, radius, lifetime, ammo on pickup
     Weapon machineGun = new Weapon("Machine Gun", 1, 30, 40f, 0.13f, 500, 0f, 2f, 500);
     Weapon shotgun = new Weapon("Shotgun", 2, 200, 100f, 0.3f, 50, 5f, 2f, 50);
-    Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.5f, 5, 12f, 5f, 5);
+    Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.5f, 5, 12f, 9f, 5);
     Weapon flameThrower = new Weapon("Flamethrower", 4, 50, 30f, 0.01f, 100, 2f, 0.3f, 100);
 
 

@@ -9,9 +9,11 @@ public class Pickup : MonoBehaviour
 
     private PlayerController pc;
     private bool isPowerUpOn = false;
+    private bool pickupFlickerOn = false;
     private float pickupDestroyTime = 10f;
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
+    private float pickupFlickerStart;
     //private Color pickupColor;
     private float powerUpTimer;
     private string powerUpName;
@@ -31,6 +33,7 @@ public class Pickup : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         powerUpTimer = powerUpDuration;
         audioManager = AudioManager.instance;
+        pickupFlickerStart = pickupDestroyTime / 3;
         //pickup = new Pickup();
     }
 
@@ -46,6 +49,16 @@ public class Pickup : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        /*
+        else if ((pickupTimer >= (pickupDestroyTime - pickupFlickerStart)) && !pickupFlickerOn)
+        {
+            Debug.Log("Pickupflicker fucntion");
+            pickupFlickerOn = true;
+            StartCoroutine(PickupFlicker());
+            //pickupFlickerOn = false;
+        }
+        */
 
         if (isPowerUpOn) 
         {
@@ -269,5 +282,19 @@ public class Pickup : MonoBehaviour
     {
         Destroy(gameObject);
     }*/
+
+        /*
+    private IEnumerator PickupFlicker()
+    {
+        while (true)
+        {
+            Debug.Log("flicker start");
+            GetComponent<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(1f);
+            GetComponent<SpriteRenderer>().enabled = true;
+            Debug.Log("flicker end");
+        }
+    }
+    */
 
 }

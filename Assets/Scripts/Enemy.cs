@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
         }*/
     }
 
+    /*
     void OnCollisionStay2D(Collision2D other)
     {
         if ( (enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
@@ -82,7 +83,7 @@ public class Enemy : MonoBehaviour
             Physics.IgnoreCollision(player.GetComponent<Collider>(), this.GetComponent<Collider>());
         }
         */
-    }
+    //}
 
     public void TakeDamage(int dmg, bool isKilledByBomb)
     {

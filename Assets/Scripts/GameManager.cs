@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
 
         playerStats.IsRespawning = true;
 
-            float originalSpeed = pc.MoveSpeed;
+            float originalSpeed = 7.5f; //pc.MoveSpeed
             pc.MoveSpeed = 0f;
 
             weaponSystem.BombCount++;

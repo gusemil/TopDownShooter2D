@@ -90,7 +90,7 @@ public class EnemyWaves : MonoBehaviour
 
     private void OnGUI()
     {
-        /*
+        
         GUI.Label(new Rect(20, 270, 200, 40), "Enemies Spawned: " + enemiesSpawned);
         GUI.Label(new Rect(20, 290, 200, 40), "Wave Count: " + wave);
         GUI.Label(new Rect(20, 310, 200, 40), "CrabSpawnTimer: " + crabSpawnTimer);
@@ -100,7 +100,7 @@ public class EnemyWaves : MonoBehaviour
         GUI.Label(new Rect(20, 410, 200, 40), "CrabSpawnRate: " + crabSpawnRate);
         GUI.Label(new Rect(20, 430, 200, 40), "OctopusSpawnRate: " + octopusSpawnRate);
         GUI.Label(new Rect(20, 450, 200, 40), "JumperSpawnRate: " + jumperSpawnRate);
-        */
+        
     }
 
 

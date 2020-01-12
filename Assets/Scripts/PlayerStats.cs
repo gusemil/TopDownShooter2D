@@ -92,7 +92,7 @@ public class PlayerStats
     public PlayerStats()
     {
         hp = 1;
-        maxHp = 10;
+        maxHp = 1;
         damageMultiplier = 1;
         invulnerabilityTime = 0.25f;
         isHexDamageUp = false;
@@ -105,7 +105,7 @@ public class PlayerStats
         isGodModeUp = false;
     }
 
-
+    /*
     public void HealPlayer(int healAmount)
     {
         if (Hp < MaxHp)
@@ -120,6 +120,7 @@ public class PlayerStats
             }
         }
     }
+    */
 
     public void TakeDamage(int dmg)
     {
