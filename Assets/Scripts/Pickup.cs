@@ -33,7 +33,7 @@ public class Pickup : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         powerUpTimer = powerUpDuration;
         audioManager = AudioManager.instance;
-        pickupFlickerStart = pickupDestroyTime / 3;
+        pickupFlickerStart = pickupDestroyTime - (pickupDestroyTime / 3);
         //pickup = new Pickup();
     }
 
@@ -48,17 +48,11 @@ public class Pickup : MonoBehaviour
         if (pickupTimer >= pickupDestroyTime)
         {
             Destroy(gameObject);
-        }
-
-        /*
-        else if ((pickupTimer >= (pickupDestroyTime - pickupFlickerStart)) && !pickupFlickerOn)
-        {
-            Debug.Log("Pickupflicker fucntion");
+        } else if (pickupTimer >= pickupFlickerStart && !pickupFlickerOn) {
             pickupFlickerOn = true;
             StartCoroutine(PickupFlicker());
-            //pickupFlickerOn = false;
         }
-        */
+        
 
         if (isPowerUpOn) 
         {
@@ -283,18 +277,15 @@ public class Pickup : MonoBehaviour
         Destroy(gameObject);
     }*/
 
-        /*
+        
     private IEnumerator PickupFlicker()
     {
         while (true)
         {
-            Debug.Log("flicker start");
-            GetComponent<SpriteRenderer>().enabled = false;
-            yield return new WaitForSeconds(1f);
-            GetComponent<SpriteRenderer>().enabled = true;
-            Debug.Log("flicker end");
+            GetComponent<SpriteRenderer>().enabled =! GetComponent<SpriteRenderer>().enabled;
+            yield return new WaitForSeconds(0.025f * pickupTimer);
         }
     }
-    */
+    
 
 }
