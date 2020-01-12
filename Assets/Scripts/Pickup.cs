@@ -14,6 +14,7 @@ public class Pickup : MonoBehaviour
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
     private float pickupFlickerStart;
+    //private bool isFlickering = false;
     //private Color pickupColor;
     private float powerUpTimer;
     private string powerUpName;
@@ -280,7 +281,7 @@ public class Pickup : MonoBehaviour
         
     private IEnumerator PickupFlicker()
     {
-        while (true)
+        while (!isPickedUp)
         {
             GetComponent<SpriteRenderer>().enabled =! GetComponent<SpriteRenderer>().enabled;
             yield return new WaitForSeconds(0.025f * pickupTimer);
