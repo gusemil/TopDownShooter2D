@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         isEnemyDead = false;
         ps = GameManager.instance.PickupSystem;
 
-        moveSpeed += (float)enemyWaves.Wave * 0.5f;
+        moveSpeed += (float)enemyWaves.Wave * 0.25f;
     }
 
     void FixedUpdate()
