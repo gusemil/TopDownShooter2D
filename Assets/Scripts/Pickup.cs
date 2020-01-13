@@ -152,6 +152,7 @@ public class Pickup : MonoBehaviour
     private void ShieldPack(PlayerStats stats, Collider2D playerCollider)
     {
         audioManager.PlaySound(12);
+        audioManager.PlaySound(31, 1.25f);
         pc = playerCollider.GetComponent<PlayerController>();
         stats.IsShieldUp = true;
         pc.TurnOnShieldGraphic();
@@ -172,24 +173,28 @@ public class Pickup : MonoBehaviour
         if (gameObject.tag == "HexDamage")
         {
             audioManager.PlaySound(9);
+            audioManager.PlaySound(29,1.25f);
             player.IsHexDamageUp = true;
             pc.TurnOnHexDamageEffect();
             //pc.ChangePlayerColor(pc.HexDamageColor);
         } else if (gameObject.tag == "InfiniteAmmo")
         {
             audioManager.PlaySound(13);
+            audioManager.PlaySound(32, 1.25f);
             player.IsInfiniteAmmoUp = true;
             //pc.ChangePlayerColor(pc.InfiniteAmmoColor);
             pc.TurnOnInfiniteAmmoEffect();
         } else if (gameObject.tag == "InfiniteDash")
         {
             audioManager.PlaySound(10);
+            audioManager.PlaySound(30, 1.25f);
             player.IsInfiniteDashUp = true;
             pc.TurnOnInfiniteDashEffect();
             //pc.ChangePlayerColor(pc.InfiniteDashColor);
         } else if(gameObject.tag == "GodMode")
         {
             audioManager.PlaySound(14);
+            audioManager.PlaySound(33, 1.25f);
             player.IsGodModeUp = true;
             pc.TurnOnGodModeEffect();
             //pc.ChangePlayerColor(pc.GodModeColor);

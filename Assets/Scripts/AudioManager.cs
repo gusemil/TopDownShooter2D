@@ -54,6 +54,13 @@ public class AudioManager : MonoBehaviour
     //out of ammo
     public AudioClip outOfAmmo;
 
+    //powerup voicelines
+    public AudioClip hexDamageVoice;
+    public AudioClip infiniteDashVoice;
+    public AudioClip shieldVoice;
+    public AudioClip infiniteAmmoVoice;
+    public AudioClip godmodeVoice;
+
 
     //music tracks
     public AudioClip mainMenu;
@@ -124,7 +131,12 @@ public class AudioManager : MonoBehaviour
             completeLevel, //25
             button_click, //26
             enemyDeath, //27
-            outOfAmmo //28
+            outOfAmmo, //28
+            hexDamageVoice, //29
+            infiniteDashVoice, //30
+            shieldVoice, //31
+            infiniteAmmoVoice, //32
+            godmodeVoice //33
         };
 
         musicTracks = new AudioClip[]

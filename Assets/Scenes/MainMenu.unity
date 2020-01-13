@@ -1798,6 +1798,11 @@ MonoBehaviour:
   button_click: {fileID: 8300000, guid: 4f21baca2dbc3364eb9d0259aa28a1bb, type: 3}
   enemyDeath: {fileID: 8300000, guid: fa33015263fec144195d3730967f9f50, type: 3}
   outOfAmmo: {fileID: 8300000, guid: ba1bbdacb6fe5404cac6db8875060583, type: 3}
+  hexDamageVoice: {fileID: 8300000, guid: a348176e3cdaa4642926511922535814, type: 3}
+  infiniteDashVoice: {fileID: 8300000, guid: 57aca107b93398f469ab3f142898590d, type: 3}
+  shieldVoice: {fileID: 8300000, guid: b2fb7d179a967ba459fde7e05f382f7d, type: 3}
+  infiniteAmmoVoice: {fileID: 8300000, guid: 2fffebc38e0bed3489e9dd58e942719e, type: 3}
+  godmodeVoice: {fileID: 8300000, guid: e5313c058d3a32c4a99d5a496d58c242, type: 3}
   mainMenu: {fileID: 8300000, guid: 331b90d5f194c8d4b84f4c281f9c09ab, type: 3}
   level1: {fileID: 8300000, guid: d8fa5123cc91e9b4c81c09932f7354b1, type: 3}
   level2: {fileID: 8300000, guid: 6cd4095bf93b2d042a06f217fa0f16a1, type: 3}
