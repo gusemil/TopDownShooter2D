@@ -22,13 +22,14 @@ public class MainMenu : MonoBehaviour
 
     public GameObject level2button;
     public GameObject level3button;
-    public GameObject level4button;
+    //public GameObject level4button;
 
-
+        /*
     private void OnGUI()
     {
         GUI.Label(new Rect(200, 10, 200, 20), "Highest level unlocked: " + lvlManager.HighestUnlockedLevel);
     }
+    */
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class MainMenu : MonoBehaviour
     {
         levelChangePanel.SetActive(false);
         optionsPanel.SetActive(false);
-        AudioManager.instance.PlayMusic(0,0.75f);
+        AudioManager.instance.PlayMusic(0,0.5f);
 
         if (lvlManager.IsBloodOn)
         {
@@ -54,7 +55,6 @@ public class MainMenu : MonoBehaviour
 
         level2button.SetActive(false);
         level3button.SetActive(false);
-        level4button.SetActive(false);
     }
 
     // Update is called once per frame
@@ -104,23 +104,22 @@ public class MainMenu : MonoBehaviour
         lvlManager.Load(lvlManager);
         levelChangePanel.SetActive(true);
         buttonManager.SetActive(false);
-        Debug.Log("Highest unlocked level" + lvlManager.HighestUnlockedLevel);
 
         if (lvlManager.HighestUnlockedLevel >= 2)
         {
             level2button.SetActive(true);
+        } else
+        {
+            level2button.SetActive(false);
         }
 
         if (lvlManager.HighestUnlockedLevel >= 3)
         {
             level3button.SetActive(true);
-        }
-
-        if(lvlManager.HighestUnlockedLevel == 4)
+        } else
         {
-            level4button.SetActive(true);
+            level3button.SetActive(false);
         }
-
 
     }
 
