@@ -166,7 +166,7 @@ public class AudioManager : MonoBehaviour
         soundSource.PlayOneShot(audioClips[i], volume);
     }
 
-    public void PlayMusic(int i)
+    public void PlayMusic(int i, float volume)
     {
         //musicManager.PlayOneShot(musicTracks[i]);
         musicSource.Stop();

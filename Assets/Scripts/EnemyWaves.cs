@@ -88,23 +88,6 @@ public class EnemyWaves : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
-        
-        GUI.Label(new Rect(20, 270, 200, 40), "Enemies Spawned: " + enemiesSpawned);
-        GUI.Label(new Rect(20, 290, 200, 40), "Wave Count: " + wave);
-        GUI.Label(new Rect(20, 310, 200, 40), "CrabSpawnTimer: " + crabSpawnTimer);
-        GUI.Label(new Rect(20, 330, 200, 40), "OctopusSpawnTimer: " + octopusSpawnTimer);
-        GUI.Label(new Rect(20, 350, 200, 40), "JumperSpawnTimer: " + jumperSpawnTimer);
-        GUI.Label(new Rect(20, 370, 200, 40), "Enemies Alive: " + enemiesAlive);
-        GUI.Label(new Rect(20, 410, 200, 40), "CrabSpawnRate: " + crabSpawnRate);
-        GUI.Label(new Rect(20, 430, 200, 40), "OctopusSpawnRate: " + octopusSpawnRate);
-        GUI.Label(new Rect(20, 450, 200, 40), "JumperSpawnRate: " + jumperSpawnRate);
-        
-    }
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -211,10 +194,10 @@ public class EnemyWaves : MonoBehaviour
         {
             if(wave == 4)
             {
-                AudioManager.instance.PlayMusic(2);
+                AudioManager.instance.PlayMusic(2,1f);
             } else if(wave == 8)
             {
-                AudioManager.instance.PlayMusic(3);
+                AudioManager.instance.PlayMusic(3,1f);
             }
         }
     }

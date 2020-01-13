@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private Dash dash;
     private PickupSystem pickupSystem;
     private UIManager uiManager;
+    private LevelManager lvlManager;
     private bool isGameOver;
     private int lives;
     private float gameTime = 0f;
@@ -81,35 +82,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        lvlManager = FindObjectOfType<LevelManager>();
         uiManager.UpdateScore(instance);
         uiManager.UpdatePointMultiplierText(instance);
-
-        Debug.Log(LevelManager.instance.CurrentLevel);
-    }
-
-    void OnGUI()
-    {
-        /*
-        GUI.Label(new Rect(20, 10, 200, 20), "Pistol (1) " + weaponSystem.WeaponList[0].Ammo);
-        GUI.Label(new Rect(20, 30, 200, 20), "Machine Gun (2) " + weaponSystem.WeaponList[1].Ammo);
-        GUI.Label(new Rect(20, 50, 200, 20), "Shotgun (3) " + weaponSystem.WeaponList[2].Ammo);
-        GUI.Label(new Rect(20, 70, 200, 20), "Rocket Launcher (4) " + weaponSystem.WeaponList[3].Ammo);
-        GUI.Label(new Rect(20, 90, 200, 20), "FlameThrower (5) " + weaponSystem.WeaponList[4].Ammo);
-        GUI.Label(new Rect(20, 110, 200, 20), "Bombs (Right Click) " + weaponSystem.BombCount);
-        GUI.Label(new Rect(40, 150, 300, 40), "ESC to Pause, 'R' to Retry, SPACE to Dash");
-        GUI.Label(new Rect(20, 170, 200, 40), "Lives: " + lives);
-        GUI.Label(new Rect(20, 190, 200, 40), "Pause state: " + pause.IsPause);
-        GUI.Label(new Rect(20, 210, 200, 40), "Dashes: " + dash.Dashes);
-        GUI.Label(new Rect(20, 230, 200, 40), "Dashtimer: " + dash.DashTimer);
-        GUI.Label(new Rect(20, 250, 200, 40), "Game Time: " + gameTime);
-        GUI.Label(new Rect(20, 390, 200, 40), "Points: " + points);
-        */
-        /*
-        GUI.Label(new Rect(20, 470, 200, 40), "HexDamageOn " + playerStats.IsHexDamageUp);
-        GUI.Label(new Rect(20, 490, 200, 40), "InfiniteAmmoOn: " + playerStats.IsInfiniteAmmoUp);
-        GUI.Label(new Rect(20, 510, 200, 40), "PointsMultiplier " + pointsMultiplier);
-        GUI.Label(new Rect(20, 530, 200, 40), "PlayerStats ShieldUp " + playerStats.IsShieldUp);
-        */
     }
 
     // Update is called once per frame
@@ -269,8 +244,14 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator CompleteLevel()
     {
-        Debug.Log("winner is you");
         levelComplete = true;
+
+        if(lvlManager.HighestUnlockedLevel == lvlManager.CurrentLevel)
+        {
+            lvlManager.HighestUnlockedLevel++;
+            lvlManager.Save(lvlManager);
+            lvlManager.Load(lvlManager);
+        }
         StartCoroutine(uiManager.ShowLevelCompleteText(enemyWaves));
         //pause.TogglePause();
         AudioManager.instance.PlaySound(25);

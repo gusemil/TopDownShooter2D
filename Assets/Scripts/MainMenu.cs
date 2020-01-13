@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    private LevelManager lvlManager;
+
     public GameObject levelChangePanel;
     public GameObject buttonManager;
     public GameObject optionsPanel;
@@ -18,8 +20,20 @@ public class MainMenu : MonoBehaviour
     public GameObject soundSlider;
     public GameObject musicSlider;
 
+    public GameObject level2button;
+    public GameObject level3button;
+    public GameObject level4button;
+
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(200, 10, 200, 20), "Highest level unlocked: " + lvlManager.HighestUnlockedLevel);
+    }
+
     private void Awake()
     {
+        //saveManager = saveManager.Instance;
+        lvlManager = FindObjectOfType<LevelManager>();
         //soundSliderValue = 1;
         //musicSliderValue = 1;
     }
@@ -28,15 +42,19 @@ public class MainMenu : MonoBehaviour
     {
         levelChangePanel.SetActive(false);
         optionsPanel.SetActive(false);
-        AudioManager.instance.PlayMusic(0);
+        AudioManager.instance.PlayMusic(0,0.75f);
 
-        if (LevelManager.instance.IsBloodOn)
+        if (lvlManager.IsBloodOn)
         {
             bloodCheck.GetComponent<Toggle>().isOn = true;
         } else
         {
             bloodCheck.GetComponent<Toggle>().isOn = false;
         }
+
+        level2button.SetActive(false);
+        level3button.SetActive(false);
+        level4button.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,28 +67,28 @@ public class MainMenu : MonoBehaviour
     {
         LevelManager.instance.CurrentLevel = 1;
         SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(1);
+        AudioManager.instance.PlayMusic(1,1.5f);
     }
 
     public void PlayLevel2()
     {
         LevelManager.instance.CurrentLevel = 2;
         SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(2);
+        AudioManager.instance.PlayMusic(2,1f);
     }
 
     public void PlayLevel3()
     {
         LevelManager.instance.CurrentLevel = 3;
         SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(3);
+        AudioManager.instance.PlayMusic(3,1f);
     }
 
     public void PlayEndlessMode()
     {
         LevelManager.instance.CurrentLevel = 4;
         SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(1);
+        AudioManager.instance.PlayMusic(1,1f);
     }
 
     public void QuitGame()
@@ -80,9 +98,29 @@ public class MainMenu : MonoBehaviour
 
     public void ShowLevelMenu()
     {
+        
+        
         AudioManager.instance.PlaySound(26);
+        lvlManager.Load(lvlManager);
         levelChangePanel.SetActive(true);
         buttonManager.SetActive(false);
+        Debug.Log("Highest unlocked level" + lvlManager.HighestUnlockedLevel);
+
+        if (lvlManager.HighestUnlockedLevel >= 2)
+        {
+            level2button.SetActive(true);
+        }
+
+        if (lvlManager.HighestUnlockedLevel >= 3)
+        {
+            level3button.SetActive(true);
+        }
+
+        if(lvlManager.HighestUnlockedLevel == 4)
+        {
+            level4button.SetActive(true);
+        }
+
 
     }
 
@@ -110,14 +148,22 @@ public class MainMenu : MonoBehaviour
         buttonManager.SetActive(true);
     }
 
+    public void ResetSave()
+    {
+        AudioManager.instance.PlaySound(16);
+        lvlManager.HighestUnlockedLevel = 1;
+        lvlManager.Save(lvlManager);
+        lvlManager.Load(lvlManager);
+    }
+
     public void BloodToggle()
     {
         if (bloodCheck.GetComponent<Toggle>().isOn)
         {
-            LevelManager.instance.IsBloodOn = true;
+            lvlManager.IsBloodOn = true;
         } else
         {
-            LevelManager.instance.IsBloodOn = false;
+            lvlManager.IsBloodOn = false;
         }
     }
 
