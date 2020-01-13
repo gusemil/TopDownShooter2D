@@ -246,6 +246,11 @@ public class GameManager : MonoBehaviour
     {
         levelComplete = true;
 
+        if(lvlManager.HighestUnlockedLevel == 0)
+        {
+            lvlManager.HighestUnlockedLevel = 1;
+        }
+
         if(lvlManager.HighestUnlockedLevel == lvlManager.CurrentLevel)
         {
             lvlManager.HighestUnlockedLevel++;
