@@ -45,18 +45,14 @@ public class UIManager : MonoBehaviour
     public Text restartText;
 
     public GameObject pauseMenu;
-    public Text pauseText;
+    //public Text pauseText;
 
     public Text waveText;
-
-    /*
-    public Text powerUpText1;
-    public Text powerUpText2;
-    public Text powerUpText3;
-    public Text powerUpText4;
-    */
+    public Text PowerUpText;
 
     private float waveTextDuration = 3f;
+    private float powerUpTextDuration = 2f;
+    private float powerUpTextTimer;
     private LevelManager lvlManager;
 
     // Start is called before the first frame update
@@ -74,6 +70,8 @@ public class UIManager : MonoBehaviour
         gameOverPointsAmount.enabled = false;
         restartText.enabled = false;
         waveText.enabled = false;
+        PowerUpText.enabled = false;
+        powerUpTextTimer = powerUpTextDuration;
 
         /*
         powerUpText1.enabled = true;
@@ -137,6 +135,10 @@ public class UIManager : MonoBehaviour
             currentDash = dash1;
         }
 
+        if (PowerUpText.enabled)
+        {
+            powerUpTextTimer -= Time.deltaTime;
+        }
 
         DashUIUpdate(currentDash);
 
@@ -273,6 +275,28 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(waveTextDuration);
             waveText.enabled = false;
     }
+
+    public IEnumerator ShowPowerUpText(String powerUpName)
+    {
+        PowerUpText.enabled = true;
+
+        PowerUpText.text = powerUpName;
+
+        yield return new WaitForSeconds(powerUpTextDuration);
+        PowerUpText.enabled = false;
+        
+
+        /*
+        while(powerUpTextTimer >= 0)
+        {
+            PowerUpText.enabled = true;
+            PowerUpText.text = powerUpName;
+        }
+        */
+
+    }
+
+
 
     public IEnumerator ShowLevelCompleteText(EnemyWaves ew)
     {

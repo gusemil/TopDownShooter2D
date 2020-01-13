@@ -152,11 +152,13 @@ public class Pickup : MonoBehaviour
     private void ShieldPack(PlayerStats stats, Collider2D playerCollider)
     {
         audioManager.PlaySound(12);
-        audioManager.PlaySound(31, 1.25f);
+        audioManager.PlaySound(31, 1.5f);
+        StartCoroutine(uiManager.ShowPowerUpText("SHIELD"));
         pc = playerCollider.GetComponent<PlayerController>();
         stats.IsShieldUp = true;
         pc.TurnOnShieldGraphic();
-        Destroy(gameObject);
+        RemoveGraphicsAndCollider();
+        Destroy(gameObject,3f);
     }
 
     private IEnumerator PowerUp(PlayerStats player, Collider2D playerCollider)
@@ -166,37 +168,39 @@ public class Pickup : MonoBehaviour
         pc = playerCollider.GetComponent<PlayerController>();
 
         powerUpName = gameObject.tag;
-       // powerUpList.Add(pickup);
-
-        
+        // powerUpList.Add(pickup);
 
         if (gameObject.tag == "HexDamage")
         {
             audioManager.PlaySound(9);
-            audioManager.PlaySound(29,1.25f);
+            audioManager.PlaySound(29,1.5f);
             player.IsHexDamageUp = true;
             pc.TurnOnHexDamageEffect();
+            StartCoroutine(uiManager.ShowPowerUpText("HEX DAMAGE"));
             //pc.ChangePlayerColor(pc.HexDamageColor);
         } else if (gameObject.tag == "InfiniteAmmo")
         {
             audioManager.PlaySound(13);
-            audioManager.PlaySound(32, 1.25f);
+            audioManager.PlaySound(32, 1.5f);
             player.IsInfiniteAmmoUp = true;
             //pc.ChangePlayerColor(pc.InfiniteAmmoColor);
+            StartCoroutine(uiManager.ShowPowerUpText("INFINITE AMMO"));
             pc.TurnOnInfiniteAmmoEffect();
         } else if (gameObject.tag == "InfiniteDash")
         {
             audioManager.PlaySound(10);
-            audioManager.PlaySound(30, 1.25f);
+            audioManager.PlaySound(30, 1.5f);
             player.IsInfiniteDashUp = true;
             pc.TurnOnInfiniteDashEffect();
+            StartCoroutine(uiManager.ShowPowerUpText("INFINITE DASH"));
             //pc.ChangePlayerColor(pc.InfiniteDashColor);
         } else if(gameObject.tag == "GodMode")
         {
             audioManager.PlaySound(14);
-            audioManager.PlaySound(33, 1.25f);
+            audioManager.PlaySound(33, 1.5f);
             player.IsGodModeUp = true;
             pc.TurnOnGodModeEffect();
+            StartCoroutine(uiManager.ShowPowerUpText("GODLIKE"));
             //pc.ChangePlayerColor(pc.GodModeColor);
         }
 
