@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    private Pickup pickup;
     public float powerUpDuration;
 
     private PlayerController pc;
@@ -14,28 +13,17 @@ public class Pickup : MonoBehaviour
     private float pickupTimer = 0f;
     private bool isPickedUp = false;
     private float pickupFlickerStart;
-    //private bool isFlickering = false;
-    //private Color pickupColor;
     private float powerUpTimer;
     private string powerUpName;
     private UIManager uiManager;
     private AudioManager audioManager;
 
-    //private List<Pickup> powerUpList = new List<Pickup>();
-
-    //public List<Pickup> PowerUpList { get { return powerUpList; } set { powerUpList = value; } }
-
-    //public float PowerUpTimer { get { return powerUpTimer; } }
-    //public string PowerUpName { get { return powerUpName; } }
-
     private void Start()
     {
-        //pickupColor = gameObject.GetComponent<SpriteRenderer>().color;
         uiManager = FindObjectOfType<UIManager>();
         powerUpTimer = powerUpDuration;
         audioManager = AudioManager.instance;
         pickupFlickerStart = pickupDestroyTime - (pickupDestroyTime / 3);
-        //pickup = new Pickup();
     }
 
     private void Update()
@@ -49,23 +37,22 @@ public class Pickup : MonoBehaviour
         if (pickupTimer >= pickupDestroyTime)
         {
             Destroy(gameObject);
-        } else if (pickupTimer >= pickupFlickerStart && !pickupFlickerOn) {
+        }
+        else if (pickupTimer >= pickupFlickerStart && !pickupFlickerOn)
+        {
             pickupFlickerOn = true;
             StartCoroutine(PickupFlicker());
         }
-        
 
-        if (isPowerUpOn) 
+
+        if (isPowerUpOn)
         {
             powerUpTimer -= Time.deltaTime;
-           // uiManager.UpdatePowerUpText(powerUpTimer, powerUpName);
-            //Debug.Log(powerupTimer);
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //triggers even when colliding with an enemy
 
         if (other.tag == "Player")
         {
@@ -88,17 +75,17 @@ public class Pickup : MonoBehaviour
                 isPickedUp = true;
                 BombPack(weapon);
             }
-            else if(gameObject.tag == "PointMultiplier")
+            else if (gameObject.tag == "PointMultiplier")
             {
                 isPickedUp = true;
                 PointMultiplierPack();
             }
-            else if(gameObject.tag == "Shield" && !playerStats.IsShieldUp)
+            else if (gameObject.tag == "Shield" && !playerStats.IsShieldUp)
             {
                 isPickedUp = true;
                 ShieldPack(playerStats, other);
             }
-            else if(gameObject.tag == "InfiniteAmmo" && !playerStats.IsInfiniteAmmoUp)
+            else if (gameObject.tag == "InfiniteAmmo" && !playerStats.IsInfiniteAmmoUp)
             {
                 isPickedUp = true;
                 StartCoroutine(PowerUp(playerStats, other));
@@ -128,15 +115,13 @@ public class Pickup : MonoBehaviour
     {
         GameManager gm = GameManager.instance;
 
-        for(int i=0; i < weapon.WeaponList.Count; i++)
+        for (int i = 0; i < weapon.WeaponList.Count; i++)
         {
             weapon.WeaponList[i].Ammo += weapon.WeaponList[i].AmmoFromPickup;
-
         }
 
         uiManager.UpdateWeaponText(weapon.CurrentWeapon);
         audioManager.PlaySound(7);
-
         Destroy(gameObject);
     }
 
@@ -158,7 +143,7 @@ public class Pickup : MonoBehaviour
         stats.IsShieldUp = true;
         pc.TurnOnShieldGraphic();
         RemoveGraphicsAndCollider();
-        Destroy(gameObject,3f);
+        Destroy(gameObject, 3f);
     }
 
     private IEnumerator PowerUp(PlayerStats player, Collider2D playerCollider)
@@ -168,40 +153,38 @@ public class Pickup : MonoBehaviour
         pc = playerCollider.GetComponent<PlayerController>();
 
         powerUpName = gameObject.tag;
-        // powerUpList.Add(pickup);
 
         if (gameObject.tag == "HexDamage")
         {
             audioManager.PlaySound(9);
-            audioManager.PlaySound(29,1.5f);
+            audioManager.PlaySound(29, 1.5f);
             player.IsHexDamageUp = true;
             pc.TurnOnHexDamageEffect();
             StartCoroutine(uiManager.ShowPowerUpText("HEX DAMAGE"));
-            //pc.ChangePlayerColor(pc.HexDamageColor);
-        } else if (gameObject.tag == "InfiniteAmmo")
+        }
+        else if (gameObject.tag == "InfiniteAmmo")
         {
             audioManager.PlaySound(13);
             audioManager.PlaySound(32, 1.5f);
             player.IsInfiniteAmmoUp = true;
-            //pc.ChangePlayerColor(pc.InfiniteAmmoColor);
             StartCoroutine(uiManager.ShowPowerUpText("INFINITE AMMO"));
             pc.TurnOnInfiniteAmmoEffect();
-        } else if (gameObject.tag == "InfiniteDash")
+        }
+        else if (gameObject.tag == "InfiniteDash")
         {
             audioManager.PlaySound(10);
             audioManager.PlaySound(30, 1.5f);
             player.IsInfiniteDashUp = true;
             pc.TurnOnInfiniteDashEffect();
             StartCoroutine(uiManager.ShowPowerUpText("INFINITE DASH"));
-            //pc.ChangePlayerColor(pc.InfiniteDashColor);
-        } else if(gameObject.tag == "GodMode")
+        }
+        else if (gameObject.tag == "GodMode")
         {
             audioManager.PlaySound(14);
             audioManager.PlaySound(33, 1.5f);
             player.IsGodModeUp = true;
             pc.TurnOnGodModeEffect();
             StartCoroutine(uiManager.ShowPowerUpText("GODLIKE"));
-            //pc.ChangePlayerColor(pc.GodModeColor);
         }
 
 
@@ -232,7 +215,8 @@ public class Pickup : MonoBehaviour
                 }
                 player.IsHexDamageUp = false;
                 pc.TurnOffHexDamageEffect();
-            } else if (gameObject.tag == "InfiniteAmmo")
+            }
+            else if (gameObject.tag == "InfiniteAmmo")
             {
                 if (player.IsInfiniteAmmoUp)
                 {
@@ -245,12 +229,12 @@ public class Pickup : MonoBehaviour
             {
                 if (player.IsInfiniteDashUp)
                 {
-                    audioManager.PlaySound(16);          
+                    audioManager.PlaySound(16);
                 }
                 pc.TurnOffInfiniteDashEffect();
                 player.IsInfiniteDashUp = false;
             }
-            else if(gameObject.tag == "GodMode")
+            else if (gameObject.tag == "GodMode")
             {
                 if (!player.IsHexDamageUp)
                 {
@@ -263,7 +247,7 @@ public class Pickup : MonoBehaviour
                 }
                 pc.TurnOffGodModeEffect();
                 player.IsGodModeUp = false;
-                
+
             }
 
             isPowerUpOn = false;
@@ -271,8 +255,6 @@ public class Pickup : MonoBehaviour
             pc.ChangePlayerColor(pc.OriginalColor);
             Destroy(gameObject);
         }
-
-       // powerUpList.Remove(pickup);
     }
 
     private void RemoveGraphicsAndCollider()
@@ -281,21 +263,14 @@ public class Pickup : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
     }
 
-    /*
-    private void DestroyObject()
-    {
-        Destroy(gameObject);
-    }*/
-
-        
     private IEnumerator PickupFlicker()
     {
         while (!isPickedUp)
         {
-            GetComponent<SpriteRenderer>().enabled =! GetComponent<SpriteRenderer>().enabled;
+            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
             yield return new WaitForSeconds(0.025f * pickupTimer);
         }
     }
-    
+
 
 }

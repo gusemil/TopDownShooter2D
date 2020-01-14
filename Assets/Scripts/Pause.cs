@@ -17,7 +17,8 @@ public class Pause
         {
             Time.timeScale = 1;
             isPause = false;
-        } else
+        }
+        else
         {
             Time.timeScale = 0;
             isPause = true;

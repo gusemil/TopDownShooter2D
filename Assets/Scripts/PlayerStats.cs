@@ -105,33 +105,15 @@ public class PlayerStats
         isGodModeUp = false;
     }
 
-    /*
-    public void HealPlayer(int healAmount)
-    {
-        if (Hp < MaxHp)
-        {
-            if ((Hp + healAmount) > MaxHp)
-            {
-                Hp = MaxHp;
-            }
-            else
-            {
-                Hp += healAmount;
-            }
-        }
-    }
-    */
-
     public void TakeDamage(int dmg)
     {
-        if (!isDashing && !isInvulnerable) //don't take damage if player is dashing
+        if (!isDashing && !isInvulnerable) //preven damage if player is dashing
         {
             hp -= dmg;
 
-            if(hp <= 0 && !isShieldUp)
+            if (hp <= 0 && !isShieldUp)
             {
                 GameManager.instance.LoseLife();
-                //GameManager.status.Pause.TogglePause();
             }
         }
     }

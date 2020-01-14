@@ -8,15 +8,12 @@ public class BloodSplatter : MonoBehaviour
     private SpriteRenderer sr;
     private float bloodTimer;
 
-    // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         bloodTimer = bloodSplatterTimeToDestroy;
-        //sr.color = new Color(1f, 1f, 1f, 1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         bloodTimer -= Time.deltaTime;

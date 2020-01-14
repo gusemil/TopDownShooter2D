@@ -67,9 +67,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip level1;
     public AudioClip level2;
     public AudioClip level3;
-    //public AudioClip endlessMode;
 
-
+    //arrays
     public AudioClip[] audioClips;
     public AudioClip[] musicTracks;
 
@@ -83,22 +82,18 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        
-        if (instance == null) //jos status olio ei ole olemassa
+
+        if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            Debug.Log("creating audiomanager");
             instance = this;
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }
-        
-
-        //DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         audioClips = new AudioClip[]
@@ -144,17 +139,9 @@ public class AudioManager : MonoBehaviour
             mainMenu,
             level1,
             level2,
-            level3,
-            //endlessMode
+            level3
         };
     }
-
-    /*
-    public void PlaySound(AudioClip[] clips, int i)
-    {
-        audioSource.PlayOneShot(clips[i]);
-    }
-    */
 
     public void PlaySound(int i)
     {
@@ -168,17 +155,16 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(int i, float volume)
     {
-        //musicManager.PlayOneShot(musicTracks[i]);
         musicSource.Stop();
         musicSource.clip = musicTracks[i];
         currentTrack = musicTracks[i];
         musicSource.Play();
     }
 
-   
+
     public void StopMusic()
     {
         musicSource.Stop();
     }
-    
+
 }

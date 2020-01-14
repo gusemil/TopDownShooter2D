@@ -25,13 +25,12 @@ public class GameManager : MonoBehaviour
     private bool levelComplete;
 
 
-    public static GameManager instance; //singleton pattern
+    public static GameManager instance; //singleton
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
     public WeaponSystem WeaponSystem { get { return weaponSystem; } }
     public EnemyWaves EnemyWaves { get { return enemyWaves; } }
     public PickupSystem PickupSystem { get { return pickupSystem; } }
-    //public UIManager UIManager { get { return uiManager; } }
     public int Lives { get { return lives; } }
     public Dash Dash { get { return dash; } }
     public GameObject playerObject;
@@ -45,14 +44,16 @@ public class GameManager : MonoBehaviour
     public float GameTime { get { return gameTime; } }
     public bool LevelComplete { get { return levelComplete; } }
     public int Points { get { return points; } set { points = value; } }
-    public int PointsMultiplier { get { return pointsMultiplier; }
-        set { pointsMultiplier = value; } }
-    
+    public int PointsMultiplier
+    {
+        get { return pointsMultiplier; }
+        set { pointsMultiplier = value; }
+    }
+
     void Awake()
     {
-        if (instance == null) //jos status olio ei ole olemassa
+        if (instance == null)
         {
-            //DontDestroyOnLoad(gameObject);
             instance = this;
         }
         else
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
         dash = new Dash();
         enemyWaves = new EnemyWaves();
         pickupSystem = new PickupSystem();
-        
+
         lives = 3;
         respawnTime = 1f;
         points = 0;
@@ -74,11 +75,8 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         Time.timeScale = 1;
         levelComplete = false;
-        //pause.IsPause = false
-        //Time.timeScale
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -87,53 +85,35 @@ public class GameManager : MonoBehaviour
         uiManager.UpdatePointMultiplierText(instance);
     }
 
-    // Update is called once per frame
     void Update()
-    { 
-        
-
+    {
         if (!isGameOver)
         {
             gameTime += Time.deltaTime;
 
             if (Input.GetKeyDown(KeyCode.Escape) && !pause.IsPause)
             {
-                //pause.TogglePause();
-                //uiManager.ToggleGameOverScreen(instance);
                 pause.TogglePause();
                 uiManager.TogglePauseText(pause);
             }
 
-            /*
-            else if (Input.GetKeyDown(KeyCode.Escape) && isGameOver)
-            {
-                //pause.TogglePause();
-                SceneManager.LoadScene("MainMenu");
-            }
-            */
-
             else if (Input.GetKeyDown(KeyCode.Escape) && pause.IsPause)
             {
-                //pause.TogglePause();
-                //uiManager.ToggleGameOverScreen(instance);
                 pause.TogglePause();
                 uiManager.TogglePauseText(pause);
             }
 
             else if (Input.GetKeyDown(KeyCode.Space) && pause.IsPause)
             {
-                //pause.TogglePause();
-                //uiManager.ToggleGameOverScreen(instance);
                 pause.TogglePause();
                 AudioManager.instance.soundSource.Stop();
                 SceneManager.LoadScene("MainMenu");
             }
-        } else
+        }
+        else
         {
             if (Input.GetKeyDown(KeyCode.Escape) && (pause.IsPause))
             {
-                //pause.TogglePause();
-                //uiManager.ToggleGameOverScreen(instance);
                 pause.TogglePause();
                 AudioManager.instance.soundSource.Stop();
                 SceneManager.LoadScene("MainMenu");
@@ -157,8 +137,8 @@ public class GameManager : MonoBehaviour
         playerObject.GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(3f);
         uiManager.ShowGameOverScreen();
-            isGameOver = true;
-            GameManager.instance.Pause.TogglePause();
+        isGameOver = true;
+        GameManager.instance.Pause.TogglePause();
     }
 
     public void LoseLife()
@@ -171,7 +151,8 @@ public class GameManager : MonoBehaviour
             uiManager.UpdateLives(instance);
             StartCoroutine(Respawn());
 
-        } else
+        }
+        else
         {
             StartCoroutine(GameOver());
         }
@@ -185,19 +166,19 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-            PlayerController pc = playerObject.GetComponent<PlayerController>();
+        PlayerController pc = playerObject.GetComponent<PlayerController>();
 
-            playerObject.GetComponent<SpriteRenderer>().enabled = false;
-            playerObject.GetComponent<Collider2D>().enabled = false;
+        playerObject.GetComponent<SpriteRenderer>().enabled = false;
+        playerObject.GetComponent<Collider2D>().enabled = false;
 
         playerStats.IsRespawning = true;
 
-            float originalSpeed = 7.5f; //pc.MoveSpeed
-            pc.MoveSpeed = 0f;
+        float originalSpeed = 7.5f;
+        pc.MoveSpeed = 0f;
 
-            weaponSystem.BombCount++;
-            weaponSystem.Bomb();
-            PlayerStats.Hp = 1;
+        weaponSystem.BombCount++;
+        weaponSystem.Bomb();
+        PlayerStats.Hp = 1;
         playerStats.IsHexDamageUp = false;
         playerStats.IsInfiniteAmmoUp = false;
         playerStats.IsInfiniteDashUp = false;
@@ -205,16 +186,13 @@ public class GameManager : MonoBehaviour
         pointsMultiplier = 1;
         pc.ChangePlayerColor(pc.OriginalColor);
 
-        uiManager.UpdatePointMultiplierText(instance);
-        uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
-        uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
-        uiManager.UpdateBombText(weaponSystem);
+        UpdateUI();
 
         yield return new WaitForSeconds(respawnTime);
 
-            pc.MoveSpeed = originalSpeed;
-            playerObject.GetComponent<SpriteRenderer>().enabled = true;
-            playerObject.GetComponent<Collider2D>().enabled = true;
+        pc.MoveSpeed = originalSpeed;
+        playerObject.GetComponent<SpriteRenderer>().enabled = true;
+        playerObject.GetComponent<Collider2D>().enabled = true;
         playerStats.IsRespawning = false;
     }
 
@@ -224,7 +202,6 @@ public class GameManager : MonoBehaviour
         {
             pause.TogglePause();
         }
-        //uiManager.ToggleGameOverScreen(instance);
         isGameOver = false;
         enemyWaves.CrabSpawnTimer = 0;
         enemyWaves.JumperSpawnTimer = 0;
@@ -234,10 +211,7 @@ public class GameManager : MonoBehaviour
         weaponSystem.BombCount = 1;
         playerStats = new PlayerStats(); //reset player stats
         weaponSystem.ChangeWeapon(0);
-        uiManager.UpdatePointMultiplierText(instance);
-        uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
-        uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
-        uiManager.UpdateBombText(weaponSystem);
+        UpdateUI();
         SceneManager.LoadScene(1);
         AudioManager.instance.musicSource.Play();
     }
@@ -246,27 +220,33 @@ public class GameManager : MonoBehaviour
     {
         levelComplete = true;
 
-        if(lvlManager.HighestUnlockedLevel == 0)
+        if (lvlManager.HighestUnlockedLevel == 0)
         {
             lvlManager.HighestUnlockedLevel = 1;
         }
 
-        if(lvlManager.HighestUnlockedLevel == lvlManager.CurrentLevel)
+        if (lvlManager.HighestUnlockedLevel == lvlManager.CurrentLevel)
         {
             lvlManager.HighestUnlockedLevel++;
             lvlManager.Save(lvlManager);
             lvlManager.Load(lvlManager);
         }
+
         StartCoroutine(uiManager.ShowLevelCompleteText(enemyWaves));
-        //pause.TogglePause();
         AudioManager.instance.PlaySound(25);
         yield return new WaitForSeconds(3f);
         AudioManager.instance.StopMusic();
-        //pause.TogglePause();
-        //GameOver();
         uiManager.ShowGameOverScreen();
         isGameOver = true;
         GameManager.instance.Pause.TogglePause();
+    }
+
+    private void UpdateUI()
+    {
+        uiManager.UpdatePointMultiplierText(instance);
+        uiManager.UpdateWeaponText(weaponSystem.CurrentWeapon);
+        uiManager.UpdateWeaponImage(weaponSystem.CurrentWeapon);
+        uiManager.UpdateBombText(weaponSystem);
     }
 
 

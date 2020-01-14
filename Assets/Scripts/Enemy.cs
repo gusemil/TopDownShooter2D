@@ -8,20 +8,14 @@ public class Enemy : MonoBehaviour
     public int damage;
     public float moveSpeed;
     public int enemyPointValue;
-    public bool shooterEnemy;
+
     private GameObject player;
     private Vector2 direction;
     private float enemyDamageTimer = 0;
     private float enemyDamageCooldown = 0.5f;
     private float enemyDeathVolume = 0.5f;
     private Rigidbody2D rb2D;
-
-    private float stopDistance = 7.5f;
-    private float retreatDistance = 5f;
-    private float playerEnemyDistance;
-
-    public bool isEnemyDead;
-
+    private bool isEnemyDead;
     private PlayerStats playerStats;
     private EnemyWaves enemyWaves;
     private GameManager gm;
@@ -31,7 +25,6 @@ public class Enemy : MonoBehaviour
     public GameObject bloodParticleEffect;
     public GameObject bloodSplatter;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -50,7 +43,6 @@ public class Enemy : MonoBehaviour
         EnemyMovementTowardsPlayer();
     }
 
-    // Update is called once per frame
     void Update()
     {
         enemyDamageTimer += Time.deltaTime;
@@ -58,32 +50,12 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if ( (enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
+        if ((enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
         {
             DamagePlayerOnCollision(other);
             enemyDamageTimer = 0;
         }
-        /*else if (playerStats.IsDashing && other.gameObject.tag == "Player")
-        {
-            Physics.IgnoreCollision(player.GetComponent<Collider>(),this.GetComponent<Collider>());
-        }*/
     }
-
-    /*
-    void OnCollisionStay2D(Collision2D other)
-    {
-        if ( (enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
-        {
-            DamagePlayerOnCollision(other);
-            enemyDamageTimer = 0;
-        }
-        /*
-        else if (playerStats.IsDashing && other.gameObject.tag == "Player")
-        {
-            Physics.IgnoreCollision(player.GetComponent<Collider>(), this.GetComponent<Collider>());
-        }
-        */
-    //}
 
     public void TakeDamage(int dmg, bool isKilledByBomb)
     {
@@ -113,20 +85,20 @@ public class Enemy : MonoBehaviour
     {
         AudioManager.instance.PlaySound(27, enemyDeathVolume);
         GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
-        Destroy(effect, 0.3f); //hit effect tuhoutuu 0.1sek
+        Destroy(effect, 0.3f);
     }
 
     private void BloodEffect()
     {
-            GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
-            GameObject burst = Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
-            GameObject splatter = Instantiate(bloodSplatter, transform.position, Quaternion.identity);
-            Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
+        GameObject effect = Instantiate(deathAnimation, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        GameObject burst = Instantiate(bloodParticleEffect, transform.position, Quaternion.identity);
+        GameObject splatter = Instantiate(bloodSplatter, transform.position, Quaternion.identity);
+        Destroy(effect, 0.2f);
     }
 
     public void DamagePlayerOnCollision(Collision2D other)
     {
-            PlayerStats playerStats = GameManager.instance.PlayerStats;
+        PlayerStats playerStats = GameManager.instance.PlayerStats;
 
         if (playerStats.IsGodModeUp || playerStats.IsInvulnerable)
         {
@@ -139,7 +111,8 @@ public class Enemy : MonoBehaviour
             AudioManager.instance.PlaySound(17); //shield break
             other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();
             playerStats.IsShieldUp = false;
-        } else
+        }
+        else
         {
             TakeDamage(hp, true);
             other.gameObject.GetComponent<PlayerController>().TurnOffHexDamageEffect();
@@ -151,54 +124,9 @@ public class Enemy : MonoBehaviour
 
     void EnemyMovementTowardsPlayer()
     {
-
-        playerEnemyDistance = Vector2.Distance(player.transform.position, this.transform.position);
-        int multiplier;
-
-        if (shooterEnemy)
-        {
-            multiplier = -1;
-        }
-        else
-        {
-            multiplier = 1;
-        }
-
-        if (!shooterEnemy || (shooterEnemy && playerEnemyDistance < retreatDistance))
-        {
-            direction = player.transform.position - transform.position; //direction vector to player position
-            direction.Normalize(); //convert to unit vector
-            transform.Translate(direction * multiplier * moveSpeed * Time.deltaTime);
-        }
-        else if (shooterEnemy)
-        {
-
-            if (playerEnemyDistance > stopDistance) //liian kaukana
-            {
-                direction = player.transform.position - transform.position; //direction vector to player position
-                direction.Normalize(); //convert to unit vector
-
-                transform.Translate(direction * moveSpeed * Time.deltaTime);
-
-                //lähestytään pelaajaa
-            }
-            else if (playerEnemyDistance > stopDistance && playerEnemyDistance > retreatDistance) //sopiva etäisyys
-            {
-                transform.position = transform.position;
-                //pysähdytään
-            }
-            /*
-            else if (playerEnemyDistance < retreatDistance)
-            {
-                direction = player.transform.position - transform.position; //direction vector to player position
-                direction.Normalize(); //convert to unit vector
-
-                transform.Translate(direction * -moveSpeed * Time.deltaTime);
-                //paetaan
-            }
-            */
-
-        }
+        direction = player.transform.position - transform.position; //direction vector to player position
+        direction.Normalize(); //convert to unit vector
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
     }
-
 }
+

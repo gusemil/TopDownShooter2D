@@ -7,21 +7,20 @@ public class EnemyWaves : MonoBehaviour
     private static float crabSpawnTimer = 0;
     private static float jumperSpawnTimer = 0;
     private static float octopusSpawnTimer = 0;
-    private float crabSpawnRate = 1f; //0.5f
-    private float jumperSpawnRate = 5f; //5f
-    private float octopusSpawnRate = 3f; //3f
+    private float crabSpawnRate = 1f;
+    private float jumperSpawnRate = 5f;
+    private float octopusSpawnRate = 3f;
     private static bool isSpawningPaused;
     private static int enemiesAlive;
-
     private static int enemiesSpawned;
     private int enemiesPerWave;
     private static int wave;
     private float waveSpawnDelay = -5f;
     private static int maxWaves;
 
-    //private GameManager gameManager;
     private UIManager uiManager;
     private LevelManager lvlManager;
+    private List<GameObject> spawnPoints = new List<GameObject>();
 
     public GameObject spawnNorth;
     public GameObject spawnEast;
@@ -45,9 +44,6 @@ public class EnemyWaves : MonoBehaviour
     public int Wave { get { return wave; } set { wave = value; } }
     public int MaxWaves { get { return maxWaves; } }
 
-    private List<GameObject> spawnPoints = new List<GameObject>();
-
-    // Start is called before the first frame update
     void Start()
     {
         spawnPoints.Add(spawnNorth);
@@ -64,37 +60,26 @@ public class EnemyWaves : MonoBehaviour
         enemiesPerWave = 20;
         enemiesAlive = 0;
         isSpawningPaused = false;
-        //gameManager = GameManager.instance;
         uiManager = FindObjectOfType<UIManager>();
         lvlManager = LevelManager.instance;
 
-        if(lvlManager.CurrentLevel == 1)
+        if (lvlManager.CurrentLevel == 1)
         {
             maxWaves = 3;
-            //GameManager.instance.Pause.TogglePause();
-            //uiManager.TogglePauseText(GameManager.instance.Pause);
-            //uiManager.pauseMenu.SetActive(true);
-            /*
-            pause.TogglePause();
-            uiManager.TogglePauseText(pause);
-            */
         }
-        else if(lvlManager.CurrentLevel == 2)
+        else if (lvlManager.CurrentLevel == 2)
         {
             maxWaves = 5;
-        } else if(lvlManager.CurrentLevel == 3)
+        }
+        else if (lvlManager.CurrentLevel == 3)
         {
             maxWaves = 7;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //if (gameManager.IsGameOver)
-        //{
-
-        if ( isSpawningPaused && enemiesAlive == 0 && enemiesSpawned == 0)
+        if (isSpawningPaused && enemiesAlive == 0 && enemiesSpawned == 0)
         {
             NextWave();
         }
@@ -103,12 +88,10 @@ public class EnemyWaves : MonoBehaviour
         {
             crabSpawnTimer += Time.deltaTime;
 
-            if(lvlManager.CurrentLevel >= 2)
+            if (lvlManager.CurrentLevel >= 2)
             {
                 jumperSpawnTimer += Time.deltaTime;
             }
-
-            //jumperSpawnTimer += Time.deltaTime;
 
             if (lvlManager.CurrentLevel >= 3)
             {
@@ -116,93 +99,80 @@ public class EnemyWaves : MonoBehaviour
             }
         }
 
-            if (crabSpawnTimer >= crabSpawnRate)
-            {
-                crabSpawnTimer = 0;
-                SpawnEnemy(crab);
-            }
-
-            if (jumperSpawnTimer >= jumperSpawnRate && lvlManager.CurrentLevel >= 2)
-            {
-                jumperSpawnTimer = 0;
-                SpawnEnemy(jumper);
-            }   
-
-            if (octopusSpawnTimer >= octopusSpawnRate && lvlManager.CurrentLevel >= 3)
-            {
-                octopusSpawnTimer = 0;
-                SpawnEnemy(octopus);
-            }
-
-            /*
-        if (Input.GetKeyUp(KeyCode.N))
+        if (crabSpawnTimer >= crabSpawnRate)
         {
-            NextWave();
+            crabSpawnTimer = 0;
+            SpawnEnemy(crab);
         }
-        */
-        
+
+        if (jumperSpawnTimer >= jumperSpawnRate && lvlManager.CurrentLevel >= 2)
+        {
+            jumperSpawnTimer = 0;
+            SpawnEnemy(jumper);
+        }
+
+        if (octopusSpawnTimer >= octopusSpawnRate && lvlManager.CurrentLevel >= 3)
+        {
+            octopusSpawnTimer = 0;
+            SpawnEnemy(octopus);
+        }
+
     }
 
     public void SpawnEnemy(GameObject enemyType)
     {
-        //Lista vihollisista myöhemmin
-
-        Instantiate(enemyType, spawnPoints[Random.Range(0,spawnPoints.Count)].transform.position, Quaternion.identity); //Quaternion.identity = no rotation
+        Instantiate(enemyType, spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position, Quaternion.identity); //Quaternion.identity = no rotation
         enemiesSpawned++;
         enemiesAlive++;
 
-        if(enemiesSpawned >= enemiesPerWave * wave)
+        if (enemiesSpawned >= enemiesPerWave * wave)
         {
             StopSpawning();
         }
-        /*else
-        {
-            isSpawningPaused = false;
-            //ContinueSpawning();
-        }*/
-
     }
 
-    
+
     public void NextWave()
     {
         isSpawningPaused = false;
         wave++;
         AudioManager.instance.PlaySound(24);
-        
-            crabSpawnTimer = waveSpawnDelay;
-            jumperSpawnTimer = waveSpawnDelay;
-            octopusSpawnTimer = waveSpawnDelay;
+
+        crabSpawnTimer = waveSpawnDelay;
+        jumperSpawnTimer = waveSpawnDelay;
+        octopusSpawnTimer = waveSpawnDelay;
 
         if (crabSpawnRate > 0.1f)
             crabSpawnRate -= 0.1f;
 
-        if(jumperSpawnRate > 1f)
+        if (jumperSpawnRate > 1f)
             jumperSpawnRate -= 0.5f;
 
-        if(octopusSpawnRate > 0.5f)
+        if (octopusSpawnRate > 0.5f)
             octopusSpawnRate -= 0.25f;
 
-        if(lvlManager.CurrentLevel != 4 && wave > maxWaves)
+        if (lvlManager.CurrentLevel != 4 && wave > maxWaves)
         {
             StartCoroutine(GameManager.instance.CompleteLevel());
-        } else
+        }
+        else
         {
             StartCoroutine(uiManager.ShowWaveText(GameManager.instance.EnemyWaves));
         }
 
-        if(lvlManager.CurrentLevel == 4)
+        if (lvlManager.CurrentLevel == 4)
         {
-            if(wave == 4)
+            if (wave == 4)
             {
-                AudioManager.instance.PlayMusic(2,1f);
-            } else if(wave == 8)
+                AudioManager.instance.PlayMusic(2, 1f);
+            }
+            else if (wave == 8)
             {
-                AudioManager.instance.PlayMusic(3,1f);
+                AudioManager.instance.PlayMusic(3, 1f);
             }
         }
     }
-    
+
 
     public void StopSpawning()
     {

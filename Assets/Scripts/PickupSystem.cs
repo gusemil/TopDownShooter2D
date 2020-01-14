@@ -14,12 +14,10 @@ public class PickupSystem : MonoBehaviour
     public GameObject godModePreFab;
 
     private static List<GameObject> pickupList = new List<GameObject>();
-    private const float pickupDropChance = 10f; //10f default
-    private GameManager gm;
+    private const float pickupDropChance = 10f;
 
     public List<GameObject> PickupList { get { return pickupList; } set { pickupList = value; } }
 
-    // Start is called before the first frame update
     void Start()
     {
         pickupList.Add(pointMultiplierPreFab);
@@ -30,13 +28,11 @@ public class PickupSystem : MonoBehaviour
         pickupList.Add(shieldPreFab);
         pickupList.Add(infiniteAmmoPreFab);
         pickupList.Add(godModePreFab);
-
-        gm = GameManager.instance;
     }
 
     public void SpawnPickUpFromEnemy(GameObject enemy)
     {
-        if(Random.Range(0,99) < pickupDropChance)
+        if (Random.Range(0, 99) < pickupDropChance)
         {
             RandomPickupToDrop(enemy);
         }
@@ -46,31 +42,38 @@ public class PickupSystem : MonoBehaviour
     {
         float random = Random.Range(0, 99);
 
-        if(random < 30)
+        if (random < 30)
         {
             Instantiate(pickupList[0], enemy.transform.position, Quaternion.identity); //point
-        } else if (random >= 30 && random < 60)
+        }
+        else if (random >= 30 && random < 60)
         {
             Instantiate(pickupList[1], enemy.transform.position, Quaternion.identity); //ammo
-        } else if (random >= 60 && random < 70)
+        }
+        else if (random >= 60 && random < 70)
         {
             Instantiate(pickupList[2], enemy.transform.position, Quaternion.identity); //hexDamage
-        } else if(random >= 70 && random < 77.5)
+        }
+        else if (random >= 70 && random < 77.5)
         {
             Instantiate(pickupList[3], enemy.transform.position, Quaternion.identity); //infiniteDash
-        } else if (random >= 77.5 && random < 85)
+        }
+        else if (random >= 77.5 && random < 85)
         {
             Instantiate(pickupList[4], enemy.transform.position, Quaternion.identity); //bomb
-        } else if (random >= 85 && random < 92.5)
+        }
+        else if (random >= 85 && random < 92.5)
         {
             Instantiate(pickupList[5], enemy.transform.position, Quaternion.identity); //shield
-        } else if (random >= 92.5 && random < 97.5)
+        }
+        else if (random >= 92.5 && random < 97.5)
         {
-                Instantiate(pickupList[6], enemy.transform.position, Quaternion.identity); //infiniteAmmo
+            Instantiate(pickupList[6], enemy.transform.position, Quaternion.identity); //infiniteAmmo
 
-        } else if (random >= 97.5 && random < 100)
+        }
+        else if (random >= 97.5 && random < 100)
         {
-                Instantiate(pickupList[7], enemy.transform.position, Quaternion.identity); //GodMode
+            Instantiate(pickupList[7], enemy.transform.position, Quaternion.identity); //GodMode
         }
     }
 }

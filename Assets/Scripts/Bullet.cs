@@ -8,14 +8,12 @@ public class Bullet : MonoBehaviour
     public GameObject explosion;
     public Sprite missile;
     public Sprite flame;
-    //public ParticleSystem flame;
 
     private bool isProjectileAlive;
     private int totalProjectileDamage;
     private float SplashDamageRadius;
     private float projectileLifeTime;
     private string nameOfWeaponShot;
-
     private WeaponSystem weapon;
 
     private void Awake()
@@ -34,13 +32,13 @@ public class Bullet : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x / 2f, transform.localScale.x / 3f, transform.localScale.x / 2f);
         }
 
-        
-        if(nameOfWeaponShot == "Flamethrower")
+
+        if (nameOfWeaponShot == "Flamethrower")
         {
             GetComponent<SpriteRenderer>().sprite = flame;
             transform.localScale = new Vector3(transform.localScale.x * 0.6f, transform.localScale.x * 0.6f, transform.localScale.x * 0.6f);
         }
-        
+
 
         if (playerStats.IsGodModeUp && nameOfWeaponShot != "Rocket Launcher")
         {
@@ -76,23 +74,20 @@ public class Bullet : MonoBehaviour
         if (nameOfWeaponShot != "Rocket Launcher")
         {
             effect = Instantiate(hitEffect, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
-        } else
+        }
+        else
         {
             effect = Instantiate(explosion, transform.position, Quaternion.identity); //Quaternion.identity = no rotation
             weapon.PlayRocketExplosionSound();
         }
 
-        
-        Destroy(effect, 0.2f); //hit effect tuhoutuu 0.1sek
-        Destroy(gameObject); //tuhotaan bullet collisionissa
-         
+        Destroy(effect, 0.2f);
+        Destroy(gameObject);
 
-        //Tee tägeillä mielummin?
-
-        if (collision.transform.GetComponent<Enemy>()) //osuu viholliseen
+        if (collision.transform.GetComponent<Enemy>())
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
-            enemy.TakeDamage(totalProjectileDamage,false);
+            enemy.TakeDamage(totalProjectileDamage, false);
         }
 
         //Splash damage
@@ -104,7 +99,7 @@ public class Bullet : MonoBehaviour
             {
                 if (SplashDamageRadius >= Vector2.Distance(transform.position, enemy.transform.position))
                 {
-                    enemy.GetComponent<Enemy>().TakeDamage(totalProjectileDamage,false);
+                    enemy.GetComponent<Enemy>().TakeDamage(totalProjectileDamage, false);
                 }
             }
         }

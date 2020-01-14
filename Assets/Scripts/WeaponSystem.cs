@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class WeaponSystem : MonoBehaviour
 {
-    //public static WeaponSystem instance;
-
     private int weaponIndex;
     private float bombSpawnDelay = -1f;
     private PlayerStats stats;
     private float gunVolume = 0.3f;
     private float heavyGunVolume = 0.5f;
-    //private UIManager uiManager;
 
     public static int bombCount;
     public static Weapon currentWeapon;
@@ -29,9 +26,6 @@ public class WeaponSystem : MonoBehaviour
     Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.75f, 5, 12f, 9f, 2);
     Weapon flameThrower = new Weapon("Flamethrower", 4, 100, 30f, 0.01f, 50, 1f, 0.3f, 100);
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         weaponList = new List<Weapon>();
@@ -40,12 +34,12 @@ public class WeaponSystem : MonoBehaviour
         weaponList.Add(machineGun);
         weaponList.Add(shotgun);
 
-        if(LevelManager.instance.CurrentLevel >= 2)
+        if (LevelManager.instance.CurrentLevel >= 2)
         {
             WeaponList.Add(rocketLauncher);
         }
 
-        if(LevelManager.instance.CurrentLevel >= 3)
+        if (LevelManager.instance.CurrentLevel >= 3)
         {
             WeaponList.Add(flameThrower);
         }
@@ -57,62 +51,17 @@ public class WeaponSystem : MonoBehaviour
         bombCount = 1;
 
         stats = GameManager.instance.PlayerStats;
-        //uiManager = FindObjectOfType<UIManager>();
-        //ui = FindObjectOfType<UIManager>();
-        /*
-        if(FindObjectOfType<UIManager>() == true)
-        {
-            Debug.Log("UI found!");
-        }
-        */
     }
 
-    // Update is called once per frame
     void Update()
     {
         shotTimer += Time.deltaTime;
-
-        /*
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            ChangePreviousWeapon();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            ChangeNextWeapon();
-        }
-        */ 
     }
-
-    /*
-    public void ChangePreviousWeapon()
-    {
-        weaponIndex--;
-
-        if (weaponIndex < 0)
-            weaponIndex = weaponList.Count - 1;
-
-        currentWeapon = weaponList[weaponIndex];
-    }
-
-    public void ChangeNextWeapon()
-    {
-        weaponIndex++;
-
-        if (weaponIndex > WeaponList.Count - 1)
-            weaponIndex = 0;
-
-        currentWeapon = weaponList[weaponIndex];
-    }
-    */
 
     public void ChangeWeapon(int weaponChoice)
     {
         weaponIndex = weaponChoice;
         currentWeapon = weaponList[weaponIndex];
-
-        //uiManager.UpdateWeaponText(GameManager.instance.WeaponSystem.CurrentWeapon);
     }
 
     public void LoseAmmo()
@@ -121,8 +70,6 @@ public class WeaponSystem : MonoBehaviour
         {
             currentWeapon.Ammo--;
         }
-
-        //uiManager.UpdateWeaponText(GameManager.instance.WeaponSystem.CurrentWeapon);
     }
 
     public void Bomb()
@@ -133,27 +80,20 @@ public class WeaponSystem : MonoBehaviour
 
             foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(500,true);
+                enemy.GetComponent<Enemy>().TakeDamage(500, true);
             }
 
             EnemyWaves ew = GameManager.instance.EnemyWaves;
 
             if (!ew.IsSpawningPaused)
             {
-               ew.CrabSpawnTimer = bombSpawnDelay;
-               ew.JumperSpawnTimer = bombSpawnDelay;
-               ew.OctopusSpawnTimer = bombSpawnDelay;
+                ew.CrabSpawnTimer = bombSpawnDelay;
+                ew.JumperSpawnTimer = bombSpawnDelay;
+                ew.OctopusSpawnTimer = bombSpawnDelay;
             }
 
             LoseBomb();
-
             PlayBombSound();
-            /*
-            if (ew.IsSpawningPaused && ew.EnemiesAlive == 0 && ew.EnemiesSpawned == 0)
-            {
-                ew.NextWave();
-            }
-            */
         }
     }
 
@@ -165,10 +105,9 @@ public class WeaponSystem : MonoBehaviour
         }
     }
 
-    
+
     public void PlayWeaponSound(string weaponName)
     {
-        Debug.Log("Current weapon" + weaponName);
         if (weaponName == "Pistol")
             AudioManager.instance.PlaySound(0, gunVolume);
         else if (weaponName == "Machine Gun")
@@ -188,13 +127,13 @@ public class WeaponSystem : MonoBehaviour
 
     public void PlayRocketExplosionSound()
     {
-        AudioManager.instance.PlaySound(6,heavyGunVolume);
+        AudioManager.instance.PlaySound(6, heavyGunVolume);
     }
 
     public void PlayOutOfAmmoSound()
     {
         AudioManager.instance.PlaySound(28, gunVolume);
     }
-    
+
 
 }

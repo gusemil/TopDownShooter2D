@@ -29,28 +29,24 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null) //jos status olio ei ole olemassa
+        if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            Debug.Log("creating levelmanager");
             instance = this;
             currentLevel = 0;
             currentSceneName = SceneManager.GetActiveScene().name;
             isBloodOn = true;
-            //Load(instance);
-
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }
-
-        //DontDestroyOnLoad(gameObject);
     }
 
     public void Save(LevelManager lvlManager)
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/playerProgress.dat");                //kerrotaan minne halutaan tallentaa tuleva data
+        FileStream file = File.Create(Application.persistentDataPath + "/playerProgress.dat");
         PlayerProgress progress = new PlayerProgress();
         progress.highestUnlockedLevel = highestUnlockedLevel;
         bf.Serialize(file, progress);
@@ -59,7 +55,7 @@ public class LevelManager : MonoBehaviour
 
     public void Load(LevelManager lvlManager)
     {
-        if (File.Exists(Application.persistentDataPath + "/playerProgress.dat")) //jos savedataa on olemassa niin annetaan loadaa, muuten tulee problems
+        if (File.Exists(Application.persistentDataPath + "/playerProgress.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerProgress.dat", FileMode.Open);
@@ -67,11 +63,10 @@ public class LevelManager : MonoBehaviour
             file.Close();
             highestUnlockedLevel = progress.highestUnlockedLevel;
         }
-        else // if save file doesn't exist
+        else // if save file doesn't exist, create a save
         {
-            Debug.Log("Creating save");
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/playerProgress.dat");                //kerrotaan minne halutaan tallentaa tuleva data
+            FileStream file = File.Create(Application.persistentDataPath + "/playerProgress.dat");
             PlayerProgress progress = new PlayerProgress();
             progress.highestUnlockedLevel = 1;
             bf.Serialize(file, progress);

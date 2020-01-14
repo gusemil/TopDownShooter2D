@@ -4097,6 +4097,11 @@ PrefabInstance:
       propertyPath: shield
       value: 
       objectReference: {fileID: 5848963445463907214}
+    - target: {fileID: 7944583421165293228, guid: e8e2dc3b292c50d4ab5c5b53c596dce7,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 7944583421165293224}
     - target: {fileID: 2054177186, guid: e8e2dc3b292c50d4ab5c5b53c596dce7, type: 3}
       propertyPath: m_Color.r
       value: 0.6095996
@@ -4130,6 +4135,12 @@ PrefabInstance:
 --- !u!1 &7944583421165293223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4433456888520020952, guid: e8e2dc3b292c50d4ab5c5b53c596dce7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7944583421165293222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &7944583421165293224 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7944583421165293225, guid: e8e2dc3b292c50d4ab5c5b53c596dce7,
     type: 3}
   m_PrefabInstance: {fileID: 7944583421165293222}
   m_PrefabAsset: {fileID: 0}
