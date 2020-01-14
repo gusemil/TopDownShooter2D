@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStats
 {
     private int hp;
-    private int maxHp;
     private int damageMultiplier;
     private bool isHexDamageUp;
     private bool isDashing;
@@ -13,7 +12,7 @@ public class PlayerStats
     private bool isRespawning;
     private bool isInfiniteAmmoUp;
     private bool isShieldUp;
-    private float invulnerabilityTime;
+    //private float invulnerabilityTime;
     private bool isInfiniteDashUp;
     private bool isGodModeUp;
 
@@ -22,12 +21,6 @@ public class PlayerStats
         get { return hp; }
         set { hp = value; }
     }
-    public int MaxHp
-    {
-        get { return maxHp; }
-        set { maxHp = value; }
-    }
-
 
     public int DamageMultiplier
     {
@@ -71,11 +64,13 @@ public class PlayerStats
         set { isShieldUp = value; }
     }
 
+    /*
     public float InvulnerabilityTime
     {
         get { return invulnerabilityTime; }
         set { invulnerabilityTime = value; }
     }
+    */
 
     public bool IsInfiniteDashUp
     {
@@ -92,9 +87,8 @@ public class PlayerStats
     public PlayerStats()
     {
         hp = 1;
-        maxHp = 1;
         damageMultiplier = 1;
-        invulnerabilityTime = 0.25f;
+        //invulnerabilityTime = 0.35f;
         isHexDamageUp = false;
         isInfiniteAmmoUp = false;
         isDashing = false;
@@ -107,14 +101,11 @@ public class PlayerStats
 
     public void TakeDamage(int dmg)
     {
-        if (!isDashing && !isInvulnerable) //preven damage if player is dashing
-        {
             hp -= dmg;
 
-            if (hp <= 0 && !isShieldUp)
+            if (hp <= 0)
             {
                 GameManager.instance.LoseLife();
             }
-        }
     }
 }

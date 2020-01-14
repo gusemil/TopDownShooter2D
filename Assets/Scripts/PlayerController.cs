@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private GameObject infiniteAmmoEffect;
     private GameObject godModeEffect;
     private Color originalColor;
-    private Color dashColor = new Color(0, 1, 0, 1);
+    private Color invulnerabilityColor = new Color(0, 1, 0, 1);
     private UIManager uiManager;
     private WeaponSystem weapon;
     private Dash dash;
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             uiManager.UpdateBombText(weapon);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !pause.IsPause && !stats.IsRespawning)
+        if (Input.GetKeyDown(KeyCode.Space) && (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0) && !pause.IsPause && !stats.IsRespawning)
         {
             if (dash.Dashes > 0 || stats.IsInfiniteDashUp || stats.IsGodModeUp)
             {
@@ -280,40 +280,82 @@ public class PlayerController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = originalColor;
     }
 
-    public IEnumerator InvulnerabilityTimer()
+    public IEnumerator InvulnerabilityTimer(float invulnerabilityTime)
     {
         stats.IsInvulnerable = true;
-        yield return new WaitForSeconds(stats.InvulnerabilityTime);
+        ChangePlayerColor(invulnerabilityColor);
+        yield return new WaitForSeconds(invulnerabilityTime);
+        ChangePlayerColor(originalColor);
         stats.IsInvulnerable = false;
     }
 
     private IEnumerator Dash()
     {
         stats.IsDashing = true;
-        while (stats.IsDashing)
+        ChangePlayerColor(invulnerabilityColor);
+        stats.IsInvulnerable = true;
+
+        if (Input.GetAxisRaw("Horizontal") > 0)
+            rb.velocity = Vector2.right * dash.DashSpeed;
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+            rb.velocity = Vector2.left * dash.DashSpeed;
+
+        if (Input.GetAxisRaw("Vertical") > 0)
+            rb.velocity = Vector2.up * dash.DashSpeed;
+        else if (Input.GetAxisRaw("Vertical") < 0)
+            rb.velocity = Vector2.down * dash.DashSpeed;
+
+        this.gameObject.layer = 11; //Dash Layer
+        yield return new WaitForSeconds(dash.DashingTime);
+        this.gameObject.layer = 10; //Player Layer
+        rb.velocity = Vector2.zero;
+        stats.IsDashing = false;
+
+        yield return new WaitForSeconds(0.5f);
+        stats.IsInvulnerable = false;
+        ChangePlayerColor(originalColor);
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy" && (!stats.IsInvulnerable && !stats.IsGodModeUp))
         {
-            SetOriginalColor();
-            ChangePlayerColor(dashColor);
-
-            if (Input.GetAxisRaw("Horizontal") > 0)
-                rb.velocity = Vector2.right * dash.DashSpeed;
-            else if (Input.GetAxisRaw("Horizontal") < 0)
-                rb.velocity = Vector2.left * dash.DashSpeed;
-
-            if (Input.GetAxisRaw("Vertical") > 0)
-                rb.velocity = Vector2.up * dash.DashSpeed;
-            else if (Input.GetAxisRaw("Vertical") < 0)
-                rb.velocity = Vector2.down * dash.DashSpeed;
-
-            this.gameObject.layer = 11; //Dash Layer
-            yield return new WaitForSeconds(dash.DashingTime);
-            this.gameObject.layer = 10; //Player Layer
-            rb.velocity = Vector2.zero;
-            stats.IsDashing = false;
-            stats.IsInvulnerable = true;
-            yield return new WaitForSeconds(stats.InvulnerabilityTime);
-            stats.IsInvulnerable = false;
-            ChangePlayerColor(originalColor);
+            DamagePlayerOnCollision(other);
         }
     }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy" && (!stats.IsInvulnerable && !stats.IsGodModeUp))
+        {
+            DamagePlayerOnCollision(other);
+        }
+    }
+
+
+    public void DamagePlayerOnCollision(Collision2D other)
+    {
+        if (stats.IsShieldUp)
+        {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+
+            enemy.TakeDamage(enemy.hp, true);
+            TurnOffShieldGraphic();
+            AudioManager.instance.PlaySound(17); //shield break sound
+            stats.IsShieldUp = false;
+            StartCoroutine(InvulnerabilityTimer(1f));
+        }
+        else
+        {
+            TurnOffHexDamageEffect();
+            TurnOffInfiniteDashEffect();
+            TurnOffInfiniteAmmoEffect();
+            stats.TakeDamage(1);
+            StartCoroutine(InvulnerabilityTimer(0.5f));
+        }
+    }
+
+
+
+
 }

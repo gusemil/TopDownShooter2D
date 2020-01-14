@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
     private Vector2 direction;
-    private float enemyDamageTimer = 0;
-    private float enemyDamageCooldown = 0.5f;
+    //private float enemyDamageTimer = 0;
+    //private float enemyDamageCooldown = 0.5f;
     private float enemyDeathVolume = 0.5f;
     private Rigidbody2D rb2D;
     private bool isEnemyDead;
@@ -45,9 +45,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        enemyDamageTimer += Time.deltaTime;
+        //enemyDamageTimer += Time.deltaTime;
     }
 
+    /*
     void OnCollisionEnter2D(Collision2D other)
     {
         if ((enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
@@ -56,6 +57,18 @@ public class Enemy : MonoBehaviour
             enemyDamageTimer = 0;
         }
     }
+    */
+
+    /*
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if ((enemyDamageTimer >= enemyDamageCooldown) && other.gameObject.tag == "Player")
+        {
+            DamagePlayerOnCollision(other);
+            enemyDamageTimer = 0;
+        }
+    }
+    */
 
     public void TakeDamage(int dmg, bool isKilledByBomb)
     {
@@ -96,6 +109,7 @@ public class Enemy : MonoBehaviour
         Destroy(effect, 0.2f);
     }
 
+    /*
     public void DamagePlayerOnCollision(Collision2D other)
     {
         PlayerStats playerStats = GameManager.instance.PlayerStats;
@@ -104,11 +118,11 @@ public class Enemy : MonoBehaviour
         {
             //do nothing
         }
-        else if (playerStats.IsShieldUp && !playerStats.IsGodModeUp)
+        else if (playerStats.IsShieldUp && !playerStats.IsGodModeUp && !playerStats.IsInvulnerable)
         {
             TakeDamage(hp, true);
             other.gameObject.GetComponent<PlayerController>().TurnOffShieldGraphic();
-            AudioManager.instance.PlaySound(17); //shield break
+            AudioManager.instance.PlaySound(17); //shield break sound
             other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();
             playerStats.IsShieldUp = false;
         }
@@ -119,8 +133,10 @@ public class Enemy : MonoBehaviour
             other.gameObject.GetComponent<PlayerController>().TurnOffInfiniteDashEffect();
             other.gameObject.GetComponent<PlayerController>().TurnOffInfiniteAmmoEffect();
             playerStats.TakeDamage(damage);
+            other.gameObject.GetComponent<PlayerController>().InvulnerabilityTimer();
         }
     }
+    */
 
     void EnemyMovementTowardsPlayer()
     {
