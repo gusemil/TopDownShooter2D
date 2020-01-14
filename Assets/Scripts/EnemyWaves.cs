@@ -134,11 +134,12 @@ public class EnemyWaves : MonoBehaviour
                 SpawnEnemy(octopus);
             }
 
-            
+            /*
         if (Input.GetKeyUp(KeyCode.N))
         {
             NextWave();
         }
+        */
         
     }
 
