@@ -78,11 +78,6 @@ public class EnemyWaves : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.N))
-        {
-            NextWave();
-        }
-
         if (isSpawningPaused && enemiesAlive == 0 && enemiesSpawned == 0)
         {
             NextWave();
