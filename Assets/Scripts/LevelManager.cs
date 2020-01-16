@@ -46,11 +46,11 @@ public class LevelManager : MonoBehaviour
     public void Save(LevelManager lvlManager)
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/playerProgress.dat");
+        FileStream fs = File.Create(Application.persistentDataPath + "/playerProgress.dat");
         PlayerProgress progress = new PlayerProgress();
         progress.highestUnlockedLevel = highestUnlockedLevel;
-        bf.Serialize(file, progress);
-        file.Close();
+        bf.Serialize(fs, progress);
+        fs.Close();
     }
 
     public void Load(LevelManager lvlManager)
@@ -60,8 +60,8 @@ public class LevelManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerProgress.dat", FileMode.Open);
             PlayerProgress progress = (PlayerProgress)bf.Deserialize(file);
-            file.Close();
             highestUnlockedLevel = progress.highestUnlockedLevel;
+            file.Close();
         }
         else // if save file doesn't exist, create a save
         {

@@ -6,7 +6,6 @@ public class WeaponSystem : MonoBehaviour
 {
     private int weaponIndex;
     private float bombSpawnDelay = -1f;
-    private PlayerStats stats;
     private float gunVolume = 0.3f;
     private float heavyGunVolume = 0.5f;
 
@@ -20,11 +19,11 @@ public class WeaponSystem : MonoBehaviour
     public List<Weapon> WeaponList { get { return weaponList; } set { weaponList = value; } }
     public int BombCount { get { return bombCount; } set { bombCount = value; } }
 
-    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f, 0); //name, number, dmg, force, fireRate, ammo, radius, lifetime, ammo on pickup
+    Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f, 0); //name, number, dmg, force, fireRate, ammo on start, radius, lifetime, ammo on pickup
     Weapon machineGun = new Weapon("Machine Gun", 1, 30, 40f, 0.13f, 100, 0f, 2f, 100);
     Weapon shotgun = new Weapon("Shotgun", 2, 200, 100f, 0.3f, 25, 5f, 1f, 25);
     Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.75f, 5, 12f, 9f, 2);
-    Weapon flameThrower = new Weapon("Flamethrower", 4, 100, 30f, 0.01f, 50, 1f, 0.3f, 100);
+    Weapon flameThrower = new Weapon("Flamethrower", 4, 100, 30f, 0.01f, 75, 1f, 0.3f, 75);
 
     void Start()
     {
@@ -49,8 +48,6 @@ public class WeaponSystem : MonoBehaviour
         shotTimer = 0f;
 
         bombCount = 1;
-
-        stats = GameManager.instance.PlayerStats;
     }
 
     void Update()

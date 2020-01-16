@@ -100,9 +100,7 @@ public class UIManager : MonoBehaviour
         {
             powerUpTextTimer -= Time.deltaTime;
         }
-
         DashUIUpdate(currentDash);
-
     }
 
     private void DashUIUpdate(Image currentDash)
@@ -214,9 +212,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator ShowPowerUpText(String powerUpName)
     {
         PowerUpText.enabled = true;
-
         PowerUpText.text = powerUpName;
-
         yield return new WaitForSeconds(powerUpTextDuration);
         PowerUpText.enabled = false;
     }

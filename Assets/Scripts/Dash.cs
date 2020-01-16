@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour
 {
-    private UIManager uiManager;
-    private PlayerStats stats;
     private int maxDashes;
 
     public static float dashingTime = 0.2f;
@@ -26,8 +24,6 @@ public class Dash : MonoBehaviour
         maxDashes = 4;
         dashRechargeTime = 2.5f;
         dashTimer = 0f;
-        stats = GameManager.instance.PlayerStats;
-        uiManager = FindObjectOfType<UIManager>();
     }
 
     void Update()

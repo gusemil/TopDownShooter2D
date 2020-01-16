@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Background : MonoBehaviour
 {
-    private LevelManager sceneChangeManager;
+    private LevelManager levelManager;
     private List<Sprite> backgroundList = new List<Sprite>();
 
     public Sprite background1;
@@ -16,12 +16,12 @@ public class Background : MonoBehaviour
 
     void Start()
     {
-        sceneChangeManager = LevelManager.instance;
+        levelManager = LevelManager.instance;
         backgroundList.Add(background1);
         backgroundList.Add(background2);
         backgroundList.Add(background3);
         backgroundList.Add(background4);
 
-        gameObject.GetComponent<Image>().sprite = backgroundList[sceneChangeManager.CurrentLevel - 1];
+        gameObject.GetComponent<Image>().sprite = backgroundList[levelManager.CurrentLevel - 1];
     }
 }

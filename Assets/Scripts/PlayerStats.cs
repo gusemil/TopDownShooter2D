@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerStats
+﻿public class PlayerStats
 {
     private int hp;
     private int damageMultiplier;
@@ -12,7 +8,6 @@ public class PlayerStats
     private bool isRespawning;
     private bool isInfiniteAmmoUp;
     private bool isShieldUp;
-    //private float invulnerabilityTime;
     private bool isInfiniteDashUp;
     private bool isGodModeUp;
 

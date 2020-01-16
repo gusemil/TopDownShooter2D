@@ -83,7 +83,7 @@ public class Pickup : MonoBehaviour
             else if (gameObject.tag == "Shield" && !playerStats.IsShieldUp)
             {
                 isPickedUp = true;
-                ShieldPack(playerStats, other);
+                ShieldPack(other);
             }
             else if (gameObject.tag == "InfiniteAmmo" && !playerStats.IsInfiniteAmmoUp)
             {
@@ -134,14 +134,10 @@ public class Pickup : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void ShieldPack(PlayerStats stats, Collider2D playerCollider)
+    private void ShieldPack(Collider2D player)
     {
-        audioManager.PlaySound(12);
-        audioManager.PlaySound(31, 1.5f);
-        StartCoroutine(uiManager.ShowPowerUpText("SHIELD"));
-        pc = playerCollider.GetComponent<PlayerController>();
-        stats.IsShieldUp = true;
-        pc.TurnOnShieldGraphic();
+        pc = player.GetComponent<PlayerController>();
+        pc.TurnOnShield();
         RemoveGraphicsAndCollider();
         Destroy(gameObject, 3f);
     }
@@ -156,35 +152,19 @@ public class Pickup : MonoBehaviour
 
         if (gameObject.tag == "HexDamage")
         {
-            audioManager.PlaySound(9);
-            audioManager.PlaySound(29, 1.5f);
-            player.IsHexDamageUp = true;
-            pc.TurnOnHexDamageEffect();
-            StartCoroutine(uiManager.ShowPowerUpText("HEX DAMAGE"));
+            pc.TurnOnHexDamage();
         }
         else if (gameObject.tag == "InfiniteAmmo")
         {
-            audioManager.PlaySound(13);
-            audioManager.PlaySound(32, 1.5f);
-            player.IsInfiniteAmmoUp = true;
-            StartCoroutine(uiManager.ShowPowerUpText("INFINITE AMMO"));
             pc.TurnOnInfiniteAmmoEffect();
         }
         else if (gameObject.tag == "InfiniteDash")
         {
-            audioManager.PlaySound(10);
-            audioManager.PlaySound(30, 1.5f);
-            player.IsInfiniteDashUp = true;
             pc.TurnOnInfiniteDashEffect();
-            StartCoroutine(uiManager.ShowPowerUpText("INFINITE DASH"));
         }
         else if (gameObject.tag == "GodMode")
         {
-            audioManager.PlaySound(14);
-            audioManager.PlaySound(33, 1.5f);
-            player.IsGodModeUp = true;
             pc.TurnOnGodModeEffect();
-            StartCoroutine(uiManager.ShowPowerUpText("GODLIKE"));
         }
 
 
@@ -205,54 +185,22 @@ public class Pickup : MonoBehaviour
 
             if (gameObject.tag == "HexDamage")
             {
-                if (!player.IsGodModeUp)
-                {
-                    player.DamageMultiplier = 1;
-                }
-                if (player.IsHexDamageUp)
-                {
-                    audioManager.PlaySound(15);
-                }
-                player.IsHexDamageUp = false;
-                pc.TurnOffHexDamageEffect();
+                pc.TurnOffHexDamage();
             }
             else if (gameObject.tag == "InfiniteAmmo")
             {
-                if (player.IsInfiniteAmmoUp)
-                {
-                    audioManager.PlaySound(18);
-                }
-                player.IsInfiniteAmmoUp = false;
                 pc.TurnOffInfiniteAmmoEffect();
             }
             else if (gameObject.tag == "InfiniteDash")
             {
-                if (player.IsInfiniteDashUp)
-                {
-                    audioManager.PlaySound(16);
-                }
                 pc.TurnOffInfiniteDashEffect();
-                player.IsInfiniteDashUp = false;
             }
             else if (gameObject.tag == "GodMode")
             {
-                if (!player.IsHexDamageUp)
-                {
-                    player.DamageMultiplier = 1;
-                }
-                pc.MoveSpeed = 7.5f;
-                if (player.IsGodModeUp)
-                {
-                    audioManager.PlaySound(19);
-                }
                 pc.TurnOffGodModeEffect();
-                player.IsGodModeUp = false;
-
             }
 
             isPowerUpOn = false;
-
-            pc.ChangePlayerColor(pc.OriginalColor);
             Destroy(gameObject);
         }
     }

@@ -4,37 +4,37 @@ using UnityEngine;
 
 public class Weapon
 {
-    private string _weaponName;
-    private int _weaponNumber;
-    private float _bulletForce;
-    private float _fireCoolDown;
-    private int _weaponDamage;
-    private int _ammo;
-    private float _splashDamageRadius;
-    private float _projectileLifeTime;
-    private int _ammoFromPickup;
+    private string weaponName;
+    private int weaponNumber;
+    private float bulletForce;
+    private float fireCoolDown;
+    private int weaponDamage;
+    private int ammo;
+    private float splashDamageRadius;
+    private float projectileLifeTime;
+    private int ammoFromPickup;
 
-    public string WeaponName { get { return _weaponName; } set { _weaponName = value; } }
-    public int WeaponNumber { get { return _weaponNumber; } set { _weaponNumber = value; } }
-    public float BulletForce { get { return _bulletForce; } set { _bulletForce = value; } }
-    public float FireCoolDown { get { return _fireCoolDown; } set { _fireCoolDown = value; } }
-    public int WeaponDamage { get { return _weaponDamage; } set { _weaponDamage = value; } }
-    public int Ammo { get { return _ammo; } set { _ammo = value; } }
-    public float SplashDamageRadius { get { return _splashDamageRadius; } set { _splashDamageRadius = value; } }
-    public float ProjectileLifeTime { get { return _projectileLifeTime; } set { _projectileLifeTime = value; } }
-    public int AmmoFromPickup { get { return _ammoFromPickup; } set { _ammoFromPickup = value; } }
+    public string WeaponName { get { return weaponName; } set { weaponName = value; } }
+    public int WeaponNumber { get { return weaponNumber; } set { weaponNumber = value; } }
+    public float BulletForce { get { return bulletForce; } set { bulletForce = value; } }
+    public float FireCoolDown { get { return fireCoolDown; } set { fireCoolDown = value; } }
+    public int WeaponDamage { get { return weaponDamage; } set { weaponDamage = value; } }
+    public int Ammo { get { return ammo; } set { ammo = value; } }
+    public float SplashDamageRadius { get { return splashDamageRadius; } set { splashDamageRadius = value; } }
+    public float ProjectileLifeTime { get { return projectileLifeTime; } set { projectileLifeTime = value; } }
+    public int AmmoFromPickup { get { return ammoFromPickup; } set { ammoFromPickup = value; } }
 
     public Weapon(string weaponName, int weaponNumber, int weaponDamage, float bulletForce, float fireCoolDown, int ammo, float splashDamageRadius, float projectileLifeTime, int ammoFromPickup)
     {
-        _weaponName = weaponName;
-        _weaponNumber = weaponNumber;
-        _weaponDamage = weaponDamage;
-        _bulletForce = bulletForce;
-        _fireCoolDown = fireCoolDown;
-        _ammo = ammo;
-        _splashDamageRadius = splashDamageRadius;
-        _projectileLifeTime = projectileLifeTime;
-        _ammoFromPickup = ammoFromPickup;
+        this.weaponName = weaponName;
+        this.weaponNumber = weaponNumber;
+        this.weaponDamage = weaponDamage;
+        this.bulletForce = bulletForce;
+        this.fireCoolDown = fireCoolDown;
+        this.ammo = ammo;
+        this.splashDamageRadius = splashDamageRadius;
+        this.projectileLifeTime = projectileLifeTime;
+        this.ammoFromPickup = ammoFromPickup;
     }
 
 }

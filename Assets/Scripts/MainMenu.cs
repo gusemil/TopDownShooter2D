@@ -42,34 +42,19 @@ public class MainMenu : MonoBehaviour
         level3button.SetActive(false);
     }
 
-    public void PlayLevel1()
+    public void PlayLevel(int level)
     {
-        LevelManager.instance.CurrentLevel = 1;
+        LevelManager.instance.CurrentLevel = level;
         SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(1, 1.5f);
+        if(level == 1 && level == 4)
+        {
+            AudioManager.instance.PlayMusic(1, 1.5f);
+        }
+        else
+        {
+            AudioManager.instance.PlayMusic(level, 1f);
+        }
     }
-
-    public void PlayLevel2()
-    {
-        LevelManager.instance.CurrentLevel = 2;
-        SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(2, 1f);
-    }
-
-    public void PlayLevel3()
-    {
-        LevelManager.instance.CurrentLevel = 3;
-        SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(3, 1f);
-    }
-
-    public void PlayEndlessMode()
-    {
-        LevelManager.instance.CurrentLevel = 4;
-        SceneManager.LoadScene(1);
-        AudioManager.instance.PlayMusic(1, 1f);
-    }
-
     public void QuitGame()
     {
         Application.Quit();
@@ -112,17 +97,16 @@ public class MainMenu : MonoBehaviour
         musicSlider.GetComponent<Slider>().value = AudioManager.instance.MusicSliderValue;
     }
 
-    public void QuitLevelMenu()
+    public void BackToMainMenu()
     {
         AudioManager.instance.PlaySound(26);
-        levelChangePanel.SetActive(false);
-        buttonManager.SetActive(true);
-    }
-
-    public void QuitOptionsMenu()
-    {
-        AudioManager.instance.PlaySound(26);
-        optionsPanel.SetActive(false);
+        if (levelChangePanel.activeSelf)
+        {
+            levelChangePanel.SetActive(false);
+        } else if (optionsPanel.activeSelf)
+        {
+            optionsPanel.SetActive(false);
+        }
         buttonManager.SetActive(true);
     }
 
