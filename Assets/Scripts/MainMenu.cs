@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
     {
         LevelManager.instance.CurrentLevel = level;
         SceneManager.LoadScene(1);
-        if(level == 1 && level == 4)
+        if(level == 1 || level == 4)
         {
             AudioManager.instance.PlayMusic(1, 1.5f);
         }

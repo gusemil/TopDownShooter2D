@@ -297,7 +297,11 @@ public class PlayerController : MonoBehaviour
         AudioManager.instance.PlaySound(9);
         AudioManager.instance.PlaySound(29, 1.5f);
         playerStats.IsHexDamageUp = true;
-        StartCoroutine(uiManager.ShowPowerUpText("HEX DAMAGE"));
+        if (uiManager.powerUpCoroutineReference != null)
+        {
+            StopCoroutine(uiManager.powerUpCoroutineReference);
+        }
+        uiManager.powerUpCoroutineReference = StartCoroutine(uiManager.ShowPowerUpText("HEX DAMAGE"));
         hexDamageEffect = Instantiate(hexDamagePreFab, transform.position, Quaternion.identity);
     }
 
@@ -321,7 +325,11 @@ public class PlayerController : MonoBehaviour
         AudioManager.instance.PlaySound(10);
         AudioManager.instance.PlaySound(30, 1.5f);
         playerStats.IsInfiniteDashUp = true;
-        StartCoroutine(uiManager.ShowPowerUpText("INFINITE DASH"));
+        if (uiManager.powerUpCoroutineReference != null)
+        {
+            StopCoroutine(uiManager.powerUpCoroutineReference);
+        }
+        uiManager.powerUpCoroutineReference = StartCoroutine(uiManager.ShowPowerUpText("INFINITE DASH"));
         infiniteDashEffect = Instantiate(infiniteDashPreFab, transform.position, Quaternion.identity);
     }
 
@@ -340,7 +348,10 @@ public class PlayerController : MonoBehaviour
         AudioManager.instance.PlaySound(13);
         AudioManager.instance.PlaySound(32, 1.5f);
         playerStats.IsInfiniteAmmoUp = true;
-        StartCoroutine(uiManager.ShowPowerUpText("INFINITE AMMO"));
+        if (uiManager.powerUpCoroutineReference != null){
+            StopCoroutine(uiManager.powerUpCoroutineReference);
+        }
+        uiManager.powerUpCoroutineReference = StartCoroutine(uiManager.ShowPowerUpText("INFINITE AMMO"));
         infiniteAmmoEffect = Instantiate(infiniteAmmoPreFab, transform.position, Quaternion.identity);
     }
 
@@ -359,7 +370,11 @@ public class PlayerController : MonoBehaviour
         AudioManager.instance.PlaySound(14);
         AudioManager.instance.PlaySound(33, 1.5f);
         playerStats.IsGodModeUp = true;
-        StartCoroutine(uiManager.ShowPowerUpText("GODLIKE"));
+        if (uiManager.powerUpCoroutineReference != null)
+        {
+            StopCoroutine(uiManager.powerUpCoroutineReference);
+        }
+        uiManager.powerUpCoroutineReference = StartCoroutine(uiManager.ShowPowerUpText("GODLIKE"));
         godModeEffect = Instantiate(godModePreFab, transform.position, Quaternion.identity);
     }
 
@@ -383,7 +398,11 @@ public class PlayerController : MonoBehaviour
         shield.GetComponent<SpriteRenderer>().enabled = true;
         AudioManager.instance.PlaySound(12);
         AudioManager.instance.PlaySound(31, 1.5f);
-        StartCoroutine(uiManager.ShowPowerUpText("SHIELD"));
+        if (uiManager.powerUpCoroutineReference != null)
+        {
+            StopCoroutine(uiManager.powerUpCoroutineReference);
+        }
+        uiManager.powerUpCoroutineReference = StartCoroutine(uiManager.ShowPowerUpText("SHIELD"));
         playerStats.IsShieldUp = true;
     }
 

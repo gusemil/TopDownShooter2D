@@ -210,7 +210,13 @@ public class GameManager : MonoBehaviour
         weaponSystem.ChangeWeapon(0);
         UpdateUI();
         SceneManager.LoadScene(1);
-        AudioManager.instance.musicSource.Play();
+        if(LevelManager.instance.CurrentLevel == 4)
+        {
+            AudioManager.instance.PlayMusic(1,1.5f);
+        } else
+        {
+            AudioManager.instance.musicSource.Play();
+        }
     }
 
     public IEnumerator CompleteLevel()

@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     private float powerUpTextTimer;
     private LevelManager lvlManager;
 
-    //UI
     public Text weaponNameText;
     public Text ammoText;
     public Text pointsMultiplierText;
@@ -42,6 +41,8 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public Text waveText;
     public Text PowerUpText;
+
+    public Coroutine powerUpCoroutineReference;
 
     void Start()
     {
