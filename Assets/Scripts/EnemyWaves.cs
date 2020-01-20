@@ -29,6 +29,7 @@ public class EnemyWaves : MonoBehaviour
     public GameObject spawnSouthEast;
     public GameObject spawnSouthWest;
     public GameObject spawnNorthWest;
+    public Camera _camera; //variable name 'camera' is not available
 
     public GameObject crab;
     public GameObject jumper;
@@ -78,7 +79,8 @@ public class EnemyWaves : MonoBehaviour
 
     void Update()
     {
-        if (isSpawningPaused && enemiesAlive == 0 && enemiesSpawned == 0)
+
+        if (isSpawningPaused && enemiesAlive <= 0)
         {
             NextWave();
         }
@@ -133,6 +135,8 @@ public class EnemyWaves : MonoBehaviour
 
     public void NextWave()
     {
+        Instantiate(GameManager.instance.PickupSystem.PickupList[1], _camera.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2,5)), Quaternion.identity); //ammopack as a reward in the middle of the screen
+
         isSpawningPaused = false;
         wave++;
         AudioManager.instance.PlaySound(24);

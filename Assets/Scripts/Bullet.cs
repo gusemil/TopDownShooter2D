@@ -39,6 +39,11 @@ public class Bullet : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x * 0.6f, transform.localScale.x * 0.6f, transform.localScale.x * 0.6f);
         }
 
+        if (nameOfWeaponShot == "Shotgun")
+        {
+            transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.x * 1.5f, transform.localScale.x * 1.5f);
+        }
+
 
         if (playerStats.IsGodModeUp && nameOfWeaponShot != "Rocket Launcher")
         {
