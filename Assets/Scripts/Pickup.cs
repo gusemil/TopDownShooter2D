@@ -167,42 +167,37 @@ public class Pickup : MonoBehaviour
             pc.TurnOnGodModeEffect();
         }
 
-
-
-        while (isPowerUpOn)
+        if (gameObject.tag == "HexDamage" || gameObject.tag == "GodMode")
         {
-            if (gameObject.tag == "HexDamage" || gameObject.tag == "GodMode")
-            {
-                player.DamageMultiplier = 6;
-            }
-
-            if (gameObject.tag == "GodMode")
-            {
-                pc.MoveSpeed = 15f;
-            }
-
-            yield return new WaitForSeconds(powerUpDuration);
-
-            if (gameObject.tag == "HexDamage")
-            {
-                pc.TurnOffHexDamage();
-            }
-            else if (gameObject.tag == "InfiniteAmmo")
-            {
-                pc.TurnOffInfiniteAmmoEffect();
-            }
-            else if (gameObject.tag == "InfiniteDash")
-            {
-                pc.TurnOffInfiniteDashEffect();
-            }
-            else if (gameObject.tag == "GodMode")
-            {
-                pc.TurnOffGodModeEffect();
-            }
-
-            isPowerUpOn = false;
-            Destroy(gameObject);
+            player.DamageMultiplier = 6;
         }
+
+        if (gameObject.tag == "GodMode")
+        {
+            pc.MoveSpeed = 15f;
+        }
+
+        yield return new WaitForSeconds(powerUpDuration);
+
+        if (gameObject.tag == "HexDamage")
+        {
+            pc.TurnOffHexDamage();
+        }
+        else if (gameObject.tag == "InfiniteAmmo")
+        {
+            pc.TurnOffInfiniteAmmoEffect();
+        }
+        else if (gameObject.tag == "InfiniteDash")
+        {
+            pc.TurnOffInfiniteDashEffect();
+        }
+        else if (gameObject.tag == "GodMode")
+        {
+            pc.TurnOffGodModeEffect();
+        }
+
+        isPowerUpOn = false;
+        Destroy(gameObject);
     }
 
     private void RemoveGraphicsAndCollider()

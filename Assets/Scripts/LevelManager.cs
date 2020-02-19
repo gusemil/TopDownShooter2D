@@ -43,12 +43,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void Save(LevelManager lvlManager)
+    public void Save(LevelManager lvlManager, int levelToUnlock)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Create(Application.persistentDataPath + "/playerProgress.dat");
         PlayerProgress progress = new PlayerProgress();
-        progress.highestUnlockedLevel = highestUnlockedLevel;
+        progress.highestUnlockedLevel = levelToUnlock;
         bf.Serialize(fs, progress);
         fs.Close();
     }
@@ -65,12 +65,7 @@ public class LevelManager : MonoBehaviour
         }
         else // if save file doesn't exist, create a save
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/playerProgress.dat");
-            PlayerProgress progress = new PlayerProgress();
-            progress.highestUnlockedLevel = 1;
-            bf.Serialize(file, progress);
-            file.Close();
+            Save(lvlManager, 1);
         }
     }
 }

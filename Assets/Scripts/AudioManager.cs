@@ -61,7 +61,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip infiniteAmmoVoice;
     public AudioClip godmodeVoice;
 
-
     //music tracks
     public AudioClip mainMenu;
     public AudioClip level1;

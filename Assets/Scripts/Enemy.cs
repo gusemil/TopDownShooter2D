@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private PlayerStats playerStats;
     private EnemyWaves enemyWaves;
     private GameManager gm;
-    private PickupSystem ps;
+    private PickupSystem pickupSystem;
 
     public GameObject deathAnimation;
     public GameObject bloodParticleEffect;
@@ -26,12 +26,11 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerStats = GameManager.instance.PlayerStats;
         enemyWaves = GameManager.instance.EnemyWaves;
         gm = GameManager.instance;
         rb = GetComponent<Rigidbody2D>();
         isEnemyDead = false;
-        ps = GameManager.instance.PickupSystem;
+        pickupSystem = GameManager.instance.PickupSystem;
 
         moveSpeed += (float)enemyWaves.Wave * 0.35f;
     }
@@ -50,7 +49,7 @@ public class Enemy : MonoBehaviour
             if (!isKilledByBomb)
             {
                 gm.AddPoints(enemyPointValue);
-                ps.SpawnPickUpFromEnemy(this.gameObject);
+                pickupSystem.SpawnPickUpFromEnemy(this.gameObject);
             }
 
             AudioManager.instance.PlaySound(27, enemyDeathVolume);

@@ -114,7 +114,7 @@ public class MainMenu : MonoBehaviour
     {
         AudioManager.instance.PlaySound(16);
         lvlManager.HighestUnlockedLevel = 1;
-        lvlManager.Save(lvlManager);
+        lvlManager.Save(lvlManager, lvlManager.HighestUnlockedLevel);
         lvlManager.Load(lvlManager);
     }
 
@@ -122,7 +122,7 @@ public class MainMenu : MonoBehaviour
     {
         AudioManager.instance.PlaySound(12);
         lvlManager.HighestUnlockedLevel = 3;
-        lvlManager.Save(lvlManager);
+        lvlManager.Save(lvlManager, lvlManager.HighestUnlockedLevel);
         lvlManager.Load(lvlManager);
     }
 

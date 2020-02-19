@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     private int pointsMultiplier;
     private bool levelComplete;
 
-
     public static GameManager instance; //singleton
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Pause Pause { get { return pause; } }
@@ -31,21 +30,11 @@ public class GameManager : MonoBehaviour
     public int Lives { get { return lives; } }
     public Dash Dash { get { return dash; } }
     public GameObject playerObject;
-
-    public bool IsGameOver
-    {
-        get { return isGameOver; }
-        set { isGameOver = value; }
-    }
-
+    public bool IsGameOver {get { return isGameOver; } set { isGameOver = value; } }
     public float GameTime { get { return gameTime; } }
     public bool LevelComplete { get { return levelComplete; } }
     public int Points { get { return points; } set { points = value; } }
-    public int PointsMultiplier
-    {
-        get { return pointsMultiplier; }
-        set { pointsMultiplier = value; }
-    }
+    public int PointsMultiplier { get { return pointsMultiplier; } set { pointsMultiplier = value; } }
 
     void Awake()
     {
@@ -231,7 +220,7 @@ public class GameManager : MonoBehaviour
         if (lvlManager.HighestUnlockedLevel == lvlManager.CurrentLevel)
         {
             lvlManager.HighestUnlockedLevel++;
-            lvlManager.Save(lvlManager);
+            lvlManager.Save(lvlManager, lvlManager.HighestUnlockedLevel);
             lvlManager.Load(lvlManager);
         }
 

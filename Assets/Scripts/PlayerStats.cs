@@ -59,14 +59,6 @@
         set { isShieldUp = value; }
     }
 
-    /*
-    public float InvulnerabilityTime
-    {
-        get { return invulnerabilityTime; }
-        set { invulnerabilityTime = value; }
-    }
-    */
-
     public bool IsInfiniteDashUp
     {
         get { return isInfiniteDashUp; }
@@ -83,7 +75,6 @@
     {
         hp = 1;
         damageMultiplier = 1;
-        //invulnerabilityTime = 0.35f;
         isHexDamageUp = false;
         isInfiniteAmmoUp = false;
         isDashing = false;
