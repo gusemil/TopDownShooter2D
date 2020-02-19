@@ -5,4 +5,4 @@ Solo project for Game Engines Course
 •	Responsibilities: Solo project. All programming.<br>
 •	Features: Unity 2D Topdown shooter in the vain of Crimsonland and Hotline Miami.<br>
 •	Other: Art from open and free sources (Unity Asset Store, OpenGameArt.org and Kenney.nl). Music and sounds bought from Humble Bundle. <br>
-•	Link to playable browser version: http://users.metropolia.fi/~emilgu/unity/topdownshooter2d/
+•	Link to a playable browser version: http://users.metropolia.fi/~emilgu/unity/topdownshooter2d/
