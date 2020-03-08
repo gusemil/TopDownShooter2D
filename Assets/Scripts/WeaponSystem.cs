@@ -21,7 +21,7 @@ public class WeaponSystem : MonoBehaviour
 
     Weapon pistol = new Weapon("Pistol", 0, 50, 20f, 0.3f, 1, 0f, 2f, 0); //name, number, dmg, force, fireRate, ammo on start, radius, lifetime, ammo on pickup
     Weapon machineGun = new Weapon("Machine Gun", 1, 50, 40f, 0.13f, 100, 0f, 2f, 100);
-    Weapon shotgun = new Weapon("Shotgun", 2, 200, 100f, 0.4f, 20, 1f, 3f, 20);
+    Weapon shotgun = new Weapon("Shotgun", 2, 200, 75f, 0.4f, 20, 1f, 3f, 20);
     Weapon rocketLauncher = new Weapon("Rocket Launcher", 3, 500, 7f, 0.75f, 5, 12f, 9f, 2);
     Weapon flameThrower = new Weapon("Flamethrower", 4, 100, 30f, 0.01f, 75, 1f, 0.3f, 75);
 
